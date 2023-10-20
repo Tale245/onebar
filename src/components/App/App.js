@@ -2,7 +2,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 
 import "./App.css";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Basket from "../Basket/Basket";
 import { useEffect, useState } from "react";
 import userApi from "../../utils/UserApi";
