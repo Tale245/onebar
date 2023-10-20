@@ -1,0 +1,34 @@
+.main {
+  margin: 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 30px;
+}
+.main__container {
+  margin: 0;
+}
+.main__container-link {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 205px;
+  height: 96px;
+  border: 1px solid #ffc37f;
+}
+.main__link {
+  margin: 0;
+  text-decoration: none;
+  color: #ffc37f;
+}
+.main__paragraph {
+  margin: 0 auto;
+  color: #ffc37f;
+
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
