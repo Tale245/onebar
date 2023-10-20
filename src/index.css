@@ -15,6 +15,7 @@ body {
 }
 .app__basket-text {
   margin: 0;
+  text-align: center;
   color: #fff;
   font-family: Inter;
   font-size: 12px;

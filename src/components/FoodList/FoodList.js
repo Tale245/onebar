@@ -3,7 +3,15 @@ import React from "react";
 import "./FoodList.css";
 import FoodCard from "../FoodCard/FoodCard";
 
-const FoodList = ({ foodArray, title, addToCart, cart, deleteFromCart }) => {
+const FoodList = ({
+  foodArray,
+  title,
+  addToCart,
+  cart,
+  deleteFromCart,
+  userInfo,
+  setCost
+}) => {
   return (
     <div className="foodList">
       <h1 className="foodList__title">{title}</h1>
@@ -22,6 +30,8 @@ const FoodList = ({ foodArray, title, addToCart, cart, deleteFromCart }) => {
               cardId={item._id}
               cart={cart}
               deleteFromCart={deleteFromCart}
+              userInfo={userInfo}
+              setCost={setCost}
             />
           ))}
       </div>

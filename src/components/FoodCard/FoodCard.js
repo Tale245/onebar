@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./FoodCard.css";
 
@@ -13,7 +13,24 @@ const FoodCard = ({
   cardId,
   cart,
   deleteFromCart,
+  userInfo,
+  setCost,
 }) => {
+  const whatIsCost = () => {
+    let price = [];
+    userInfo.foods.forEach((item) => {
+      price.push(item.price);
+    });
+    const sum = price.reduce((total, num) => total + num, 0);
+
+    setCost(sum);
+  };
+
+  useEffect(() => {
+    whatIsCost();
+
+  });
+
   const onClickCard = () => {
     addToCart(title, description, price, cal, img);
   };
@@ -26,6 +43,7 @@ const FoodCard = ({
       }
     });
     console.log("индекс этой карточки:", thisCard);
+
     deleteFromCart(thisCard);
   };
 

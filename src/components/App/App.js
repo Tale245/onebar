@@ -7,10 +7,13 @@ import Basket from "../Basket/Basket";
 import { useEffect, useState } from "react";
 import userApi from "../../utils/UserApi";
 import food from "../../utils/FoodApi";
+import order from "../../utils/OrderApi";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
   const [foodMenu, setFoodMenu] = useState([]);
+
+  const [cost, setCost] = useState(0);
 
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
@@ -44,9 +47,18 @@ function App() {
         userApi.getMyInfo().then((data) => {
           console.log(data);
           setUserInfo(data);
+          if (userInfo.foods.length <= 1) {
+            setCost(0);
+          }
         });
       })
       .catch((e) => console.log(e));
+  };
+
+  const createOrder = (nameWhoOrder, foods, price) => {
+    order.createOrder(nameWhoOrder, foods, price).then((data) => {
+      console.log(data);
+    });
   };
 
   return (
@@ -61,6 +73,9 @@ function App() {
                 userInfo={userInfo}
                 foodMenu={foodMenu}
                 deleteFromCart={deleteFromCart}
+                cost={cost}
+                setCost={setCost}
+                createOrder={createOrder}
               />
             }
           />
@@ -71,6 +86,8 @@ function App() {
                 userInfo={userInfo}
                 foodMenu={foodMenu}
                 addToCart={addToCart}
+                cost={cost}
+                setCost={setCost}
               />
             }
           />
