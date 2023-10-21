@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import "./FoodCard.css";
 
@@ -18,9 +18,10 @@ const FoodCard = ({
 }) => {
   const whatIsCost = () => {
     let price = [];
-    userInfo.foods.forEach((item) => {
+    userInfo.foods?.forEach((item) => {
       price.push(item.price);
-    });
+    })
+
     const sum = price.reduce((total, num) => total + num, 0);
 
     setCost(sum);
@@ -28,7 +29,6 @@ const FoodCard = ({
 
   useEffect(() => {
     whatIsCost();
-
   });
 
   const onClickCard = () => {

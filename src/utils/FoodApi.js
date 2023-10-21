@@ -13,7 +13,7 @@ class Food {
   //   Получаем все карточки
 
   getFoods() {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/foodMenu`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

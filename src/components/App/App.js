@@ -2,29 +2,30 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 
 import "./App.css";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Basket from "../Basket/Basket";
 import { useEffect, useState } from "react";
 import userApi from "../../utils/UserApi";
 import food from "../../utils/FoodApi";
-import order from "../../utils/OrderApi";
+import orderApi from "../../utils/OrderApi";
+import Orders from "../Orders/Orders";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
   const [foodMenu, setFoodMenu] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const [cost, setCost] = useState(0);
 
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
     userApi.getMyInfo().then((data) => {
-      console.log(data);
       setUserInfo(data);
     });
     food.getFoods().then((data) => {
       setFoodMenu(data);
-      console.log(data);
     });
+    orderApi.getOrders().then((data) => setOrders(data));
   }, []);
 
   const addToCart = (name, description, price, cal, imageLink) => {
@@ -55,12 +56,29 @@ function App() {
       .catch((e) => console.log(e));
   };
 
-  const createOrder = (nameWhoOrder, foods, price) => {
-    order.createOrder(nameWhoOrder, foods, price).then((data) => {
-      console.log(data);
-    });
+  const createOrder = (nameWhoOrder, foods, price, doneStatus) => {
+    orderApi
+      .createOrder(nameWhoOrder, foods, price, doneStatus)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => console.log(e));
   };
 
+  const updateDoneStatus = (doneStatus, id) => {
+    orderApi
+      .updateDoneStatus(doneStatus, id)
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e));
+  };
+  const clearCart = () => {
+    userApi.clearCart().then((data) => {
+      userApi.getMyInfo().then((data) => {
+        setUserInfo(data);
+        setCost(0)
+      })
+    });
+  };
   return (
     <div className="app">
       <Header userInfo={userInfo} />
@@ -76,6 +94,7 @@ function App() {
                 cost={cost}
                 setCost={setCost}
                 createOrder={createOrder}
+                clearCart={clearCart}
               />
             }
           />
@@ -89,6 +108,12 @@ function App() {
                 cost={cost}
                 setCost={setCost}
               />
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <Orders orders={orders} updateDoneStatus={updateDoneStatus} />
             }
           />
         </Routes>

@@ -4,12 +4,25 @@ import "./Basket.css";
 import FoodList from "../FoodList/FoodList";
 import { NavLink } from "react-router-dom";
 
-const Basket = ({ userInfo, deleteFromCart, cost, setCost, createOrder }) => {
+const Basket = ({
+  userInfo,
+  deleteFromCart,
+  cost,
+  setCost,
+  createOrder,
+  clearCart,
+}) => {
   console.log(cost);
 
   const createNewOrder = () => {
-    createOrder(userInfo.name, userInfo.foods, cost)
-  }
+    console.log(userInfo.foods.length)
+    if (userInfo.foods.length === 0) {
+      console.log('вы не можете сделать пустой заказ!')
+    } else {
+      createOrder(userInfo.name, userInfo.foods, cost, false);
+      clearCart();
+    }
+  };
   return (
     <section className="basket">
       <h1 className="basket__title">Корзина</h1>
@@ -25,7 +38,9 @@ const Basket = ({ userInfo, deleteFromCart, cost, setCost, createOrder }) => {
           Назад
         </NavLink>
         <p className="basket__price">{cost}</p>
-        <button className="basket__btn-order" onClick={createNewOrder}>Заказать</button>
+        <button className="basket__btn-order" onClick={createNewOrder}>
+          Заказать
+        </button>
       </div>
     </section>
   );

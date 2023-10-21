@@ -66,6 +66,18 @@ class UserApi {
       return this._checkResponse(res);
     });
   }
+
+  clearCart() {
+    return fetch(`${this._baseUrl}/clearCart`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
 }
 
 const userApi = new UserApi();

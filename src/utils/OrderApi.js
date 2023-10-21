@@ -11,9 +11,22 @@ class Order {
     }
   }
 
+  // Получаем заказ
+
+  getOrders() {
+    return fetch(`${this._baseUrl}/orders`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
+
   // Создаем заказ
 
-  createOrder(nameWhoOrders, foods, price) {
+  createOrder(nameWhoOrders, foods, price, doneStatus) {
     return fetch(`${this._baseUrl}/createOrder`, {
       method: "POST",
       headers: {
@@ -24,6 +37,22 @@ class Order {
         nameWhoOrders: nameWhoOrders,
         foods: foods,
         price: price,
+        doneStatus: doneStatus
+      }),
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
+  updateDoneStatus(doneStatus, id) {
+    debugger
+    return fetch(`${this._baseUrl}/updateDoneStatus/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        doneStatus: doneStatus,
       }),
     }).then((res) => {
       return this._checkResponse(res);
@@ -31,6 +60,6 @@ class Order {
   }
 }
 
-const order = new Order();
+const orderApi = new Order();
 
-export default order;
+export default orderApi;
