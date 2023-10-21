@@ -28,6 +28,7 @@ const Main = ({
   setPastesBtnValue,
   setBeerSnacksBtnValue,
   setHotDishesBtnValue,
+  deleteElementInMenu
 }) => {
   return (
     <main className="main">
@@ -55,6 +56,7 @@ const Main = ({
         pastesBtnValue={pastesBtnValue}
         beerSnacksBtnValue={beerSnacksBtnValue}
         hotDishesBtnValue={hotDishesBtnValue}
+        deleteElementInMenu={deleteElementInMenu}
       />
       <NavLink to="/basket">
         {" "}

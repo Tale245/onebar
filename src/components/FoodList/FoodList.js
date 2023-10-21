@@ -18,21 +18,10 @@ const FoodList = ({
   pastesBtnValue,
   beerSnacksBtnValue,
   hotDishesBtnValue,
+  deleteElementInMenu,
 }) => {
-  console.log(
-    pizzaBtnValue,
-    soupsBtnValue,
-    snacksBtnValue,
-    saladsBtnValue,
-    pastesBtnValue,
-    beerSnacksBtnValue,
-    hotDishesBtnValue
-  );
-
   let valueArray = foodArray;
   let title = "";
-  let allFalse = false;
-  console.log(foodArray);
   const whatValue = () => {
     if (pizzaBtnValue === true) {
       valueArray = foodArray[0].pizza;
@@ -44,7 +33,7 @@ const FoodList = ({
       valueArray = foodArray[0].snacks;
       title = foodArray[0].snackTitle;
     } else if (coldSnacksBtnValue === true) {
-      valueArray = foodArray[0].snacks;
+      valueArray = foodArray[0].coldSnacks;
       title = foodArray[0].coldSnacksTitle;
     } else if (saladsBtnValue === true) {
       valueArray = foodArray[0].salads;
@@ -58,8 +47,6 @@ const FoodList = ({
     } else if (hotDishesBtnValue === true) {
       valueArray = foodArray[0].hotDishes;
       title = foodArray[0].hotDishesTitle;
-    } else {
-      allFalse = true;
     }
   };
 
@@ -85,6 +72,15 @@ const FoodList = ({
               deleteFromCart={deleteFromCart}
               userInfo={userInfo}
               setCost={setCost}
+              deleteElementInMenu={deleteElementInMenu}
+              pizzaBtnValue={pizzaBtnValue}
+              soupsBtnValue={soupsBtnValue}
+              coldSnacksBtnValue={coldSnacksBtnValue}
+              snacksBtnValue={snacksBtnValue}
+              saladsBtnValue={saladsBtnValue}
+              pastesBtnValue={pastesBtnValue}
+              beerSnacksBtnValue={beerSnacksBtnValue}
+              hotDishesBtnValue={hotDishesBtnValue}
             />
           ))}
       </div>

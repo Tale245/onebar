@@ -42,6 +42,20 @@ class Food {
       return this._checkResponse(res);
     });
   }
+  deleteElementInMenu(index, deleteItem) {
+    return fetch(`${this._baseUrl}/delete${deleteItem}InMenu`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        index: index,
+      }),
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
 }
 
 const food = new Food();

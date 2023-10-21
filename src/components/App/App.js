@@ -119,6 +119,15 @@ function App() {
         });
       });
   };
+
+  const deleteElementInMenu = (index, deleteItem) => {
+    food.deleteElementInMenu(index, deleteItem).then((data) => {
+      console.log(data);
+      food.getFoods().then((data) => {
+        setFoodMenu(data);
+      });
+    });
+  };
   return (
     <div className="app">
       <Header userInfo={userInfo} />
@@ -163,6 +172,7 @@ function App() {
                 setPastesBtnValue={setPastesBtnValue}
                 setBeerSnacksBtnValue={setBeerSnacksBtnValue}
                 setHotDishesBtnValue={setHotDishesBtnValue}
+                deleteElementInMenu={deleteElementInMenu}
               />
             }
           />
