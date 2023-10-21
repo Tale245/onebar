@@ -3,6 +3,7 @@ import React from "react";
 import "./Basket.css";
 import FoodList from "../FoodList/FoodList";
 import { NavLink } from "react-router-dom";
+import PopupAddItem from "../PopupAddItem/PopupAddItem";
 
 const Basket = ({
   userInfo,
@@ -41,6 +42,7 @@ const Basket = ({
         <button className="basket__btn-order" onClick={createNewOrder}>
           Заказать
         </button>
+        
       </div>
     </section>
   );

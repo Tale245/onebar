@@ -27,6 +27,9 @@ function App() {
   const [beerSnacksBtnValue, setBeerSnacksBtnValue] = useState(false);
   const [hotDishesBtnValue, setHotDishesBtnValue] = useState(false);
 
+  // Попап добавления позиции в меню
+  const [isPopupAddItemOpen, setIsPopupAddItemOpen] = useState(false);
+
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
     userApi.getMyInfo().then((data) => {
@@ -34,11 +37,17 @@ function App() {
     });
     food.getFoods().then((data) => {
       setFoodMenu(data);
-      setColdSnacksBtnValue(true)
+      setColdSnacksBtnValue(true);
     });
     orderApi.getOrders().then((data) => setOrders(data));
-
   }, []);
+
+  const openPopupAddItem = () => {
+    setIsPopupAddItemOpen(true);
+  };
+  const closePopups = () => {
+    setIsPopupAddItemOpen(false);
+  };
 
   const addToCart = (name, description, price, cal, imageLink) => {
     userApi
@@ -91,6 +100,25 @@ function App() {
       });
     });
   };
+
+  const addNewElementInMenu = (
+    newItem,
+    name,
+    description,
+    price,
+    cal,
+    linkImage
+  ) => {
+    food
+      .addNewElementInMenu(newItem, name, description, price, cal, linkImage)
+      .then((data) => {
+        console.log(data);
+        food.getFoods().then((data) => {
+          setFoodMenu(data);
+          setColdSnacksBtnValue(true);
+        });
+      });
+  };
   return (
     <div className="app">
       <Header userInfo={userInfo} />
@@ -141,7 +169,14 @@ function App() {
           <Route
             path="/orders"
             element={
-              <Orders orders={orders} updateDoneStatus={updateDoneStatus} />
+              <Orders
+                orders={orders}
+                updateDoneStatus={updateDoneStatus}
+                openPopupAddItem={openPopupAddItem}
+                isPopupAddItemOpen={isPopupAddItemOpen}
+                closePopups={closePopups}
+                addNewElementInMenu={addNewElementInMenu}
+              />
             }
           />
         </Routes>

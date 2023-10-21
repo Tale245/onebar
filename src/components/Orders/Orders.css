@@ -1,5 +1,6 @@
 .orders {
   margin: 0 auto;
+  min-height: 400px;
   padding-bottom: 40px;
 }
 .orders__container {
@@ -16,4 +17,16 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+.orders__popup-open {
+  margin: 0;
+  position: absolute;
+  left: 30px;
+  width: 35px;
+  height: 35px;
+  background: none;
+  border: none;
+  background-image: url(../../images/addItemBtn.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
 }

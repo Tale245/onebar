@@ -2,7 +2,15 @@ import React from "react";
 
 import "../Orders/Orders.css";
 import Order from "../Order/Order";
-const Orders = ({ orders, updateDoneStatus }) => {
+import PopupAddItem from "../PopupAddItem/PopupAddItem";
+const Orders = ({
+  orders,
+  updateDoneStatus,
+  openPopupAddItem,
+  isPopupAddItemOpen,
+  closePopups,
+  addNewElementInMenu
+}) => {
   return (
     <section className="orders">
       <div className="orders__container">
@@ -17,10 +25,19 @@ const Orders = ({ orders, updateDoneStatus }) => {
               _id={item._id}
               doneStatus={item.doneStatus}
               updateDoneStatus={updateDoneStatus}
-              />
+            />
           ))}
         </div>
       </div>
+      <button
+        className="orders__popup-open"
+        onClick={openPopupAddItem}
+      ></button>
+      <PopupAddItem
+        isPopupAddItemOpen={isPopupAddItemOpen}
+        closePopups={closePopups}
+        addNewElementInMenu={addNewElementInMenu}
+      />
     </section>
   );
 };
