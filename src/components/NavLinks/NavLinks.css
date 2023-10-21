@@ -11,31 +11,25 @@
   justify-content: center;
   align-items: center;
 }
-.navLinks__container-link {
+.navLinks__btn {
   margin: 0;
+  width: 205px;
+  height: 96px;
   display: flex;
   text-decoration: none;
   justify-content: center;
   align-items: center;
-  width: 205px;
-  height: 96px;
+  background: none;
   border: 1px solid #ffc37f;
-  transition: opacity 200ms ease-in-out;
-}
-.navLinks__container-link:hover {
-  opacity: 0.6;
-}
-.navLinks__link {
-  margin: 0;
   color: #ffc37f;
-}
-.navLinks__paragraph {
-  margin: 0 auto;
-  color: #ffc37f;
-
   font-family: Inter;
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  transition: opacity 200ms ease-in-out;
+}
+.navLinks__btn:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }

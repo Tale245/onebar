@@ -17,6 +17,16 @@ function App() {
 
   const [cost, setCost] = useState(0);
 
+  // Кнопки меню
+  const [pizzaBtnValue, setPizzaBtnValue] = useState(false);
+  const [soupsBtnValue, setSoupsBtnValue] = useState(false);
+  const [snacksBtnValue, setSnacksBtnValue] = useState(false);
+  const [coldSnacksBtnValue, setColdSnacksBtnValue] = useState(false);
+  const [saladsBtnValue, setSaladsBtnValue] = useState(false);
+  const [pastesBtnValue, setPastesBtnValue] = useState(false);
+  const [beerSnacksBtnValue, setBeerSnacksBtnValue] = useState(false);
+  const [hotDishesBtnValue, setHotDishesBtnValue] = useState(false);
+
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
     userApi.getMyInfo().then((data) => {
@@ -24,8 +34,10 @@ function App() {
     });
     food.getFoods().then((data) => {
       setFoodMenu(data);
+      setColdSnacksBtnValue(true)
     });
     orderApi.getOrders().then((data) => setOrders(data));
+
   }, []);
 
   const addToCart = (name, description, price, cal, imageLink) => {
@@ -75,8 +87,8 @@ function App() {
     userApi.clearCart().then((data) => {
       userApi.getMyInfo().then((data) => {
         setUserInfo(data);
-        setCost(0)
-      })
+        setCost(0);
+      });
     });
   };
   return (
@@ -107,6 +119,22 @@ function App() {
                 addToCart={addToCart}
                 cost={cost}
                 setCost={setCost}
+                pizzaBtnValue={pizzaBtnValue}
+                soupsBtnValue={soupsBtnValue}
+                snacksBtnValue={snacksBtnValue}
+                coldSnacksBtnValue={coldSnacksBtnValue}
+                saladsBtnValue={saladsBtnValue}
+                pastesBtnValue={pastesBtnValue}
+                beerSnacksBtnValue={beerSnacksBtnValue}
+                hotDishesBtnValue={hotDishesBtnValue}
+                setPizzaBtnValue={setPizzaBtnValue}
+                setSoupsBtnValue={setSoupsBtnValue}
+                setSnacksBtnValue={setSnacksBtnValue}
+                setColdSnacksBtnValue={setColdSnacksBtnValue}
+                setSaladsBtnValue={setSaladsBtnValue}
+                setPastesBtnValue={setPastesBtnValue}
+                setBeerSnacksBtnValue={setBeerSnacksBtnValue}
+                setHotDishesBtnValue={setHotDishesBtnValue}
               />
             }
           />

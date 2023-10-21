@@ -20,7 +20,7 @@ const FoodCard = ({
     let price = [];
     userInfo.foods?.forEach((item) => {
       price.push(item.price);
-    })
+    });
 
     const sum = price.reduce((total, num) => total + num, 0);
 
@@ -49,7 +49,7 @@ const FoodCard = ({
 
   return (
     <div className="foodCard" onClick={cart ? findIndex : onClickCard}>
-      <img className="foodCard__image" src={img} />
+      <img className="foodCard__image" src={img} alt={title}/>
       <div className="foodCard__text-container">
         {" "}
         <h3 className="foodCard__title">{title}</h3>
