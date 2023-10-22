@@ -1,6 +1,6 @@
 class UserApi {
   constructor() {
-    this._baseUrl = "http://localhost:3001";
+    this._baseUrl = "http://192.168.0.104:3001";
   }
 
   _checkResponse(res) {

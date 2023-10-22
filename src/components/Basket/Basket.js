@@ -13,7 +13,6 @@ const Basket = ({
   createOrder,
   clearCart,
 }) => {
-  console.log(cost);
 
   const createNewOrder = () => {
     console.log(userInfo.foods.length)

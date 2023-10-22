@@ -2,13 +2,15 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Basket from "../Basket/Basket";
 import { useEffect, useState } from "react";
 import userApi from "../../utils/UserApi";
 import food from "../../utils/FoodApi";
 import orderApi from "../../utils/OrderApi";
 import Orders from "../Orders/Orders";
+import Signin from "../SignIn/SignIn";
+import auth from "../../utils/Auth";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -16,6 +18,8 @@ function App() {
   const [orders, setOrders] = useState([]);
 
   const [cost, setCost] = useState(0);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Кнопки меню
   const [pizzaBtnValue, setPizzaBtnValue] = useState(false);
@@ -30,17 +34,37 @@ function App() {
   // Попап добавления позиции в меню
   const [isPopupAddItemOpen, setIsPopupAddItemOpen] = useState(false);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  });
+
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
-    userApi.getMyInfo().then((data) => {
-      setUserInfo(data);
-    });
-    food.getFoods().then((data) => {
-      setFoodMenu(data);
-      setColdSnacksBtnValue(true);
-    });
-    orderApi.getOrders().then((data) => setOrders(data));
-  }, []);
+    if (isLoggedIn) {
+      userApi.getMyInfo().then((data) => {
+        console.log(1)
+        setUserInfo(data);
+      });
+      food.getFoods().then((data) => {
+        console.log(2)
+        setFoodMenu(data);
+        setColdSnacksBtnValue(true);
+      });
+      // setInterval(() => {
+   
+      // }, 3000);
+      orderApi.getOrders().then((data) => {
+        setOrders(data)
+      console.log(3)
+      });
+    }
+  }, [isLoggedIn]);
 
   const openPopupAddItem = () => {
     setIsPopupAddItemOpen(true);
@@ -128,6 +152,19 @@ function App() {
       });
     });
   };
+  const signin = (email, password, codeWord) => {
+    auth.signin(email, password, codeWord).then((data) => {
+      console.log("Успешная авторизация!");
+      setIsLoggedIn(true);
+      console.log(userInfo);
+      if (userInfo.admin === true) {
+        debugger;
+        navigate("/orders");
+      } else {
+        navigate("/main");
+      }
+    });
+  };
   return (
     <div className="app">
       <Header userInfo={userInfo} />
@@ -189,6 +226,7 @@ function App() {
               />
             }
           />
+          <Route path="/signin" element={<Signin signin={signin} />} />
         </Routes>
       </div>
     </div>

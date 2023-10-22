@@ -9,7 +9,6 @@ const Order = ({
   _id,
   updateDoneStatus,
 }) => {
-  console.log("заказ готов? ", doneStatus);
   const [hide, setHide] = useState(false);
 
   const hideOrder = () => {

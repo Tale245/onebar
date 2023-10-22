@@ -9,8 +9,8 @@ body {
 }
 .app__basket {
   margin: 0;
-  position: absolute;
-  bottom: 41px;
+  position: fixed;
+  top: 200px;
   right: 22px;
 }
 .app__basket-text {

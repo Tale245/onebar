@@ -1,6 +1,6 @@
 class Order {
   constructor() {
-    this._baseUrl = "http://localhost:3001";
+    this._baseUrl = "http://192.168.0.104:3001";
   }
 
   _checkResponse(res) {
@@ -44,7 +44,6 @@ class Order {
     });
   }
   updateDoneStatus(doneStatus, id) {
-    debugger
     return fetch(`${this._baseUrl}/updateDoneStatus/${id}`, {
       method: "PUT",
       headers: {

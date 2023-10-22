@@ -1,6 +1,6 @@
 class Auth {
   constructor() {
-    this._baseUrl = "http://localhost:3001";
+    this._baseUrl = "http://192.168.0.104:3001";
   }
 
   _checkResponse(res) {
@@ -12,7 +12,8 @@ class Auth {
   }
   //   Авторизация
 
-  signin(email, password) {
+  signin(email, password, codeWord) {
+    debugger
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: {
@@ -21,12 +22,15 @@ class Auth {
       body: JSON.stringify({
         email: email,
         password: password,
+        codeWord: codeWord
       }),
     })
       .then((res) => {
+        debugger
         return this._checkResponse(res);
       })
       .then((data) => {
+        debugger
         localStorage.setItem("token", data.token);
       });
   }
