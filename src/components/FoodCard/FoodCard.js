@@ -7,7 +7,7 @@ const FoodCard = ({
   title,
   price,
   description,
-  cal,
+  gram,
   addToCart,
   foodArray,
   cardId,
@@ -25,7 +25,7 @@ const FoodCard = ({
   beerSnacksBtnValue,
   hotDishesBtnValue,
 }) => {
-  let category
+  let category;
   const whatIsCost = () => {
     let price = [];
     userInfo.foods?.forEach((item) => {
@@ -46,28 +46,28 @@ const FoodCard = ({
     let thisArray = [];
     if (pizzaBtnValue === true) {
       thisArray = foodArray[0].pizza;
-      category = 'Pizza'
+      category = "Pizza";
     } else if (soupsBtnValue === true) {
       thisArray = foodArray[0].soups;
-      category = 'Soups'
+      category = "Soups";
     } else if (snacksBtnValue === true) {
       thisArray = foodArray[0].snacks;
-      category = 'Snacks'
+      category = "Snacks";
     } else if (coldSnacksBtnValue === true) {
       thisArray = foodArray[0].coldSnacks;
-      category = 'ColdSnacks'
+      category = "ColdSnacks";
     } else if (saladsBtnValue === true) {
       thisArray = foodArray[0].salads;
-      category = "Salads"
+      category = "Salads";
     } else if (pastesBtnValue === true) {
       thisArray = foodArray[0].pastes;
-      category = "Pastes"
+      category = "Pastes";
     } else if (beerSnacksBtnValue === true) {
       thisArray = foodArray[0].beerSnacks;
-      category = 'BeerSnack'
+      category = "BeerSnack";
     } else if (hotDishesBtnValue === true) {
       thisArray = foodArray[0].hotDishes;
-      category = 'HotDishes'
+      category = "HotDishes";
     }
     thisArray.forEach((item) => {
       if (item._id === cardId) {
@@ -75,11 +75,11 @@ const FoodCard = ({
       }
     });
 
-    if(userInfo.admin === false){
-      addToCart(title, description, price, cal, img);
+    if (userInfo.admin === false) {
+      addToCart(title, description, price, gram, img);
     } else {
-      console.log('индекс этой карточки:', thisCard)
-      deleteElementInMenu(thisCard, category)
+      console.log("индекс этой карточки:", thisCard);
+      deleteElementInMenu(thisCard, category);
     }
   };
 
@@ -103,7 +103,7 @@ const FoodCard = ({
         <h4 className="foodCard__price">{price}</h4>
       </div>
       <p className="foodCard__description">{description}</p>
-      <p className="foodCard__cal">Коллорийность: {cal}</p>
+      <p className="foodCard__cal">Грамм: {gram}</p>
       <button className="foodCard__btn-add"></button>
     </div>
   );

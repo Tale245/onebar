@@ -12,6 +12,7 @@ const PopupAddItem = ({
     register,
     handleSubmit,
     formState: { errors, isValid },
+    reset,
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
@@ -21,9 +22,10 @@ const PopupAddItem = ({
       data.name,
       data.description,
       data.price,
-      data.cal,
+      data.gram,
       data.imageLink
     );
+    reset();
   };
 
   return (
@@ -56,11 +58,11 @@ const PopupAddItem = ({
             placeholder="Цена"
           />
           <input
-            {...register("cal", {
+            {...register("gram", {
               required: true,
             })}
             className="popup__input"
-            placeholder="Каллории"
+            placeholder="Грамм"
           />
           <input
             {...register("imageLink", {

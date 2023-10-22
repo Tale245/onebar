@@ -12,14 +12,15 @@ const Basket = ({
   setCost,
   createOrder,
   clearCart,
+  changeLimit
 }) => {
-
   const createNewOrder = () => {
     console.log(userInfo.foods.length)
     if (userInfo.foods.length === 0) {
       console.log('вы не можете сделать пустой заказ!')
     } else {
       createOrder(userInfo.name, userInfo.foods, cost, false);
+      changeLimit(userInfo.limit - cost, userInfo._id)
       clearCart();
     }
   };
@@ -37,8 +38,8 @@ const Basket = ({
         <NavLink to="/main" className="basket__link-back">
           Назад
         </NavLink>
-        <p className="basket__price">{cost}</p>
-        <button className="basket__btn-order" onClick={createNewOrder}>
+        <p className="basket__price">{cost}р/{userInfo.limit}р</p>
+        <button className={`basket__btn-order ${(cost > userInfo.limit || cost === 0) && 'basket__btn-order_disabled'}`} onClick={createNewOrder} disabled={(cost > userInfo.limit || cost === 0) && true}>
           Заказать
         </button>
         

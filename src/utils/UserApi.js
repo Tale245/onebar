@@ -37,7 +37,7 @@ class UserApi {
     });
   }
 
-  addToCart(name, description, price, cal, imageLink) {
+  addToCart(name, description, price, gram, imageLink) {
     return fetch(`${this._baseUrl}/user/cards`, {
       method: "POST",
       headers: {
@@ -48,7 +48,7 @@ class UserApi {
         name: name,
         description: description,
         price: price,
-        ccal: cal,
+        gram: gram,
         imageLink: imageLink,
       }),
     }).then((res) => {
@@ -74,6 +74,20 @@ class UserApi {
         authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
+  changeLimit(limit, id) {
+    return fetch(`${this._baseUrl}/updateLimit/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        newLimit: limit,
+      }),
     }).then((res) => {
       return this._checkResponse(res);
     });

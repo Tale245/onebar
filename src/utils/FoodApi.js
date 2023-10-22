@@ -22,7 +22,7 @@ class Food {
       return this._checkResponse(res);
     });
   }
-  addNewElementInMenu(newItem, name, description, price, cal, linkImage) {
+  addNewElementInMenu(newItem, name, description, price, gram, linkImage) {
     return fetch(`${this._baseUrl}/add${newItem}InMenu`, {
       method: "PUT",
       headers: {
@@ -34,7 +34,7 @@ class Food {
           name: name,
           description: description,
           price: price,
-          ccal: cal,
+          gram: gram,
           linkImage: linkImage,
         },
       }),

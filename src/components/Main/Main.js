@@ -28,7 +28,7 @@ const Main = ({
   setPastesBtnValue,
   setBeerSnacksBtnValue,
   setHotDishesBtnValue,
-  deleteElementInMenu
+  deleteElementInMenu,
 }) => {
   return (
     <main className="main">
@@ -61,10 +61,15 @@ const Main = ({
       <NavLink to="/basket">
         {" "}
         <div className="app__basket">
-          <p className="app__basket-text">{cost}</p>
+          <p className="app__basket-text">{cost}/{userInfo.limit}</p>
           <img className="app__basket-ico" src={basketLogo} />
         </div>
       </NavLink>
+      {userInfo.admin && (
+        <NavLink to="/orders" className="userList__link-back">
+          Заказы
+        </NavLink>
+      )}
     </main>
   );
 };

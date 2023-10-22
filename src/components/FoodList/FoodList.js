@@ -22,7 +22,6 @@ const FoodList = ({
 }) => {
   let valueArray = foodArray;
   let title = "";
-  console.log(foodArray)
   const whatValue = () => {
     if (pizzaBtnValue === true) {
       valueArray = foodArray[0].pizza;
@@ -64,7 +63,7 @@ const FoodList = ({
               img={item.linkImage ? item.linkImage : item.imageLink}
               price={item.price}
               description={item.description}
-              cal={item.ccal}
+              gram={item.gram}
               key={item._id}
               addToCart={addToCart}
               foodArray={foodArray}

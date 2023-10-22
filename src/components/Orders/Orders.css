@@ -2,6 +2,7 @@
   margin: 0 auto;
   min-height: 400px;
   padding-bottom: 40px;
+  position: relative;
 }
 .orders__container {
   margin: 0;
@@ -29,4 +30,21 @@
   background-image: url(../../images/addItemBtn.svg);
   background-repeat: no-repeat;
   background-size: contain;
+}
+.orders__link-back {
+  margin: 0;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #ffc37f;
+
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration: none;
+}
+.orders__link-back:last-of-type {
+  top: 40px;
 }

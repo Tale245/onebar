@@ -11,6 +11,7 @@ import orderApi from "../../utils/OrderApi";
 import Orders from "../Orders/Orders";
 import Signin from "../SignIn/SignIn";
 import auth from "../../utils/Auth";
+import UsersList from "../UsersList/UsersList";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -33,6 +34,7 @@ function App() {
 
   // Попап добавления позиции в меню
   const [isPopupAddItemOpen, setIsPopupAddItemOpen] = useState(false);
+  const [userList, setUserList] = useState([]);
 
   const navigate = useNavigate();
 
@@ -42,27 +44,47 @@ function App() {
     if (token) {
       setIsLoggedIn(true);
     }
-  });
+  }, []);
+  // Получаем информацию о пользователе и карточки с позициями для меню
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log(1);
+      userApi.getUsers().then((data) => setUserList(data));
+      userApi.getMyInfo().then((data) => {
+        console.log(2);
+        setUserInfo(data);
+      });
+      food.getFoods().then((data) => {
+        setFoodMenu(data);
+        console.log(3);
+        setColdSnacksBtnValue(true);
+      });
+      console.log(4);
+      orderApi.getOrders().then((data) => {
+        setOrders(data);
+      });
+    }
+  }, [isLoggedIn]);
 
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
     if (isLoggedIn) {
-      userApi.getMyInfo().then((data) => {
-        console.log(1)
-        setUserInfo(data);
-      });
-      food.getFoods().then((data) => {
-        console.log(2)
-        setFoodMenu(data);
-        setColdSnacksBtnValue(true);
-      });
-      // setInterval(() => {
-   
-      // }, 3000);
-      orderApi.getOrders().then((data) => {
-        setOrders(data)
-      console.log(3)
-      });
+      if (userInfo.admin === true) {
+        setInterval(() => {
+          console.log(2.2);
+          orderApi.getOrders().then((data) => {
+            setOrders(data);
+          });
+          userApi.getUsers().then((data) => setUserList(data));
+        }, 10000);
+      } else if (userInfo.admin === false) {
+        setInterval(() => {
+          console.log(1.1);
+          userApi.getMyInfo().then((data) => {
+            setUserInfo(data);
+          });
+        }, 10000);
+      }
     }
   }, [isLoggedIn]);
 
@@ -73,9 +95,9 @@ function App() {
     setIsPopupAddItemOpen(false);
   };
 
-  const addToCart = (name, description, price, cal, imageLink) => {
+  const addToCart = (name, description, price, gram, imageLink) => {
     userApi
-      .addToCart(name, description, price, cal, imageLink)
+      .addToCart(name, description, price, gram, imageLink)
       .then((data) => {
         console.log(data);
         userApi.getMyInfo().then((data) => {
@@ -130,11 +152,11 @@ function App() {
     name,
     description,
     price,
-    cal,
+    gram,
     linkImage
   ) => {
     food
-      .addNewElementInMenu(newItem, name, description, price, cal, linkImage)
+      .addNewElementInMenu(newItem, name, description, price, gram, linkImage)
       .then((data) => {
         console.log(data);
         food.getFoods().then((data) => {
@@ -165,6 +187,12 @@ function App() {
       }
     });
   };
+  const changeLimit = (limit, id) => {
+    userApi.changeLimit(limit, id).then((data) => {
+      console.log(data);
+      userApi.getUsers().then((data) => setUserList(data));
+    });
+  };
   return (
     <div className="app">
       <Header userInfo={userInfo} />
@@ -181,6 +209,7 @@ function App() {
                 setCost={setCost}
                 createOrder={createOrder}
                 clearCart={clearCart}
+                changeLimit={changeLimit}
               />
             }
           />
@@ -227,6 +256,12 @@ function App() {
             }
           />
           <Route path="/signin" element={<Signin signin={signin} />} />
+          <Route
+            path="/userList"
+            element={
+              <UsersList userList={userList} changeLimit={changeLimit} />
+            }
+          />
         </Routes>
       </div>
     </div>

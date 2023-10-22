@@ -39,8 +39,11 @@ const Orders = ({
         closePopups={closePopups}
         addNewElementInMenu={addNewElementInMenu}
       />
-      <NavLink to="/main" className="basket__link-back">
+      <NavLink to="/main" className="orders__link-back">
         В меню
+      </NavLink>
+      <NavLink to="/userList" className="orders__link-back">
+        Установить лимит
       </NavLink>
     </section>
   );
