@@ -21,7 +21,7 @@
 .orders__popup-open {
   margin: 0;
   position: absolute;
-  left: 30px;
+  right: 30px;
   width: 35px;
   height: 35px;
   background: none;

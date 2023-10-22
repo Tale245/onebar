@@ -75,7 +75,7 @@ const FoodCard = ({
       }
     });
 
-    if(userInfo.admin === "no"){
+    if(userInfo.admin === false){
       addToCart(title, description, price, cal, img);
     } else {
       console.log('индекс этой карточки:', thisCard)

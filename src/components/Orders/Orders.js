@@ -3,13 +3,14 @@ import React from "react";
 import "../Orders/Orders.css";
 import Order from "../Order/Order";
 import PopupAddItem from "../PopupAddItem/PopupAddItem";
+import { NavLink } from "react-router-dom";
 const Orders = ({
   orders,
   updateDoneStatus,
   openPopupAddItem,
   isPopupAddItemOpen,
   closePopups,
-  addNewElementInMenu
+  addNewElementInMenu,
 }) => {
   return (
     <section className="orders">
@@ -38,6 +39,9 @@ const Orders = ({
         closePopups={closePopups}
         addNewElementInMenu={addNewElementInMenu}
       />
+      <NavLink to="/main" className="basket__link-back">
+        В меню
+      </NavLink>
     </section>
   );
 };
