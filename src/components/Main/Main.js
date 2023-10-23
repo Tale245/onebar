@@ -29,6 +29,7 @@ const Main = ({
   setBeerSnacksBtnValue,
   setHotDishesBtnValue,
   deleteElementInMenu,
+  openPopupAddItem,
 }) => {
   return (
     <main className="main">
@@ -41,6 +42,14 @@ const Main = ({
         setPastesBtnValue={setPastesBtnValue}
         setBeerSnacksBtnValue={setBeerSnacksBtnValue}
         setHotDishesBtnValue={setHotDishesBtnValue}
+        pizzaBtnValue={pizzaBtnValue}
+        soupsBtnValue={soupsBtnValue}
+        snacksBtnValue={snacksBtnValue}
+        coldSnacksBtnValue={coldSnacksBtnValue}
+        saladsBtnValue={saladsBtnValue}
+        pastesBtnValue={pastesBtnValue}
+        beerSnacksBtnValue={beerSnacksBtnValue}
+        hotDishesBtnValue={hotDishesBtnValue}
       />
       <FoodList
         foodArray={foodMenu}
@@ -57,17 +66,18 @@ const Main = ({
         beerSnacksBtnValue={beerSnacksBtnValue}
         hotDishesBtnValue={hotDishesBtnValue}
         deleteElementInMenu={deleteElementInMenu}
+        openPopupAddItem={openPopupAddItem}
       />
-      <NavLink to="/basket">
-        {" "}
-        <div className="app__basket">
-          <p className="app__basket-text">{cost}/{userInfo.limit}</p>
-          <img className="app__basket-ico" src={basketLogo} />
-        </div>
-      </NavLink>
-      {userInfo.admin && (
-        <NavLink to="/orders" className="userList__link-back">
-          Заказы
+      {userInfo.admin === false && (
+        <NavLink to="/basket">
+          {" "}
+          <div className="app__basket">
+            <p className="app__basket-text">
+              {cost}
+              <span className="app__text-limit">/{userInfo.limit}</span>
+            </p>
+            <img className="app__basket-ico" src={basketLogo} />
+          </div>
         </NavLink>
       )}
     </main>

@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 61px;
+  gap: 22px;
 }
 .foodList__container {
   margin: 0;
@@ -12,16 +12,29 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  row-gap: 23px;
-  column-gap: 53px;
+  row-gap: 16px;
+  column-gap: 32px;
 }
 .foodList__title {
   margin: 0 auto;
-  color: #ffc37f;
+  color: #fff;
 
   font-family: Inter;
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+.foodList__popup-open {
+  margin: 0;
+  position: absolute;
+  top: 34px;
+  right: 100px;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  background-image: url(../../images/addItemBtn.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
 }

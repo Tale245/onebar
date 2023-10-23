@@ -9,42 +9,13 @@
 }
 .orders__title {
   margin: 0;
-  margin-top: 38px;
+  margin-top: 59px;
   text-align: center;
-  color: #ffc37f;
+  color: #ffffff;
 
   font-family: Inter;
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-}
-.orders__popup-open {
-  margin: 0;
-  position: absolute;
-  right: 30px;
-  width: 35px;
-  height: 35px;
-  background: none;
-  border: none;
-  background-image: url(../../images/addItemBtn.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-.orders__link-back {
-  margin: 0;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: #ffc37f;
-
-  font-family: Inter;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  text-decoration: none;
-}
-.orders__link-back:last-of-type {
-  top: 40px;
 }

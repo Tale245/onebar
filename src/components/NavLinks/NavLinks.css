@@ -20,8 +20,9 @@
   justify-content: center;
   align-items: center;
   background: none;
-  border: 1px solid #ffc37f;
-  color: #ffc37f;
+  border: none;
+  border-bottom: 1px solid #483838;
+  color: #fff;
   font-family: Inter;
   font-size: 20px;
   font-style: normal;
@@ -31,5 +32,7 @@
 }
 .navLinks__btn:hover {
   cursor: pointer;
-  opacity: 0.6;
+}
+.navLinks__btn_active {
+  background-color: #d82e2e;
 }

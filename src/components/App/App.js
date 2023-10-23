@@ -12,6 +12,7 @@ import Orders from "../Orders/Orders";
 import Signin from "../SignIn/SignIn";
 import auth from "../../utils/Auth";
 import UsersList from "../UsersList/UsersList";
+import PopupAddItem from "../PopupAddItem/PopupAddItem";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -35,12 +36,12 @@ function App() {
   // Попап добавления позиции в меню
   const [isPopupAddItemOpen, setIsPopupAddItemOpen] = useState(false);
   const [userList, setUserList] = useState([]);
+  const [dataLoad, setDataLoad] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     if (token) {
       setIsLoggedIn(true);
     }
@@ -52,6 +53,7 @@ function App() {
       userApi.getUsers().then((data) => setUserList(data));
       userApi.getMyInfo().then((data) => {
         console.log(2);
+        setDataLoad(true);
         setUserInfo(data);
       });
       food.getFoods().then((data) => {
@@ -67,26 +69,37 @@ function App() {
   }, [isLoggedIn]);
 
   // Получаем информацию о пользователе и карточки с позициями для меню
-  useEffect(() => {
-    if (isLoggedIn) {
-      if (userInfo.admin === true) {
-        setInterval(() => {
-          console.log(2.2);
-          orderApi.getOrders().then((data) => {
-            setOrders(data);
-          });
-          userApi.getUsers().then((data) => setUserList(data));
-        }, 10000);
-      } else if (userInfo.admin === false) {
-        setInterval(() => {
-          console.log(1.1);
-          userApi.getMyInfo().then((data) => {
-            setUserInfo(data);
-          });
-        }, 10000);
-      }
-    }
-  }, [isLoggedIn]);
+
+  // useEffect(() => {
+  //   console.log(isLoggedIn);
+  //   if (isLoggedIn) {
+  //     if (userInfo.admin === true) {
+  //       window.setInterval(() => {
+  //         console.log(2.2);
+  //         orderApi.getOrders().then((data) => {
+  //           setOrders(data);
+  //         });
+  //         userApi.getUsers().then((data) => setUserList(data));
+  //       }, 10000);
+  //     } else if (userInfo.admin === false) {
+  //       window.setInterval(() => {
+  //         console.log(1.1);
+  //         userApi.getMyInfo().then((data) => {
+  //           setUserInfo(data);
+  //         });
+  //         food.getFoods().then((data) => {
+  //           setFoodMenu(data);
+  //           console.log(3.3);
+  //           setColdSnacksBtnValue(true);
+  //         });
+  //       }, 10000);
+  //     }
+  //     setInterval(() => {
+  //       window.location.reload();
+  //     }, 604800000);
+  //     return () => clearInterval();
+  //   }
+  // }, [dataLoad]);
 
   const openPopupAddItem = () => {
     setIsPopupAddItemOpen(true);
@@ -239,20 +252,17 @@ function App() {
                 setBeerSnacksBtnValue={setBeerSnacksBtnValue}
                 setHotDishesBtnValue={setHotDishesBtnValue}
                 deleteElementInMenu={deleteElementInMenu}
+                openPopupAddItem={openPopupAddItem}
+                isPopupAddItemOpen={isPopupAddItemOpen}
+                closePopups={closePopups}
+                addNewElementInMenu={addNewElementInMenu}
               />
             }
           />
           <Route
             path="/orders"
             element={
-              <Orders
-                orders={orders}
-                updateDoneStatus={updateDoneStatus}
-                openPopupAddItem={openPopupAddItem}
-                isPopupAddItemOpen={isPopupAddItemOpen}
-                closePopups={closePopups}
-                addNewElementInMenu={addNewElementInMenu}
-              />
+              <Orders orders={orders} updateDoneStatus={updateDoneStatus} />
             }
           />
           <Route path="/signin" element={<Signin signin={signin} />} />
@@ -263,6 +273,11 @@ function App() {
             }
           />
         </Routes>
+        <PopupAddItem
+          isPopupAddItemOpen={isPopupAddItemOpen}
+          closePopups={closePopups}
+          addNewElementInMenu={addNewElementInMenu}
+        />
       </div>
     </div>
   );

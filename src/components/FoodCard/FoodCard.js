@@ -93,7 +93,6 @@ const FoodCard = ({
 
     deleteFromCart(thisCard);
   };
-
   return (
     <div className="foodCard" onClick={cart ? findIndex : onClickCard}>
       <img className="foodCard__image" src={img} alt={title} />
@@ -102,9 +101,9 @@ const FoodCard = ({
         <h3 className="foodCard__title">{title}</h3>
         <h4 className="foodCard__price">{price}</h4>
       </div>
-      <p className="foodCard__description">{description}</p>
-      <p className="foodCard__cal">Грамм: {gram}</p>
-      <button className="foodCard__btn-add"></button>
+      <p className="foodCard__description">Состав: {description}</p>
+      <p className="foodCard__gram">Грамм: {gram}</p>
+      <button className={`foodCard__btn-add ${(cart || userInfo.admin === true) && 'foodCard__btn-trash'}`}></button>
     </div>
   );
 };

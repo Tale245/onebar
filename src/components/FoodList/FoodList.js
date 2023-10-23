@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import "./FoodList.css";
 import FoodCard from "../FoodCard/FoodCard";
+import PopupAddItem from "../PopupAddItem/PopupAddItem";
 
 const FoodList = ({
   foodArray,
@@ -19,6 +20,7 @@ const FoodList = ({
   beerSnacksBtnValue,
   hotDishesBtnValue,
   deleteElementInMenu,
+  openPopupAddItem,
 }) => {
   let valueArray = foodArray;
   let title = "";
@@ -84,6 +86,12 @@ const FoodList = ({
             />
           ))}
       </div>
+      {userInfo.admin && (
+        <button
+          className="foodList__popup-open"
+          onClick={openPopupAddItem}
+        ></button>
+      )}
     </div>
   );
 };

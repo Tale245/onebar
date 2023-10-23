@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 @import url(../src/vendor/normalize.css);
 body {
   margin: 0 auto;
   max-width: 768px;
-  background-color: #000412;
+  background-color: #000000;
   position: relative;
   font-family: "inter", Arial, Helvetica, sans-serif;
 }
@@ -11,12 +12,29 @@ body {
   margin: 0;
   position: fixed;
   top: 200px;
-  right: 22px;
+  right: 15px;
+}
+.app__basket-ico {
+  margin: 0;
+  width: 35px;
+  height: 35px;
 }
 .app__basket-text {
   margin: 0;
   text-align: center;
   color: #fff;
+
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.app__text-limit {
+  margin: 0;
+  text-align: center;
+  color: #3a9738;
+
   font-family: Inter;
   font-size: 12px;
   font-style: normal;

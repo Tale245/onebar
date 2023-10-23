@@ -2,12 +2,11 @@ import React from "react";
 
 import "./UsersList.css";
 import UserCard from "../UserCard/UserCard";
-import { NavLink } from "react-router-dom";
 
 const UsersList = ({ userList, changeLimit }) => {
   return (
     <section className="userList">
-      <h1 className="userList__title">Список пользователей</h1>
+      <h1 className="userList__title">Установить лимит</h1>
       <div className="userList__container">
         {userList.map((item) => (
           <UserCard
@@ -19,9 +18,6 @@ const UsersList = ({ userList, changeLimit }) => {
           />
         ))}
       </div>
-      <NavLink to="/orders" className="userList__link-back">
-        В заказы
-      </NavLink>
     </section>
   );
 };

@@ -38,7 +38,7 @@ const Basket = ({
         <NavLink to="/main" className="basket__link-back">
           Назад
         </NavLink>
-        <p className="basket__price">{cost}р/{userInfo.limit}р</p>
+        <p className="basket__price">{cost}р/<span className="basket__price-limit">{userInfo.limit}р</span></p>
         <button className={`basket__btn-order ${(cost > userInfo.limit || cost === 0) && 'basket__btn-order_disabled'}`} onClick={createNewOrder} disabled={(cost > userInfo.limit || cost === 0) && true}>
           Заказать
         </button>

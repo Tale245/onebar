@@ -6,9 +6,12 @@
   justify-content: center;
   align-items: center;
   margin-top: 100px;
-  border: 1px solid #ffc37f;
+  border: 0.5px solid #D82E2E;
   width: 510px;
   height: 150px;
+}
+.userCard:first-of-type{
+  margin-top: 46px;
 }
 .userCard__container {
   margin: 0 auto;
@@ -20,13 +23,13 @@
 }
 .userCard__user-name {
   margin: 0 auto;
-  color: #fff;
-
+  color: #FFF;
+  
   font-family: Inter;
-  font-size: 15px;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  font-weight: 700;
+  line-height: normal
 }
 
 .userCard__form {
@@ -49,17 +52,19 @@
 }
 .userCard__limitInput {
   margin: 0 auto;
+  padding-left: 5px;
+  box-sizing: border-box;
   width: 310px;
-  height: 35px;
+  height: 40px;
   outline: none;
   border: none;
 }
 .userCard__submit-btn {
   margin: 0 auto;
   width: 310px;
-  height: 35px;
+  height: 39px;
   background: none;
-  border: 1px solid #ffc37f;
-  color: #ffc37f;
+  border: 0.5px solid #D82E2E;
+  color: #ffffff;
   cursor: pointer;
 }

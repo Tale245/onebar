@@ -1,20 +1,20 @@
 .order {
   margin: 0 auto;
   padding-top: 28px;
-  max-width: 500px;
+  width: 304px;
   min-height: 121px;
 }
-.order_hide{
+.order_hide {
   display: none;
 }
-.order__item {
+.order__container {
   margin: 0 auto;
   position: relative;
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  border: 1px solid #ffc37f;
+  gap: 16px;
+  border: 0.5px solid #d82e2e;
 }
 .order__author {
   margin: 0;
@@ -23,7 +23,7 @@
   color: #fff;
 
   font-family: Inter;
-  font-size: 17px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -47,9 +47,9 @@
   color: #fff;
 
   font-family: Inter;
-  font-size: 17px;
+  font-size: 15px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   line-height: normal;
 }
 .order__done-btn {

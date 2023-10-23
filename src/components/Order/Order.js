@@ -18,7 +18,7 @@ const Order = ({
 
   return (
     <div className={`order ${(hide || doneStatus) && "order_hide"}`}>
-      <div className="order__item">
+      <div className="order__container">
         <p className="order__author">{nameWhoOrders}</p>
         {foods.map((item) => (
           <p className="order__name">{item.name}</p>

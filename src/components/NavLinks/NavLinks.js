@@ -11,6 +11,14 @@ const NavLinks = ({
   setPastesBtnValue,
   setBeerSnacksBtnValue,
   setHotDishesBtnValue,
+  pizzaBtnValue,
+  soupsBtnValue,
+  snacksBtnValue,
+  coldSnacksBtnValue,
+  saladsBtnValue,
+  pastesBtnValue,
+  beerSnacksBtnValue,
+  hotDishesBtnValue,
 }) => {
   const changePizzaValue = () => {
     setPizzaBtnValue(true);
@@ -95,28 +103,28 @@ const NavLinks = ({
   return (
     <section className="navLinks">
       <nav className="navLinks__container">
-        <button className="navLinks__btn" onClick={changeColdSnacksValue}>
+        <button className={`navLinks__btn ${coldSnacksBtnValue && 'navLinks__btn_active'}`} onClick={changeColdSnacksValue}>
           Холодные закуски
         </button>
-        <button className="navLinks__btn" onClick={changeSoupsValue}>
+        <button className={`navLinks__btn ${soupsBtnValue && 'navLinks__btn_active'}`} onClick={changeSoupsValue}>
           Супы
         </button>
-        <button className="navLinks__btn" onClick={changePizzaValue}>
+        <button className={`navLinks__btn ${pizzaBtnValue && 'navLinks__btn_active'}`} onClick={changePizzaValue}>
           Пицца
         </button>
-        <button className="navLinks__btn" onClick={changeSnacksValue}>
+        <button className={`navLinks__btn ${snacksBtnValue && 'navLinks__btn_active'}`} onClick={changeSnacksValue}>
           Снэки
         </button>
-        <button className="navLinks__btn" onClick={changeSaladsValue}>
+        <button className={`navLinks__btn ${saladsBtnValue && 'navLinks__btn_active'}`} onClick={changeSaladsValue}>
           Салаты
         </button>
-        <button className="navLinks__btn" onClick={changePastesValue}>
+        <button className={`navLinks__btn ${pastesBtnValue && 'navLinks__btn_active'}`} onClick={changePastesValue}>
           Пасты
         </button>
-        <button className="navLinks__btn" onClick={changeBeerSnacksValue}>
+        <button className={`navLinks__btn ${beerSnacksBtnValue && 'navLinks__btn_active'}`} onClick={changeBeerSnacksValue}>
           Закуски к пиву
         </button>
-        <button className="navLinks__btn" onClick={changeHotDishesValue}>
+        <button className={`navLinks__btn ${hotDishesBtnValue && 'navLinks__btn_active'}`} onClick={changeHotDishesValue}>
           Горячие блюда
         </button>
       </nav>

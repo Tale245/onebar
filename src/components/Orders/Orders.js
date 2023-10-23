@@ -2,15 +2,9 @@ import React from "react";
 
 import "../Orders/Orders.css";
 import Order from "../Order/Order";
-import PopupAddItem from "../PopupAddItem/PopupAddItem";
-import { NavLink } from "react-router-dom";
 const Orders = ({
   orders,
   updateDoneStatus,
-  openPopupAddItem,
-  isPopupAddItemOpen,
-  closePopups,
-  addNewElementInMenu,
 }) => {
   return (
     <section className="orders">
@@ -30,21 +24,7 @@ const Orders = ({
           ))}
         </div>
       </div>
-      <button
-        className="orders__popup-open"
-        onClick={openPopupAddItem}
-      ></button>
-      <PopupAddItem
-        isPopupAddItemOpen={isPopupAddItemOpen}
-        closePopups={closePopups}
-        addNewElementInMenu={addNewElementInMenu}
-      />
-      <NavLink to="/main" className="orders__link-back">
-        В меню
-      </NavLink>
-      <NavLink to="/userList" className="orders__link-back">
-        Установить лимит
-      </NavLink>
+
     </section>
   );
 };
