@@ -2,11 +2,15 @@
   margin: 0;
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-bottom: 20px;
 }
 .navLinks__container {
   margin: 0 auto;
-  display: flex;
+  height: 500px;
+  overflow: auto;
+  display: inline-block;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -14,7 +18,7 @@
 .navLinks__btn {
   margin: 0;
   width: 205px;
-  height: 96px;
+  min-height: 100px;
   display: flex;
   text-decoration: none;
   justify-content: center;
@@ -35,4 +39,37 @@
 }
 .navLinks__btn_active {
   background-color: #d82e2e;
+}
+.navLinks__btn_activeBar {
+  background-color: #2ea2d8;
+}
+.navLinks__btns {
+  margin: 0;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+}
+.navLinks__btn-food {
+  margin: 0;
+  min-width: 70px;
+  height: 30px;
+  background: none;
+  border: none;
+  background-color: #000000;
+  border: 1px solid #d82e2e;
+  color: #fff;
+  font-family: Inter;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+.navLinks__btn-food:last-of-type {
+  border: 1px solid #2ea2d8;
+}
+.navLinks__btn-food:hover {
+  cursor: pointer;
+}
+.navLinks__btn-food_active {
+  opacity: 0.7;
 }

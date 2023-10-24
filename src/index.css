@@ -10,9 +10,11 @@ body {
 }
 .app__basket {
   margin: 0;
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 200px;
-  right: 15px;
+  right: 5px;
 }
 .app__basket-ico {
   margin: 0;

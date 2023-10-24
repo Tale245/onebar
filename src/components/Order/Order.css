@@ -39,6 +39,10 @@
   font-weight: 500;
   line-height: normal;
 }
+.order__container-text{
+  display: flex;
+  justify-content: space-between;
+}
 .order__price {
   margin: 0;
   text-align: start;
@@ -51,6 +55,12 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+.order__price_history{
+  font-size: 13px;
+  color: #ffffff;
+
+
 }
 .order__done-btn {
   margin: 0 auto;
@@ -65,4 +75,34 @@
   background-image: url("../../images/btn-done.svg");
   background-repeat: no-repeat;
   background-size: contain;
+}
+.order__createAt {
+  margin: 0;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  color: #ffffff6e;
+
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.order__order-status{
+  margin: 0;
+  text-align: center;
+  margin-right: 10px;
+  padding-top: 5px;
+  color: #2cd450d0;
+
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.order__order-status_not-ready{
+  color: #f57f1ee3;
+
 }

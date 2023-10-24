@@ -8,6 +8,8 @@ const Order = ({
   doneStatus,
   _id,
   updateDoneStatus,
+  createsAt,
+  btnOrders,
 }) => {
   const [hide, setHide] = useState(false);
 
@@ -15,16 +17,44 @@ const Order = ({
     updateDoneStatus(true, _id);
     setHide(true);
   };
-
+  console.log(createsAt);
   return (
-    <div className={`order ${(hide || doneStatus) && "order_hide"}`}>
+    <div
+      className={
+        btnOrders === true
+          ? `order ${(hide || doneStatus) && "order_hide"}`
+          : `order`
+      }
+    >
       <div className="order__container">
-        <p className="order__author">{nameWhoOrders}</p>
+        {btnOrders === false && (
+          <div className="order__container-text">
+            <p className="order__author">{nameWhoOrders}</p>
+            <p className={`order__order-status ${doneStatus === false && 'order__order-status_not-ready'}`}>{doneStatus === true ? 'Завершён' : 'Готовится'}</p>
+          </div>
+        )}
+        {btnOrders === true && <p className="order__author">{nameWhoOrders}</p>}
         {foods.map((item) => (
           <p className="order__name">{item.name}</p>
         ))}
-        <p className="order__price">{price}р</p>
-        <button className="order__done-btn" onClick={hideOrder}></button>
+        {btnOrders === false && (
+          <div className="order__container-text">
+            <p className="order__price order__price_history">{price}р</p>
+            {btnOrders === false && (
+              <p className="order__createAt">
+                {createsAt.slice(0, 10)} - {createsAt.slice(11, 19)}
+              </p>
+            )}
+          </div>
+        )}
+        {btnOrders === true && (
+          <div className="order__container-text">
+            <p className="order__price order__price_history">{price}р</p>
+          </div>
+        )}
+        {btnOrders === true && (
+          <button className="order__done-btn" onClick={hideOrder}></button>
+        )}
       </div>
     </div>
   );

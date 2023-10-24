@@ -22,6 +22,16 @@ class Food {
       return this._checkResponse(res);
     });
   }
+  getFoodBar() {
+    return fetch(`${this._baseUrl}/foodMenuBar`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
   addNewElementInMenu(newItem, name, description, price, gram, linkImage) {
     return fetch(`${this._baseUrl}/add${newItem}InMenu`, {
       method: "PUT",

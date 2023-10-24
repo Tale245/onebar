@@ -48,7 +48,7 @@
 }
 .basket__btn-order {
   margin: 0;
-  color: #D82E2E;
+  color: #d82e2e;
 
   font-family: Inter;
   font-size: 25px;
@@ -56,14 +56,14 @@
   font-weight: 700;
   line-height: normal;
   border: none;
-  border: 1px solid #D82E2E;
+  border: 1px solid #d82e2e;
   border-radius: 10px;
   background: none;
   cursor: pointer;
 }
 .basket__link-back {
   margin: 0;
-  color: #FFF;
+  color: #fff;
 
   font-family: Russo One;
   font-size: 20px;
@@ -77,4 +77,19 @@
 }
 .basket__btn-order_disabled {
   opacity: 0.5;
+}
+.basket__btn-order_barTheme {
+  color: #2ea2d8;
+  border: 1px solid #2ea2d8;
+}
+.basket__text {
+  margin: 0;
+  margin-left: 30px;
+  color: #ffffff;
+
+  font-family: Inter;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }

@@ -40,7 +40,7 @@
   width: 500px;
   min-height: 300px;
   background-color: rgb(2, 2, 2);
-  border: 1px solid #D82E2E; ;
+  border: 1px solid #d82e2e;
   z-index: 4;
 }
 .popup__title {
@@ -76,7 +76,7 @@
   height: 35px;
   margin-top: 20px;
   border: none;
-  background: #D82E2E;
+  background: #d82e2e;
   color: #ffffff;
 
   font-family: Inter;
@@ -87,8 +87,9 @@
 }
 .popup__category {
   margin: 0;
+  display: inline-block;
   width: 310px;
-  height: 40px;
+  min-height: 40px;
   text-align: center;
 }
 .popup__item {
@@ -96,13 +97,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70px;
-  border-bottom: 1px solid #ffc37f;
-  background-color: #000d1f;
-  color: antiquewhite;
+  height:40px;
+  border-bottom: 1px solid #ffffff;
+  background-color: #d82e2e;
+  color: rgb(255, 255, 255);
   font-family: Inter;
   font-size: 17px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.popup__item_bar-theme{
+  background-color: #2EA2D8;
+}
+.popup__container_bar-theme {
+  border: 1px solid #2EA2D8;
+}
+.popup__submit-btn_bar-theme{
+  background: #2EA2D8;
 }

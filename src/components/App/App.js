@@ -16,7 +16,6 @@ import PopupAddItem from "../PopupAddItem/PopupAddItem";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
-  const [foodMenu, setFoodMenu] = useState([]);
   const [orders, setOrders] = useState([]);
 
   const [cost, setCost] = useState(0);
@@ -24,6 +23,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Кнопки меню
+  const [foodMenu, setFoodMenu] = useState([]);
+
   const [pizzaBtnValue, setPizzaBtnValue] = useState(false);
   const [soupsBtnValue, setSoupsBtnValue] = useState(false);
   const [snacksBtnValue, setSnacksBtnValue] = useState(false);
@@ -33,10 +34,40 @@ function App() {
   const [beerSnacksBtnValue, setBeerSnacksBtnValue] = useState(false);
   const [hotDishesBtnValue, setHotDishesBtnValue] = useState(false);
 
-  // Попап добавления позиции в меню
+  // Кнопки бара меню
+  const [foodMenuBar, setFoodMenuBar] = useState([]);
+
+  const [cigarettesBtnValue, setCigarettesBtnValue] = useState(false);
+  const [juiceBtnValue, setJuiceBtnValue] = useState(false);
+  const [coffeesBtnValue, setCoffeeBtnValue] = useState(false);
+  const [teaBtnValue, setTeaBtnValue] = useState(false);
+  const [bottledBeerBtnValue, setBottledBeerBtnValue] = useState(false);
+  const [wineBtnValue, setWineBtnValue] = useState(false);
+  const [champagneBtnValue, setChampagneBtnValue] = useState(false);
+  const [vermouthBtnValue, setVermouthBtnValue] = useState(false);
+  const [aperativesBtnValue, setAperativesBtnValue] = useState(false);
+  const [rumBtnValue, setRumBtnValue] = useState(false);
+  const [cognacBtnValue, setCognacBtnValue] = useState(false);
+  const [brandyBtnValue, setBrandyBtnValue] = useState(false);
+  const [whiskeyBtnValue, setWhiskeyBtnValue] = useState(false);
+  const [ginBtnValue, setGinBtnValue] = useState(false);
+  const [tequilaBtnValue, setTequilaBtnValue] = useState(false);
+  const [tincturesBtnValue, setTincturesBtnValue] = useState(false);
+  const [vodkaBtnValue, setVodkaBtnValue] = useState(false);
+  const [liqueursBtnValue, setLiqueursBtnValue] = useState(false);
+
   const [isPopupAddItemOpen, setIsPopupAddItemOpen] = useState(false);
   const [userList, setUserList] = useState([]);
   const [dataLoad, setDataLoad] = useState(false);
+
+  const [btnFood, setBtnFood] = useState(true);
+  const [btnBar, setBtnBar] = useState(false);
+
+  const [btnHistoryOrders, setBtnHistoryOrders] = useState(false);
+  const [btnOrders, setBtnOrders] = useState(true);
+
+  const [isUserCartEmpty, setIsUserCartEmpty] = useState(false);
+  const [isUserCreateOrder, setIsUserCreateOrder] = useState(false);
 
   const navigate = useNavigate();
 
@@ -55,11 +86,22 @@ function App() {
         console.log(2);
         setDataLoad(true);
         setUserInfo(data);
+        if (data.foods.length === 0) {
+          setIsUserCartEmpty(true);
+          setIsUserCreateOrder(false);
+        } else {
+          setIsUserCartEmpty(false);
+          setIsUserCreateOrder(false);
+        }
       });
       food.getFoods().then((data) => {
         setFoodMenu(data);
         console.log(3);
         setColdSnacksBtnValue(true);
+      });
+      food.getFoodBar().then((data) => {
+        setFoodMenuBar(data);
+        setCigarettesBtnValue(true);
       });
       console.log(4);
       orderApi.getOrders().then((data) => {
@@ -70,36 +112,36 @@ function App() {
 
   // Получаем информацию о пользователе и карточки с позициями для меню
 
-  // useEffect(() => {
-  //   console.log(isLoggedIn);
-  //   if (isLoggedIn) {
-  //     if (userInfo.admin === true) {
-  //       window.setInterval(() => {
-  //         console.log(2.2);
-  //         orderApi.getOrders().then((data) => {
-  //           setOrders(data);
-  //         });
-  //         userApi.getUsers().then((data) => setUserList(data));
-  //       }, 10000);
-  //     } else if (userInfo.admin === false) {
-  //       window.setInterval(() => {
-  //         console.log(1.1);
-  //         userApi.getMyInfo().then((data) => {
-  //           setUserInfo(data);
-  //         });
-  //         food.getFoods().then((data) => {
-  //           setFoodMenu(data);
-  //           console.log(3.3);
-  //           setColdSnacksBtnValue(true);
-  //         });
-  //       }, 10000);
-  //     }
-  //     setInterval(() => {
-  //       window.location.reload();
-  //     }, 604800000);
-  //     return () => clearInterval();
-  //   }
-  // }, [dataLoad]);
+  useEffect(() => {
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
+      if (userInfo.admin === true) {
+        window.setInterval(() => {
+          console.log(2.2);
+          orderApi.getOrders().then((data) => {
+            setOrders(data);
+          });
+          userApi.getUsers().then((data) => setUserList(data));
+        }, 10000);
+      } else if (userInfo.admin === false) {
+        window.setInterval(() => {
+          console.log(1.1);
+          userApi.getMyInfo().then((data) => {
+            setUserInfo(data);
+          });
+          food.getFoods().then((data) => {
+            setFoodMenu(data);
+            console.log(3.3);
+            setColdSnacksBtnValue(true);
+          });
+        }, 10000);
+      }
+      setInterval(() => {
+        window.location.reload();
+      }, 604800000);
+      return () => clearInterval();
+    }
+  }, [dataLoad]);
 
   const openPopupAddItem = () => {
     setIsPopupAddItemOpen(true);
@@ -113,6 +155,7 @@ function App() {
       .addToCart(name, description, price, gram, imageLink)
       .then((data) => {
         console.log(data);
+        setIsUserCartEmpty(false);
         userApi.getMyInfo().then((data) => {
           console.log(data);
           setUserInfo(data);
@@ -130,6 +173,7 @@ function App() {
           setUserInfo(data);
           if (userInfo.foods.length <= 1) {
             setCost(0);
+            setIsUserCartEmpty(true);
           }
         });
       })
@@ -141,6 +185,12 @@ function App() {
       .createOrder(nameWhoOrder, foods, price, doneStatus)
       .then((data) => {
         console.log(data);
+        setIsUserCreateOrder(true);
+        setIsUserCartEmpty(false);
+        setTimeout(() => {
+          setIsUserCreateOrder(false);
+          setIsUserCartEmpty(true);
+        }, 2000)
       })
       .catch((e) => console.log(e));
   };
@@ -148,7 +198,9 @@ function App() {
   const updateDoneStatus = (doneStatus, id) => {
     orderApi
       .updateDoneStatus(doneStatus, id)
-      .then((data) => console.log(data))
+      .then((data) => {
+        orderApi.getOrders().then((data) => setOrders(data));
+      })
       .catch((e) => console.log(e));
   };
   const clearCart = () => {
@@ -174,7 +226,23 @@ function App() {
         console.log(data);
         food.getFoods().then((data) => {
           setFoodMenu(data);
-          setColdSnacksBtnValue(true);
+        });
+      });
+  };
+  const addNewElementInBarMenu = (
+    newItem,
+    name,
+    description,
+    price,
+    gram,
+    linkImage
+  ) => {
+    food
+      .addNewElementInMenu(newItem, name, description, price, gram, linkImage)
+      .then((data) => {
+        console.log(data);
+        food.getFoodBar().then((data) => {
+          setFoodMenuBar(data);
         });
       });
   };
@@ -185,6 +253,13 @@ function App() {
       food.getFoods().then((data) => {
         setFoodMenu(data);
       });
+    });
+  };
+
+  const deleteElementInBarMenu = (index, deleteItem) => {
+    food.deleteElementInMenu(index, deleteItem).then((data) => {
+      console.log(data);
+      food.getFoodBar().then((data) => setFoodMenuBar(data));
     });
   };
   const signin = (email, password, codeWord) => {
@@ -208,7 +283,7 @@ function App() {
   };
   return (
     <div className="app">
-      <Header userInfo={userInfo} />
+      <Header userInfo={userInfo} btnBar={btnBar} />
       <div className="app__container">
         <Routes>
           <Route
@@ -223,6 +298,11 @@ function App() {
                 createOrder={createOrder}
                 clearCart={clearCart}
                 changeLimit={changeLimit}
+                btnBar={btnBar}
+                isUserCartEmpty={isUserCartEmpty}
+                isUserCreateOrder={isUserCreateOrder}
+                setIsUserCreateOrder={setIsUserCreateOrder}
+                setIsUserCartEmpty={setIsUserCartEmpty}
               />
             }
           />
@@ -251,18 +331,67 @@ function App() {
                 setPastesBtnValue={setPastesBtnValue}
                 setBeerSnacksBtnValue={setBeerSnacksBtnValue}
                 setHotDishesBtnValue={setHotDishesBtnValue}
+                cigarettesBtnValue={cigarettesBtnValue}
+                juiceBtnValue={juiceBtnValue}
+                coffeesBtnValue={coffeesBtnValue}
+                teaBtnValue={teaBtnValue}
+                bottledBeerBtnValue={bottledBeerBtnValue}
+                wineBtnValue={wineBtnValue}
+                champagneBtnValue={champagneBtnValue}
+                vermouthBtnValue={vermouthBtnValue}
+                aperativesBtnValue={aperativesBtnValue}
+                rumBtnValue={rumBtnValue}
+                cognacBtnValue={cognacBtnValue}
+                brandyBtnValue={brandyBtnValue}
+                whiskeyBtnValue={whiskeyBtnValue}
+                ginBtnValue={ginBtnValue}
+                tequilaBtnValue={tequilaBtnValue}
+                tincturesBtnValue={tincturesBtnValue}
+                vodkaBtnValue={vodkaBtnValue}
+                liqueursBtnValue={liqueursBtnValue}
+                setCigarettesBtnValue={setCigarettesBtnValue}
+                setJuiceBtnValue={setJuiceBtnValue}
+                setCoffeeBtnValue={setCoffeeBtnValue}
+                setTeaBtnValue={setTeaBtnValue}
+                setBottledBeerBtnValue={setBottledBeerBtnValue}
+                setWineBtnValue={setWineBtnValue}
+                setChampagneBtnValue={setChampagneBtnValue}
+                setVermouthBtnValue={setVermouthBtnValue}
+                setAperativesBtnValue={setAperativesBtnValue}
+                setRumBtnValue={setRumBtnValue}
+                setCognacBtnValue={setCognacBtnValue}
+                setBrandyBtnValue={setBrandyBtnValue}
+                setWhiskeyBtnValue={setWhiskeyBtnValue}
+                setGinBtnValue={setGinBtnValue}
+                setTequilaBtnValue={setTequilaBtnValue}
+                setTincturesBtnValue={setTincturesBtnValue}
+                setVodkaBtnValue={setVodkaBtnValue}
+                setLiqueursBtnValue={setLiqueursBtnValue}
                 deleteElementInMenu={deleteElementInMenu}
                 openPopupAddItem={openPopupAddItem}
                 isPopupAddItemOpen={isPopupAddItemOpen}
                 closePopups={closePopups}
                 addNewElementInMenu={addNewElementInMenu}
+                btnBar={btnBar}
+                setBtnBar={setBtnBar}
+                btnFood={btnFood}
+                setBtnFood={setBtnFood}
+                foodMenuBar={foodMenuBar}
+                deleteElementInBarMenu={deleteElementInBarMenu}
               />
             }
           />
           <Route
             path="/orders"
             element={
-              <Orders orders={orders} updateDoneStatus={updateDoneStatus} />
+              <Orders
+                orders={orders}
+                updateDoneStatus={updateDoneStatus}
+                btnOrders={btnOrders}
+                btnHistoryOrders={btnHistoryOrders}
+                setBtnOrders={setBtnOrders}
+                setBtnHistoryOrders={setBtnHistoryOrders}
+              />
             }
           />
           <Route path="/signin" element={<Signin signin={signin} />} />
@@ -277,6 +406,8 @@ function App() {
           isPopupAddItemOpen={isPopupAddItemOpen}
           closePopups={closePopups}
           addNewElementInMenu={addNewElementInMenu}
+          addNewElementInBarMenu={addNewElementInBarMenu}
+          btnBar={btnBar}
         />
       </div>
     </div>

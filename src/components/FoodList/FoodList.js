@@ -21,34 +21,114 @@ const FoodList = ({
   hotDishesBtnValue,
   deleteElementInMenu,
   openPopupAddItem,
+  cigarettesBtnValue,
+  juiceBtnValue,
+  coffeesBtnValue,
+  teaBtnValue,
+  bottledBeerBtnValue,
+  wineBtnValue,
+  champagneBtnValue,
+  vermouthBtnValue,
+  aperativesBtnValue,
+  rumBtnValue,
+  cognacBtnValue,
+  brandyBtnValue,
+  whiskeyBtnValue,
+  ginBtnValue,
+  tequilaBtnValue,
+  tincturesBtnValue,
+  vodkaBtnValue,
+  liqueursBtnValue,
+  foodMenuBar,
+  btnBar,
+  btnFood,
+  deleteElementInBarMenu 
 }) => {
   let valueArray = foodArray;
   let title = "";
   const whatValue = () => {
-    if (pizzaBtnValue === true) {
-      valueArray = foodArray[0].pizza;
-      title = foodArray[0].pizzaTitle;
-    } else if (soupsBtnValue === true) {
-      valueArray = foodArray[0].soups;
-      title = foodArray[0].soupsTitle;
-    } else if (snacksBtnValue === true) {
-      valueArray = foodArray[0].snacks;
-      title = foodArray[0].snacksTitle;
-    } else if (coldSnacksBtnValue === true) {
-      valueArray = foodArray[0].coldSnacks;
-      title = foodArray[0].coldSnacksTitle;
-    } else if (saladsBtnValue === true) {
-      valueArray = foodArray[0].salads;
-      title = foodArray[0].saladsTitle;
-    } else if (pastesBtnValue === true) {
-      valueArray = foodArray[0].pastes;
-      title = foodArray[0].pastesTitle;
-    } else if (beerSnacksBtnValue === true) {
-      valueArray = foodArray[0].beerSnacks;
-      title = foodArray[0].beerSnacksTitle;
-    } else if (hotDishesBtnValue === true) {
-      valueArray = foodArray[0].hotDishes;
-      title = foodArray[0].hotDishesTitle;
+    if (btnFood === true) {
+      if (pizzaBtnValue === true) {
+        valueArray = foodArray[0].pizza;
+        title = foodArray[0].pizzaTitle;
+      } else if (soupsBtnValue === true) {
+        valueArray = foodArray[0].soups;
+        title = foodArray[0].soupsTitle;
+      } else if (snacksBtnValue === true) {
+        valueArray = foodArray[0].snacks;
+        title = foodArray[0].snacksTitle;
+      } else if (coldSnacksBtnValue === true) {
+        valueArray = foodArray[0].coldSnacks;
+        title = foodArray[0].coldSnacksTitle;
+      } else if (saladsBtnValue === true) {
+        valueArray = foodArray[0].salads;
+        title = foodArray[0].saladsTitle;
+      } else if (pastesBtnValue === true) {
+        valueArray = foodArray[0].pastes;
+        title = foodArray[0].pastesTitle;
+      } else if (beerSnacksBtnValue === true) {
+        valueArray = foodArray[0].beerSnacks;
+        title = foodArray[0].beerSnacksTitle;
+      } else if (hotDishesBtnValue === true) {
+        valueArray = foodArray[0].hotDishes;
+        title = foodArray[0].hotDishesTitle;
+      }
+    } else if (btnBar === true) {
+      if (cigarettesBtnValue === true) {
+        valueArray = foodMenuBar[0].cigarettes;
+        title = foodMenuBar[0].cigarettesTitle;
+      } else if (juiceBtnValue === true) {
+        valueArray = foodMenuBar[0].juice;
+        title = foodMenuBar[0].juiceTitle;
+      }  else if (coffeesBtnValue === true) {
+        valueArray = foodMenuBar[0].coffee;
+        title = foodMenuBar[0].coffeeTitle;
+      } else if (teaBtnValue === true) {
+        valueArray = foodMenuBar[0].tea;
+        title = foodMenuBar[0].teaTitle;
+      } else if (bottledBeerBtnValue === true) {
+        valueArray = foodMenuBar[0].bottledBeer;
+        title = foodMenuBar[0].bottledBeerTitle;
+      } else if (wineBtnValue === true) {
+        valueArray = foodMenuBar[0].wine;
+        title = foodMenuBar[0].wineTitle;
+      } else if (champagneBtnValue === true) {
+        valueArray = foodMenuBar[0].champagne;
+        title = foodMenuBar[0].champagneTitle;
+      } else if (vermouthBtnValue === true) {
+        valueArray = foodMenuBar[0].vermouth;
+        title = foodMenuBar[0].vermouthTitle;
+      } else if (aperativesBtnValue === true) {
+        valueArray = foodMenuBar[0].aperatives;
+        title = foodMenuBar[0].aperativesTitle;
+      } else if (rumBtnValue === true) {
+        valueArray = foodMenuBar[0].rum;
+        title = foodMenuBar[0].rumTitle;
+      } else if (cognacBtnValue === true) {
+        valueArray = foodMenuBar[0].cognac;
+        title = foodMenuBar[0].cognacTitle;
+      } else if (brandyBtnValue === true) {
+        valueArray = foodMenuBar[0].brandy;
+        title = foodMenuBar[0].brandyTitle;
+      } else if (whiskeyBtnValue === true) {
+        valueArray = foodMenuBar[0].whiskey;
+        title = foodMenuBar[0].whiskeyTitle;
+      } else if (ginBtnValue === true) {
+        valueArray = foodMenuBar[0].gin;
+        title = foodMenuBar[0].ginTitle;
+      } else if (tequilaBtnValue === true) {
+        valueArray = foodMenuBar[0].tequila;
+        title = foodMenuBar[0].tequilaTitle;
+      } else if (tincturesBtnValue === true) {
+        valueArray = foodMenuBar[0].tinctures;
+        title = foodMenuBar[0].tincturesTitle;
+      } else if (vodkaBtnValue === true) {
+        valueArray = foodMenuBar[0].vodka;
+        title = foodMenuBar[0].vodkaTitle;
+      } else if (liqueursBtnValue === true) {
+        valueArray = foodMenuBar[0].liqueurs;
+        title = foodMenuBar[0].liqueursTitle;
+      }
     }
   };
 
@@ -69,6 +149,7 @@ const FoodList = ({
               key={item._id}
               addToCart={addToCart}
               foodArray={foodArray}
+              foodMenuBar={foodMenuBar}
               cardId={item._id}
               cart={cart}
               deleteFromCart={deleteFromCart}
@@ -83,6 +164,26 @@ const FoodList = ({
               pastesBtnValue={pastesBtnValue}
               beerSnacksBtnValue={beerSnacksBtnValue}
               hotDishesBtnValue={hotDishesBtnValue}
+              btnBar={btnBar}
+              cigarettesBtnValue={cigarettesBtnValue}
+              juiceBtnValue={juiceBtnValue}
+              coffeesBtnValue={coffeesBtnValue}
+              teaBtnValue={teaBtnValue}
+              bottledBeerBtnValue={bottledBeerBtnValue}
+              wineBtnValue={wineBtnValue}
+              champagneBtnValue={champagneBtnValue}
+              vermouthBtnValue={vermouthBtnValue}
+              aperativesBtnValue={aperativesBtnValue}
+              rumBtnValue={rumBtnValue}
+              cognacBtnValue={cognacBtnValue}
+              brandyBtnValue={brandyBtnValue}
+              whiskeyBtnValue={whiskeyBtnValue}
+              ginBtnValue={ginBtnValue}
+              tequilaBtnValue={tequilaBtnValue}
+              tincturesBtnValue={tincturesBtnValue}
+              vodkaBtnValue={vodkaBtnValue}
+              liqueursBtnValue={liqueursBtnValue}
+              deleteElementInBarMenu ={deleteElementInBarMenu }
             />
           ))}
       </div>
