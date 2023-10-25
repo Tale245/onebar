@@ -41,7 +41,7 @@ const Basket = ({
         <p className="basket__text"> Корзина пуста!</p>
       )}
       {isUserCreateOrder === true && (
-        <p className="basket__text"> Спасибо за заказ!</p>
+        <p className="basket__text basket__text_order"> МЫ УЖЕ НАЧАЛИ ГОТОВИТЬ ВАШ ЗАКАЗ!</p>
       )}
       <div className="basket__container">
         <NavLink to="/main" className="basket__link-back">

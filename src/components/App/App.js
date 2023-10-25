@@ -13,6 +13,7 @@ import Signin from "../SignIn/SignIn";
 import auth from "../../utils/Auth";
 import UsersList from "../UsersList/UsersList";
 import PopupAddItem from "../PopupAddItem/PopupAddItem";
+import MyOrders from "../MyOrders/MyOrders";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -38,6 +39,7 @@ function App() {
   const [foodMenuBar, setFoodMenuBar] = useState([]);
 
   const [cigarettesBtnValue, setCigarettesBtnValue] = useState(false);
+  const [hookahsBtnValue, setHookahsBtnValue] = useState(false);
   const [juiceBtnValue, setJuiceBtnValue] = useState(false);
   const [coffeesBtnValue, setCoffeeBtnValue] = useState(false);
   const [teaBtnValue, setTeaBtnValue] = useState(false);
@@ -110,6 +112,8 @@ function App() {
     }
   }, [isLoggedIn]);
 
+  
+
   // Получаем информацию о пользователе и карточки с позициями для меню
 
   useEffect(() => {
@@ -133,6 +137,9 @@ function App() {
             setFoodMenu(data);
             console.log(3.3);
             setColdSnacksBtnValue(true);
+          });
+          orderApi.getOrders().then((data) => {
+            setOrders(data);
           });
         }, 10000);
       }
@@ -184,13 +191,16 @@ function App() {
     orderApi
       .createOrder(nameWhoOrder, foods, price, doneStatus)
       .then((data) => {
+        orderApi.getOrders().then((data) => {
+          setOrders(data);
+        });
         console.log(data);
         setIsUserCreateOrder(true);
         setIsUserCartEmpty(false);
         setTimeout(() => {
           setIsUserCreateOrder(false);
           setIsUserCartEmpty(true);
-        }, 2000)
+        }, 5000);
       })
       .catch((e) => console.log(e));
   };
@@ -264,6 +274,7 @@ function App() {
   };
   const signin = (email, password, codeWord) => {
     auth.signin(email, password, codeWord).then((data) => {
+      debugger;
       console.log("Успешная авторизация!");
       setIsLoggedIn(true);
       console.log(userInfo);
@@ -332,6 +343,7 @@ function App() {
                 setBeerSnacksBtnValue={setBeerSnacksBtnValue}
                 setHotDishesBtnValue={setHotDishesBtnValue}
                 cigarettesBtnValue={cigarettesBtnValue}
+                hookahsBtnValue={hookahsBtnValue}
                 juiceBtnValue={juiceBtnValue}
                 coffeesBtnValue={coffeesBtnValue}
                 teaBtnValue={teaBtnValue}
@@ -351,6 +363,7 @@ function App() {
                 liqueursBtnValue={liqueursBtnValue}
                 setCigarettesBtnValue={setCigarettesBtnValue}
                 setJuiceBtnValue={setJuiceBtnValue}
+                setHookahsBtnValue={setHookahsBtnValue}
                 setCoffeeBtnValue={setCoffeeBtnValue}
                 setTeaBtnValue={setTeaBtnValue}
                 setBottledBeerBtnValue={setBottledBeerBtnValue}
@@ -400,6 +413,10 @@ function App() {
             element={
               <UsersList userList={userList} changeLimit={changeLimit} />
             }
+          />
+          <Route
+            path="/myOrders"
+            element={<MyOrders orders={orders} userInfo={userInfo} />}
           />
         </Routes>
         <PopupAddItem

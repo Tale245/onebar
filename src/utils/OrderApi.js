@@ -1,6 +1,6 @@
 class Order {
   constructor() {
-    this._baseUrl = "http://192.168.0.104:3001";
+    this._baseUrl = "http://192.168.0.113:3001";
   }
 
   _checkResponse(res) {

@@ -32,6 +32,7 @@ const Main = ({
   deleteElementInMenu,
   openPopupAddItem,
   cigarettesBtnValue,
+  hookahsBtnValue,
   juiceBtnValue,
   coffeesBtnValue,
   teaBtnValue,
@@ -50,6 +51,7 @@ const Main = ({
   vodkaBtnValue,
   liqueursBtnValue,
   setCigarettesBtnValue,
+  setHookahsBtnValue,
   setJuiceBtnValue,
   setCoffeeBtnValue,
   setTeaBtnValue,
@@ -94,6 +96,7 @@ const Main = ({
         beerSnacksBtnValue={beerSnacksBtnValue}
         hotDishesBtnValue={hotDishesBtnValue}
         cigarettesBtnValue={cigarettesBtnValue}
+        hookahsBtnValue={hookahsBtnValue}
         juiceBtnValue={juiceBtnValue}
         coffeesBtnValue={coffeesBtnValue}
         teaBtnValue={teaBtnValue}
@@ -112,6 +115,7 @@ const Main = ({
         vodkaBtnValue={vodkaBtnValue}
         liqueursBtnValue={liqueursBtnValue}
         setCigarettesBtnValue={setCigarettesBtnValue}
+        setHookahsBtnValue={setHookahsBtnValue}
         setJuiceBtnValue={setJuiceBtnValue}
         setCoffeeBtnValue={setCoffeeBtnValue}
         setTeaBtnValue={setTeaBtnValue}
@@ -178,8 +182,7 @@ const Main = ({
           {" "}
           <div className="app__basket">
             <p className="app__basket-text">
-              {cost}
-              <span className="app__text-limit">/{userInfo.limit}</span>
+              {cost}р
             </p>
             <img className="app__basket-ico" src={btnBar === true ? basketLogoBar : basketLogo} />
           </div>

@@ -1,12 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+@import url(./vendor/font/drukwidecyr-bold.css);
 @import url(../src/vendor/normalize.css);
 body {
   margin: 0 auto;
-  max-width: 768px;
-  background-color: #000000;
+  max-width: 100%;
+  background-image: url('./images/ajy.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   position: relative;
-  font-family: "inter", Arial, Helvetica, sans-serif;
+	font-family: 'DrukWideCyr-Bold', Arial, Helvetica, sans-serif;
+
+  /* font-family: "inter", Arial, Helvetica, sans-serif; */
 }
 .app__basket {
   margin: 0;
@@ -14,7 +19,7 @@ body {
   flex-direction: column;
   position: fixed;
   top: 200px;
-  right: 5px;
+  right: 50px;
 }
 .app__basket-ico {
   margin: 0;
@@ -35,10 +40,10 @@ body {
 .app__text-limit {
   margin: 0;
   text-align: center;
-  color: #3a9738;
+  color: #eaa51a;
 
   font-family: Inter;
-  font-size: 12px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

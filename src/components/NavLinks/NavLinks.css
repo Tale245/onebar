@@ -1,6 +1,7 @@
 .navLinks {
   margin: 0;
-  position: relative;
+  position: sticky;
+  top:140px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +28,6 @@
   border: none;
   border-bottom: 1px solid #483838;
   color: #fff;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
@@ -41,7 +41,7 @@
   background-color: #d82e2e;
 }
 .navLinks__btn_activeBar {
-  background-color: #2ea2d8;
+  background-color: #eaa51a;
 }
 .navLinks__btns {
   margin: 0;
@@ -58,14 +58,13 @@
   background-color: #000000;
   border: 1px solid #d82e2e;
   color: #fff;
-  font-family: Inter;
   font-size: 17px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
 }
 .navLinks__btn-food:last-of-type {
-  border: 1px solid #2ea2d8;
+  border: 1px solid #eaa51a;
 }
 .navLinks__btn-food:hover {
   cursor: pointer;

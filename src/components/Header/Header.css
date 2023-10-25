@@ -1,8 +1,12 @@
 .header {
   margin: 0 auto;
+  position:sticky;
+  top: 0;
+  z-index: 10;
   padding-top: 25px;
   padding-bottom: 20px;
   display: flex;
+  background-color: #000;
   justify-content: space-between;
   align-items: center;
 }
@@ -14,9 +18,7 @@
 }
 .header__logo {
   margin: 0;
-  margin-left: 23px;
-  width: 156px;
-  height: 36px;
+  width: 200px;
 }
 .header__admin-links {
   margin: 0;
@@ -47,6 +49,26 @@
   font-weight: 600;
   line-height: normal;
 }
-.header__account-name_bar{
-  color: #2EA2D8;
+.header__account-name_bar {
+  color: #eaa51a;
+}
+.app__text-limit_text {
+  color: #fff;
+  font-family: Inter;
+}
+.app__text-orders {
+  margin: 0;
+  font-family: Inter;
+  margin-right: 50px;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 0.5px solid #fff;
+}
+.header__link_menu{
+  margin: 0;
+  margin-right: 50px;
+  font-family: Inter;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
 }

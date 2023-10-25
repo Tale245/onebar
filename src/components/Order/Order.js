@@ -17,7 +17,6 @@ const Order = ({
     updateDoneStatus(true, _id);
     setHide(true);
   };
-  console.log(createsAt);
   return (
     <div
       className={
@@ -30,7 +29,13 @@ const Order = ({
         {btnOrders === false && (
           <div className="order__container-text">
             <p className="order__author">{nameWhoOrders}</p>
-            <p className={`order__order-status ${doneStatus === false && 'order__order-status_not-ready'}`}>{doneStatus === true ? 'Завершён' : 'Готовится'}</p>
+            <p
+              className={`order__order-status ${
+                doneStatus === false && "order__order-status_not-ready"
+              }`}
+            >
+              {doneStatus === true ? "Завершён" : "Готовится"}
+            </p>
           </div>
         )}
         {btnOrders === true && <p className="order__author">{nameWhoOrders}</p>}

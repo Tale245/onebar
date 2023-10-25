@@ -47,7 +47,7 @@
   margin: 0;
   text-align: center;
   margin-top: 30px;
-  font-size: 24px;
+  font-size: 21px;
   color: #ffffff;
 }
 .popup__form {
@@ -108,11 +108,11 @@
   line-height: normal;
 }
 .popup__item_bar-theme{
-  background-color: #2EA2D8;
+  background-color: #eaa51a;
 }
 .popup__container_bar-theme {
-  border: 1px solid #2EA2D8;
+  border: 1px solid #eaa51a;
 }
 .popup__submit-btn_bar-theme{
-  background: #2EA2D8;
+  background: #eaa51a;
 }
