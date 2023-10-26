@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../Orders/Orders.css";
 import Order from "../Order/Order";
@@ -9,6 +9,8 @@ const Orders = ({
   btnHistoryOrders,
   setBtnOrders,
   setBtnHistoryOrders,
+  download,
+  userInfo,
 }) => {
   const selectOrdersBtn = () => {
     setBtnOrders(true);
@@ -18,7 +20,17 @@ const Orders = ({
     setBtnOrders(false);
     setBtnHistoryOrders(true);
   };
-  
+
+  let ordersNew = [];
+
+  let whatArray = btnOrders === true ? orders : ordersNew
+  orders.forEach((element) => {
+    ordersNew.push(element);
+  });
+
+  console.log("ordersOld:", orders);
+  console.log("ordersNew:", ordersNew);
+
   return (
     <section className="orders">
       <div className="orders__container">
@@ -42,7 +54,7 @@ const Orders = ({
           </button>
         </div>
         <div className="orders__list">
-          {orders.map((item) => (
+          {whatArray.reverse().map((item) => (
             <Order
               nameWhoOrders={item.nameWhoOrders}
               price={item.price}
@@ -51,8 +63,11 @@ const Orders = ({
               _id={item._id}
               doneStatus={item.doneStatus}
               updateDoneStatus={updateDoneStatus}
-              createsAt = {item.createsAt}
+              createsAt={item.createsAt}
               btnOrders={btnOrders}
+              download={download}
+              item={item}
+              userInfo={userInfo}
             />
           ))}
         </div>

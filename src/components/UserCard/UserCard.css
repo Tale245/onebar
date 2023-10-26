@@ -6,11 +6,11 @@
   justify-content: center;
   align-items: center;
   margin-top: 100px;
-  border: 0.5px solid #D82E2E;
+  border: 0.5px solid #d82e2e;
   width: 510px;
   height: 150px;
 }
-.userCard:first-of-type{
+.userCard:first-of-type {
   margin-top: 46px;
 }
 .userCard__container {
@@ -23,13 +23,13 @@
 }
 .userCard__user-name {
   margin: 0 auto;
-  color: #FFF;
-  
+  color: #fff;
+
   font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal
+  line-height: normal;
 }
 
 .userCard__form {
@@ -43,7 +43,6 @@
 .userCard__limit {
   margin: 0 auto;
   color: #fff;
-
   font-family: Inter;
   font-size: 15px;
   font-style: normal;
@@ -53,6 +52,7 @@
 .userCard__limitInput {
   margin: 0 auto;
   padding-left: 5px;
+  font-family: Inter;
   box-sizing: border-box;
   width: 310px;
   height: 40px;
@@ -63,8 +63,9 @@
   margin: 0 auto;
   width: 310px;
   height: 39px;
+  font-family: Inter;
   background: none;
-  border: 0.5px solid #D82E2E;
+  border: 0.5px solid #d82e2e;
   color: #ffffff;
   cursor: pointer;
 }

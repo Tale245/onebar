@@ -1,19 +1,19 @@
 class Auth {
   constructor() {
-    this._baseUrl = "http://192.168.0.113:3001";
+    this._baseUrl = "http://192.168.0.104:3001";
   }
 
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
     } else {
+      window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
   //   Авторизация
 
   signin(email, password, codeWord) {
-    debugger
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: {
@@ -22,15 +22,15 @@ class Auth {
       body: JSON.stringify({
         email: email,
         password: password,
-        codeWord: codeWord
+        codeWord: codeWord,
       }),
     })
       .then((res) => {
-        debugger
+        debugger;
         return this._checkResponse(res);
       })
       .then((data) => {
-        debugger
+        debugger;
         localStorage.setItem("token", data.token);
       });
   }

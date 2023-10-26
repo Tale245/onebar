@@ -16,7 +16,7 @@ const MyOrders = ({ orders, userInfo }) => {
   return (
     <section className="myOrder">
       <div className="myOrder__container">
-        {array.map((item) => (
+        {array.reverse().map((item) => (
           <MyOrder
             itemFood={item.foods}
             price={item.price}

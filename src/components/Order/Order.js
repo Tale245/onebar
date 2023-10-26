@@ -10,12 +10,26 @@ const Order = ({
   updateDoneStatus,
   createsAt,
   btnOrders,
+  item,
+  download,
+  userInfo
 }) => {
   const [hide, setHide] = useState(false);
 
   const hideOrder = () => {
     updateDoneStatus(true, _id);
     setHide(true);
+  };
+  console.log(item.foods[0]);
+
+  const downloadItem = () => {
+    let array = [];
+    item.foods.forEach((item) => {
+      array.push({ имя: item.name, цена: item.price });
+    });
+    console.log(array);
+
+    download(array, _id);
   };
   return (
     <div
@@ -40,7 +54,9 @@ const Order = ({
         )}
         {btnOrders === true && <p className="order__author">{nameWhoOrders}</p>}
         {foods.map((item) => (
-          <p className="order__name">{item.name}</p>
+          <p className="order__name">
+            {item.name} - {item.price}руб
+          </p>
         ))}
         {btnOrders === false && (
           <div className="order__container-text">
@@ -60,6 +76,9 @@ const Order = ({
         {btnOrders === true && (
           <button className="order__done-btn" onClick={hideOrder}></button>
         )}
+        <button className="order__print-receipt" onClick={downloadItem}>
+          Напечатать чек
+        </button>
       </div>
     </div>
   );

@@ -39,7 +39,7 @@
   font-weight: 500;
   line-height: normal;
 }
-.order__container-text{
+.order__container-text {
   display: flex;
   justify-content: space-between;
 }
@@ -56,16 +56,14 @@
   font-weight: 500;
   line-height: normal;
 }
-.order__price_history{
+.order__price_history {
   font-size: 13px;
   color: #ffffff;
-
-
 }
 .order__done-btn {
   margin: 0 auto;
   position: absolute;
-  top: 40%;
+  top: 25%;
   bottom: 0;
   right: 10px;
   width: 30px;
@@ -89,7 +87,7 @@
   font-weight: 500;
   line-height: normal;
 }
-.order__order-status{
+.order__order-status {
   margin: 0;
   text-align: center;
   margin-right: 10px;
@@ -102,7 +100,23 @@
   font-weight: 500;
   line-height: normal;
 }
-.order__order-status_not-ready{
+.order__order-status_not-ready {
   color: #f57f1ee3;
-
+}
+.order__print-receipt {
+  margin: 0;
+  height: 40px;
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  font-family: Inter;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  transition: opacity 200ms ease-in-out;
+}
+.order__print-receipt:hover {
+  opacity: .7;
+  cursor: pointer;
 }
