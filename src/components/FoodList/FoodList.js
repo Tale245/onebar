@@ -22,6 +22,7 @@ const FoodList = ({
   deleteElementInMenu,
   openPopupAddItem,
   cigarettesBtnValue,
+  hookahsBtnValue,
   juiceBtnValue,
   coffeesBtnValue,
   teaBtnValue,
@@ -80,6 +81,12 @@ const FoodList = ({
       } else if (juiceBtnValue === true) {
         valueArray = foodMenuBar[0].juice;
         title = foodMenuBar[0].juiceTitle;
+      } else if (juiceBtnValue === true) {
+        valueArray = foodMenuBar[0].juice;
+        title = foodMenuBar[0].juiceTitle;
+      } else if (hookahsBtnValue === true) {
+        valueArray = foodMenuBar[0].hookahs;
+        title = foodMenuBar[0].hookahsTitle;
       }  else if (coffeesBtnValue === true) {
         valueArray = foodMenuBar[0].coffee;
         title = foodMenuBar[0].coffeeTitle;
@@ -142,6 +149,7 @@ const FoodList = ({
           valueArray.map((item) => (
             <FoodCard
               title={item.name}
+              priceRelax={item.priceRelax ? item.priceRelax : undefined}
               img={item.linkImage ? item.linkImage : item.imageLink}
               price={item.price}
               description={item.description}
@@ -166,6 +174,7 @@ const FoodList = ({
               hotDishesBtnValue={hotDishesBtnValue}
               btnBar={btnBar}
               cigarettesBtnValue={cigarettesBtnValue}
+              hookahsBtnValue={hookahsBtnValue}
               juiceBtnValue={juiceBtnValue}
               coffeesBtnValue={coffeesBtnValue}
               teaBtnValue={teaBtnValue}

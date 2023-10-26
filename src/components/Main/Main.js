@@ -155,6 +155,7 @@ const Main = ({
         deleteElementInMenu={deleteElementInMenu}
         openPopupAddItem={openPopupAddItem}
         cigarettesBtnValue={cigarettesBtnValue}
+        hookahsBtnValue={hookahsBtnValue}
         juiceBtnValue={juiceBtnValue}
         coffeesBtnValue={coffeesBtnValue}
         teaBtnValue={teaBtnValue}

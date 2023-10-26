@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./FoodCard.css";
 
 const FoodCard = ({
   img,
+  priceRelax,
   title,
   price,
   description,
@@ -27,6 +28,7 @@ const FoodCard = ({
   btnBar,
   foodMenuBar,
   cigarettesBtnValue,
+  hookahsBtnValue,
   juiceBtnValue,
   coffeesBtnValue,
   teaBtnValue,
@@ -46,7 +48,85 @@ const FoodCard = ({
   liqueursBtnValue,
   deleteElementInBarMenu,
 }) => {
-  console.log(description)
+  const [Mon, setMon] = useState(false);
+  const [Tue, setTue] = useState(false);
+  const [Wed, setWed] = useState(false);
+  const [Thu, setThu] = useState(false);
+  const [Fri, setFri] = useState(false);
+  const [Sat, setSat] = useState(false);
+  const [Sun, setSun] = useState(false);
+
+  const date = new Date().toString().slice(0, 3);
+
+  const whatDate = () => {
+    if (hookahsBtnValue === true && date === "Mon") {
+      setMon(true);
+      setTue(false);
+      setWed(false);
+      setThu(false);
+      setFri(false);
+      setSat(false);
+      setSun(false);
+    } else if (hookahsBtnValue === true && date === "Tue") {
+      setMon(false);
+      setTue(true);
+      setWed(false);
+      setThu(false);
+      setFri(false);
+      setSat(false);
+      setSun(false);
+    } else if (hookahsBtnValue === true && date === "Wed") {
+      setMon(false);
+      setTue(false);
+      setWed(true);
+      setThu(false);
+      setFri(false);
+      setSat(false);
+      setSun(false);
+    } else if (hookahsBtnValue === true && date === "Thu") {
+      setMon(false);
+      setTue(false);
+      setWed(false);
+      setThu(true);
+      setFri(false);
+      setSat(false);
+      setSun(false);
+    } else if (hookahsBtnValue === true && date === "Fri") {
+      setMon(false);
+      setTue(false);
+      setWed(false);
+      setThu(false);
+      setFri(true);
+      setSat(false);
+      setSun(false);
+    } else if (hookahsBtnValue === true && date === "Sat") {
+      setMon(false);
+      setTue(false);
+      setWed(false);
+      setThu(false);
+      setFri(false);
+      setSat(true);
+      setSun(false);
+    } else if (hookahsBtnValue === true && date === "Sun") {
+      setMon(false);
+      setTue(false);
+      setWed(false);
+      setThu(false);
+      setFri(false);
+      setSat(false);
+      setSun(true);
+    } else {
+      return;
+    }
+  };
+  console.log(date === "Thu");
+  console.log(hookahsBtnValue === true && date === "Thu");
+  console.log(Mon, Tue, Wed, Thu);
+  useEffect(() => {
+    whatDate();
+    setInterval(() => {}, 21600000);
+  }, []);
+
   let category;
   const whatIsCost = () => {
     let price = [];
@@ -99,6 +179,9 @@ const FoodCard = ({
       } else if (juiceBtnValue === true) {
         thisArray = foodMenuBar[0].juice;
         category = "Juice";
+      } else if (hookahsBtnValue === true) {
+        thisArray = foodMenuBar[0].hookahs;
+        category = "Hookahs";
       } else if (coffeesBtnValue === true) {
         thisArray = foodMenuBar[0].coffee;
         category = "Coffee";
@@ -189,7 +272,14 @@ const FoodCard = ({
       <div className="foodCard__text-container">
         {" "}
         <h3 className="foodCard__title">{title}</h3>
-        <h4 className="foodCard__price">{price}</h4>
+        <h4 className="foodCard__price">
+          {(Mon === true || Tue === true || Wed === true || Thu === true && hookahsBtnValue === true)
+            ? price
+            : priceRelax}
+        </h4>
+       {hookahsBtnValue === false && <h4 className="foodCard__price">
+          {price}
+        </h4>}
       </div>
       <p className="foodCard__description">
         {btnBar ? "Страна:" : "Состав:"} {description}

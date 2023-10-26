@@ -151,6 +151,12 @@ const PopupAddItem = ({
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
+                value="Hookahs"
+              >
+                Кальяны
+              </option>
+              <option
+                className="popup__item popup__item_bar-theme"
                 value="Juice"
               >
                 Сок

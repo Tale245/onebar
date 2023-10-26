@@ -136,7 +136,7 @@ function App() {
           food.getFoods().then((data) => {
             setFoodMenu(data);
             console.log(3.3);
-            setColdSnacksBtnValue(true);
+            // setColdSnacksBtnValue(true);
           });
           orderApi.getOrders().then((data) => {
             setOrders(data);

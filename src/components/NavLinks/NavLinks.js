@@ -20,6 +20,7 @@ const NavLinks = ({
   beerSnacksBtnValue,
   hotDishesBtnValue,
   cigarettesBtnValue,
+  hookahsBtnValue,
   juiceBtnValue,
   coffeesBtnValue,
   teaBtnValue,
@@ -38,6 +39,7 @@ const NavLinks = ({
   vodkaBtnValue,
   liqueursBtnValue,
   setCigarettesBtnValue,
+  setHookahsBtnValue,
   setJuiceBtnValue,
   setCoffeeBtnValue,
   setTeaBtnValue,
@@ -143,6 +145,29 @@ const NavLinks = ({
 
   const changeCigarettesValue = () => {
     setCigarettesBtnValue(true);
+    setHookahsBtnValue(false)
+    setJuiceBtnValue(false);
+    setCoffeeBtnValue(false);
+    setTeaBtnValue(false);
+    setBottledBeerBtnValue(false);
+    setWineBtnValue(false);
+    setChampagneBtnValue(false);
+    setVermouthBtnValue(false);
+    setAperativesBtnValue(false);
+    setRumBtnValue(false);
+    setCognacBtnValue(false);
+    setBrandyBtnValue(false);
+    setWhiskeyBtnValue(false);
+    setGinBtnValue(false);
+    setTequilaBtnValue(false);
+    setTincturesBtnValue(false);
+    setVodkaBtnValue(false);
+    setLiqueursBtnValue(false);
+  };
+
+  const changeHookahsValue = () => {
+    setCigarettesBtnValue(false);
+    setHookahsBtnValue(true)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -163,6 +188,7 @@ const NavLinks = ({
   };
   const changeJuiceValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(true);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -183,6 +209,7 @@ const NavLinks = ({
   };
   const changeCoffeeValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(true);
     setTeaBtnValue(false);
@@ -203,6 +230,7 @@ const NavLinks = ({
   };
   const changeTeaValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(true);
@@ -223,6 +251,7 @@ const NavLinks = ({
   };
   const changeBottledBeerValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -243,6 +272,7 @@ const NavLinks = ({
   };
   const changeWineValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -263,6 +293,7 @@ const NavLinks = ({
   };
   const changeChampagneValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -283,6 +314,7 @@ const NavLinks = ({
   };
   const changeVermouthValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -303,6 +335,7 @@ const NavLinks = ({
   };
   const changeAperativesValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -323,6 +356,7 @@ const NavLinks = ({
   };
   const changeRumValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -343,6 +377,7 @@ const NavLinks = ({
   };
   const changeCognacValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -363,6 +398,7 @@ const NavLinks = ({
   };
   const changeBrandyValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -383,6 +419,7 @@ const NavLinks = ({
   };
   const changeWhiskeyValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -403,6 +440,7 @@ const NavLinks = ({
   };
   const changeGinValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -423,6 +461,7 @@ const NavLinks = ({
   };
   const changeTequilaValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -443,6 +482,7 @@ const NavLinks = ({
   };
   const changeTincturesValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -463,6 +503,7 @@ const NavLinks = ({
   };
   const changeVodkaValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -483,6 +524,7 @@ const NavLinks = ({
   };
   const changeLiqueursValue = () => {
     setCigarettesBtnValue(false);
+    setHookahsBtnValue(false)
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -597,6 +639,14 @@ const NavLinks = ({
             onClick={changeCigarettesValue}
           >
             Сигареты
+          </button>
+          <button
+            className={`navLinks__btn ${
+              hookahsBtnValue && "navLinks__btn_activeBar"
+            }`}
+            onClick={changeHookahsValue}
+          >
+            Кальяны
           </button>
           <button
             className={`navLinks__btn ${
