@@ -18,7 +18,7 @@ const PopupAddItem = ({
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data.imageLink[0].name);
     if(btnBar === false){
       addNewElementInMenu(
         data.category,
@@ -26,7 +26,7 @@ const PopupAddItem = ({
         data.description,
         data.price,
         data.gram,
-        data.imageLink
+        data.imageLink[0].name
       );
     } else {
       addNewElementInBarMenu(
@@ -35,7 +35,7 @@ const PopupAddItem = ({
         data.description,
         data.price,
         data.gram,
-        data.imageLink
+        data.imageLink[0].name
       );
     }
 
@@ -73,25 +73,22 @@ const PopupAddItem = ({
               required: true,
             })}
             className="popup__input"
-            placeholder="Цена"
+            placeholder="Цена(цифрами)"
           />
           <input
             {...register("gram", {
               required: false,
             })}
             className="popup__input"
-            placeholder={btnBar ? "Грамм(Пропусти, если нет)" : "Грамм"}
+            placeholder={btnBar ? "Грамм(Пропусти, если нет)" : "Грамм(цифрами)"}
           />
           <input
+          type="file"
             {...register("imageLink", {
               required: true,
-              pattern: {
-                value:
-                  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-              },
             })}
             className="popup__input"
-            placeholder="Ссылка ни изображение"
+            placeholder="Путь до изображения"
           />
 
           {btnBar === false && (

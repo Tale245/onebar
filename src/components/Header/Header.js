@@ -3,29 +3,31 @@ import React from "react";
 import "./Header.css";
 
 import logo from "../../images/neonLogo.png";
-import logoBar from "../../images/neonLogo_bar.svg";
+import { NavLink } from "react-router-dom";
+import basketLogo from "../../images/basketLogo.svg";
+import basketLogoBar from "../../images/basketLogo_bar.svg";
 import profileAvatar from "../../images/profileAvatar.svg";
 import profileAvatarBar from "../../images/profileAvatar_bar.svg";
-import { NavLink } from "react-router-dom";
 
-const Header = ({ userInfo, btnBar }) => {
+const Header = ({ userInfo, btnBar, cost }) => {
   return (
     <header className="header">
-     <NavLink to="/main"> <img
-        className="header__logo"
-        src={logo}
-        alt="логотип"
-      /></NavLink>
+      <NavLink to="/main">
+        {" "}
+        <img className="header__logo" src={logo} alt="логотип" />
+      </NavLink>
       <div className="header__container">
         <div className="header__admin-links">
-   {(userInfo.admin === false || userInfo.admin === true) &&       <NavLink
-            to="/main"
-            className={`header__link ${
-              userInfo.admin === false && "header__link_menu"
-            } `}
-          >
-            Меню
-          </NavLink>}
+          {(userInfo.admin === false || userInfo.admin === true) && (
+            <NavLink
+              to="/main"
+              className={`header__link ${
+                userInfo.admin === false && "header__link_menu"
+              } `}
+            >
+              Меню
+            </NavLink>
+          )}
           {userInfo.admin === false && (
             <NavLink to="/myOrders" className="app__text-orders">
               Мои заказы
@@ -35,6 +37,18 @@ const Header = ({ userInfo, btnBar }) => {
             <p className="app__text-limit_text">
               БАЛАНС: <span className="app__text-limit">{userInfo.limit}р</span>{" "}
             </p>
+          )}
+          {userInfo.admin === false && (
+            <NavLink to="/basket">
+              {" "}
+              <div className="header__basket">
+                <p className="header__basket-text">{cost}р</p>
+                <img
+                  className="header__basket-ico"
+                  src={btnBar === true ? basketLogoBar : basketLogo}
+                />
+              </div>
+            </NavLink>
           )}
 
           {userInfo.admin && (

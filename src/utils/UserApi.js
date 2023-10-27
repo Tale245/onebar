@@ -7,7 +7,7 @@ class UserApi {
     if (res.ok) {
       return res.json();
     } else {
-      window.location.reload()
+      // window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
@@ -39,6 +39,7 @@ class UserApi {
   }
 
   addToCart(name, description, price, gram, imageLink) {
+    debugger
     return fetch(`${this._baseUrl}/user/cards`, {
       method: "POST",
       headers: {

@@ -7,7 +7,7 @@ class Order {
     if (res.ok) {
       return res.json();
     } else {
-      window.location.reload()
+      // window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
@@ -21,7 +21,6 @@ class Order {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      
       return this._checkResponse(res);
     });
   }
@@ -39,7 +38,7 @@ class Order {
         nameWhoOrders: nameWhoOrders,
         foods: foods,
         price: price,
-        doneStatus: doneStatus
+        doneStatus: doneStatus,
       }),
     }).then((res) => {
       return this._checkResponse(res);
@@ -68,7 +67,7 @@ class Order {
       },
       body: JSON.stringify({
         object: object,
-        name: name
+        name: name,
       }),
     }).then((res) => {
       return this._checkResponse(res);

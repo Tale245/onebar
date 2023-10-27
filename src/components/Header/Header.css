@@ -59,16 +59,54 @@
 .app__text-orders {
   margin: 0;
   font-family: Inter;
-  margin-right: 50px;
+  margin-right: 30px;
   color: #fff;
   text-decoration: none;
   border-bottom: 0.5px solid #fff;
 }
 .header__link_menu{
   margin: 0;
-  margin-right: 50px;
+  margin-right: 30px;
   font-family: Inter;
   font-size: 17px;
   font-style: normal;
   font-weight: 400;
+}
+.header__basket {
+  margin: 0;
+  margin-left: 30px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  right: 50px;
+}
+.header__basket-ico {
+  margin: 0;
+  width: 20px;
+  height: 20px;
+}
+.header__basket-text {
+  margin: 0;
+  margin-left: 20px;
+  background-color: #00000079;
+  position: absolute;
+  text-align: center;
+  color: #fff;
+
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.header__text-limit {
+  margin: 0;
+  text-align: center;
+  color: #eaa51a;
+
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }

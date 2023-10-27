@@ -296,7 +296,7 @@ function App() {
   };
   return (
     <div className="app">
-      <Header userInfo={userInfo} btnBar={btnBar} />
+      <Header userInfo={userInfo} btnBar={btnBar} cost={cost}/>
       <div className="app__container">
         <Routes>
           <Route

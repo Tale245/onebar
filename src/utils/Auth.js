@@ -7,7 +7,7 @@ class Auth {
     if (res.ok) {
       return res.json();
     } else {
-      window.location.reload();
+      // window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }

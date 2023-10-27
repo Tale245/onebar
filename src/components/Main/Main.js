@@ -3,9 +3,7 @@ import React from "react";
 import "../Main/Main.css";
 import FoodList from "../FoodList/FoodList";
 import NavLinks from "../NavLinks/NavLinks";
-import { NavLink } from "react-router-dom";
-import basketLogo from "../../images/basketLogo.svg";
-import basketLogoBar from "../../images/basketLogo_bar.svg";
+
 
 const Main = ({
   foodMenu,
@@ -178,17 +176,7 @@ const Main = ({
         btnFood={btnFood}
         deleteElementInBarMenu={deleteElementInBarMenu }
       />
-      {userInfo.admin === false && (
-        <NavLink to="/basket">
-          {" "}
-          <div className="app__basket">
-            <p className="app__basket-text">
-              {cost}р
-            </p>
-            <img className="app__basket-ico" src={btnBar === true ? basketLogoBar : basketLogo} />
-          </div>
-        </NavLink>
-      )}
+      
     </main>
   );
 };

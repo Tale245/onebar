@@ -2,8 +2,8 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: 164px;
+  width: 225px;
+  height: 189px;
   position: relative;
   transition: opacity 200ms ease-in-out;
 }
@@ -20,17 +20,29 @@
   object-fit: cover;
 }
 .foodCard__text-container {
-  margin: 0;
-  position: absolute;
-  left: 4px;
-  right: 4px;
-  bottom: 35px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  background-color: rgba(0, 0, 0, 0.253);
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 35px;
+}
+.foodCard__description-container {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.253);
+
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 .foodCard__title {
   margin: 0;
+  margin-left: 8px;
   max-width: 110px;
   color: #fff;
 
@@ -42,7 +54,8 @@
 }
 .foodCard__price {
   margin: 0;
-  color: #FFF;
+  margin-right: 8px;
+  color: #fff;
 
   font-family: Inter;
   font-size: 17px;
@@ -52,24 +65,25 @@
 }
 .foodCard__description {
   margin: 0;
-  position: absolute;
-  bottom: 18px;
-  color: rgba(255, 255, 255, 0.90);
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.9);
 
   font-family: Inter;
-  font-size: 7px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 .foodCard__gram {
   margin: 0;
-  position: absolute;
-  bottom: 8px;
-  color: rgba(255, 255, 255, 0.90);
+  margin-left: 8px;
+  margin-bottom: 5px;
+  left: 8px;
+  bottom: 3px;
+  color: rgba(255, 255, 255, 0.9);
 
   font-family: Inter;
-  font-size: 7px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;

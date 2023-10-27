@@ -245,6 +245,7 @@ const FoodCard = ({
       } else {
         thisGram = gram;
       }
+      debugger
       addToCart(title, description, price, thisGram, img);
     } else {
       console.log("индекс этой карточки:", thisCard);
@@ -266,25 +267,35 @@ const FoodCard = ({
 
     deleteFromCart(thisCard);
   };
+
+  const imagePath = require(`../../imageForMenu/${img}`);
+
   return (
     <div className="foodCard" onClick={cart ? findIndex : onClickCard}>
-      <img className="foodCard__image" src={img} alt={title} />
+      <img className="foodCard__image" src={imagePath} alt={title} />
       <div className="foodCard__text-container">
         {" "}
         <h3 className="foodCard__title">{title}</h3>
-        <h4 className="foodCard__price">
-          {(Mon === true || Tue === true || Wed === true || Thu === true && hookahsBtnValue === true)
-            ? price
-            : priceRelax}
-        </h4>
-       {hookahsBtnValue === false && <h4 className="foodCard__price">
-          {price}
-        </h4>}
+        {hookahsBtnValue === true && (
+          <h4 className="foodCard__price">
+            {Mon === true ||
+            Tue === true ||
+            Wed === true ||
+            (Thu === true && hookahsBtnValue === true)
+              ? `${price}р`
+              : `${priceRelax}р`}
+          </h4>
+        )}
+        {hookahsBtnValue === false && (
+          <h4 className="foodCard__price">{price}р</h4>
+        )}
       </div>
-      <p className="foodCard__description">
-        {btnBar ? "Страна:" : "Состав:"} {description}
-      </p>
-      {gram !== undefined && <p className="foodCard__gram">Грамм: {gram}</p>}
+      <div className="foodCard__description-container">
+        <p className="foodCard__description">
+          {btnBar ? "Страна:" : "Состав:"} {description}
+        </p>
+        {gram !== undefined && <p className="foodCard__gram">Грамм: {gram}</p>}
+      </div>
       <button
         className={`foodCard__btn-add ${
           (cart || userInfo.admin === true) && "foodCard__btn-trash"

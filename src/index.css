@@ -13,38 +13,3 @@ body {
 
   /* font-family: "inter", Arial, Helvetica, sans-serif; */
 }
-.app__basket {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 200px;
-  right: 50px;
-}
-.app__basket-ico {
-  margin: 0;
-  width: 35px;
-  height: 35px;
-}
-.app__basket-text {
-  margin: 0;
-  text-align: center;
-  color: #fff;
-
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-.app__text-limit {
-  margin: 0;
-  text-align: center;
-  color: #eaa51a;
-
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
