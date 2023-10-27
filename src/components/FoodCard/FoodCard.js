@@ -21,6 +21,7 @@ const FoodCard = ({
   soupsBtnValue,
   snacksBtnValue,
   coldSnacksBtnValue,
+  iceCreamBtnValue,
   saladsBtnValue,
   pastesBtnValue,
   beerSnacksBtnValue,
@@ -47,6 +48,7 @@ const FoodCard = ({
   vodkaBtnValue,
   liqueursBtnValue,
   deleteElementInBarMenu,
+  openPopupConfirm,
 }) => {
   const [Mon, setMon] = useState(false);
   const [Tue, setTue] = useState(false);
@@ -55,6 +57,10 @@ const FoodCard = ({
   const [Fri, setFri] = useState(false);
   const [Sat, setSat] = useState(false);
   const [Sun, setSun] = useState(false);
+
+  const try123 = (index, category) => {
+    openPopupConfirm(index, category);
+  };
 
   const date = new Date().toString().slice(0, 3);
 
@@ -153,6 +159,9 @@ const FoodCard = ({
       } else if (soupsBtnValue === true) {
         thisArray = foodArray[0].soups;
         category = "Soups";
+      } else if (iceCreamBtnValue === true) {
+        thisArray = foodArray[0].iceCream;
+        category = "IceCream";
       } else if (snacksBtnValue === true) {
         thisArray = foodArray[0].snacks;
         category = "Snacks";
@@ -238,22 +247,25 @@ const FoodCard = ({
       }
     });
 
-    if (userInfo.admin === false) {
+    if (userInfo.admin === false && userInfo.waiter === false) {
       let thisGram;
       if (gram === undefined) {
         thisGram = 0;
       } else {
         thisGram = gram;
       }
-      debugger
       addToCart(title, description, price, thisGram, img);
-    } else {
+    } else if (userInfo.admin === true && userInfo.waiter === false) {
       console.log("индекс этой карточки:", thisCard);
       if (btnBar === true) {
-        deleteElementInBarMenu(thisCard, category);
+        try123(thisCard, category);
+        // deleteElementInBarMenu(thisCard, category);
       } else {
-        deleteElementInMenu(thisCard, category);
+        try123(thisCard, category);
+        // deleteElementInMenu(thisCard, category);
       }
+    } else {
+      console.log("у вас нет доступа");
     }
   };
 
@@ -269,26 +281,29 @@ const FoodCard = ({
   };
 
   const imagePath = require(`../../imageForMenu/${img}`);
-
+  const whatPrice =
+    (Mon === true && hookahsBtnValue === true) ||
+    (Tue === true && hookahsBtnValue === true) ||
+    (Wed === true && hookahsBtnValue === true) ||
+    (Thu === true && hookahsBtnValue === true)
+      ? `${price}р`
+      : `${priceRelax}р`;
   return (
-    <div className="foodCard" onClick={cart ? findIndex : onClickCard}>
+    <div
+      className="foodCard"
+      onClick={
+        cart || (userInfo.admin === false && userInfo.waiter === false)
+          ? findIndex
+          : onClickCard
+      }
+    >
       <img className="foodCard__image" src={imagePath} alt={title} />
       <div className="foodCard__text-container">
         {" "}
         <h3 className="foodCard__title">{title}</h3>
-        {hookahsBtnValue === true && (
           <h4 className="foodCard__price">
-            {Mon === true ||
-            Tue === true ||
-            Wed === true ||
-            (Thu === true && hookahsBtnValue === true)
-              ? `${price}р`
-              : `${priceRelax}р`}
+            {hookahsBtnValue === true && btnBar === true ? `${whatPrice}` : `${price}р`}
           </h4>
-        )}
-        {hookahsBtnValue === false && (
-          <h4 className="foodCard__price">{price}р</h4>
-        )}
       </div>
       <div className="foodCard__description-container">
         <p className="foodCard__description">
@@ -296,11 +311,13 @@ const FoodCard = ({
         </p>
         {gram !== undefined && <p className="foodCard__gram">Грамм: {gram}</p>}
       </div>
-      <button
-        className={`foodCard__btn-add ${
-          (cart || userInfo.admin === true) && "foodCard__btn-trash"
-        }`}
-      ></button>
+      {userInfo.waiter === false && (
+        <button
+          className={`foodCard__btn-add ${
+            (cart || userInfo.admin === true) && "foodCard__btn-trash"
+          }`}
+        ></button>
+      )}
     </div>
   );
 };

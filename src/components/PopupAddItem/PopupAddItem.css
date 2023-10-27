@@ -1,5 +1,6 @@
 .popup {
   margin: 0 auto;
+  height: 100vh;
   position: absolute;
   top: 0;
   bottom: 0;

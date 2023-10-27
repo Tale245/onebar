@@ -1,0 +1,61 @@
+.popupConfirm {
+  margin: 0 auto;
+  border: 1px solid red;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.5s ease, opacity 0.5s ease;
+}
+.popupConfirm_active {
+  visibility: visible;
+  opacity: 1;
+}
+.popupConfirm__overlay {
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.459);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.popupConfirm__container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  height: 200px;
+  background-color: #fff;
+  z-index: 4;
+}
+.popupConfirm__confirm-title {
+  margin: 0 auto;
+  margin-top: 40px;
+  text-align: center;
+}
+.popupConfirm__confirm-text {
+  margin: 0;
+  margin-top: 30px;
+}
+.popupConfirm__btn-confirm {
+  margin: 0;
+  margin-top: 20px;
+  width: 140px;
+  height: 40px;
+  background: none;
+  border: 0.5px solid #000;
+}
+.popupConfirm__btn-container {
+  margin: 0 auto;
+  display: flex;
+  gap: 30px;
+}

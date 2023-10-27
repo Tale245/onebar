@@ -19,7 +19,7 @@ const PopupAddItem = ({
 
   const onSubmit = (data) => {
     console.log(data.imageLink[0].name);
-    if(btnBar === false){
+    if (btnBar === false) {
       addNewElementInMenu(
         data.category,
         data.name,
@@ -80,10 +80,12 @@ const PopupAddItem = ({
               required: false,
             })}
             className="popup__input"
-            placeholder={btnBar ? "Грамм(Пропусти, если нет)" : "Грамм(цифрами)"}
+            placeholder={
+              btnBar ? "Грамм(Пропусти, если нет)" : "Грамм(цифрами)"
+            }
           />
           <input
-          type="file"
+            type="file"
             {...register("imageLink", {
               required: true,
             })}
@@ -97,10 +99,12 @@ const PopupAddItem = ({
               {...register("category", {
                 required: true,
               })}
-  
             >
               <option сlassName="popup__item" value="ColdSnacks">
                 Холодные закуски
+              </option>
+              <option сlassName="popup__item" value="IceCream">
+                Мороженое
               </option>
               <option className="popup__item" value="Soups">
                 Супы
@@ -134,10 +138,7 @@ const PopupAddItem = ({
               })}
               size={4}
             >
-              <option
-                сlassName="popup__item "
-                value="Cigarettes"
-              >
+              <option сlassName="popup__item " value="Cigarettes">
                 Выберите категорию
               </option>
               <option

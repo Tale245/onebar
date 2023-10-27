@@ -7,6 +7,7 @@ const NavLinks = ({
   setSoupsBtnValue,
   setSnacksBtnValue,
   setColdSnacksBtnValue,
+  setIceCreamBtnValue,
   setSaladsBtnValue,
   setPastesBtnValue,
   setBeerSnacksBtnValue,
@@ -15,6 +16,7 @@ const NavLinks = ({
   soupsBtnValue,
   snacksBtnValue,
   coldSnacksBtnValue,
+  iceCreamBtnValue,
   saladsBtnValue,
   pastesBtnValue,
   beerSnacksBtnValue,
@@ -67,6 +69,7 @@ const NavLinks = ({
     setSoupsBtnValue(false);
     setSnacksBtnValue(false);
     setColdSnacksBtnValue(false);
+    setIceCreamBtnValue(false);
     setSaladsBtnValue(false);
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
@@ -77,6 +80,7 @@ const NavLinks = ({
     setSoupsBtnValue(true);
     setSnacksBtnValue(false);
     setColdSnacksBtnValue(false);
+    setIceCreamBtnValue(false);
     setSaladsBtnValue(false);
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
@@ -87,6 +91,7 @@ const NavLinks = ({
     setSoupsBtnValue(false);
     setSnacksBtnValue(true);
     setColdSnacksBtnValue(false);
+    setIceCreamBtnValue(false);
     setSaladsBtnValue(false);
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
@@ -97,6 +102,18 @@ const NavLinks = ({
     setSoupsBtnValue(false);
     setSnacksBtnValue(false);
     setColdSnacksBtnValue(true);
+    setIceCreamBtnValue(false);
+    setSaladsBtnValue(false);
+    setPastesBtnValue(false);
+    setBeerSnacksBtnValue(false);
+    setHotDishesBtnValue(false);
+  };
+  const changeIceCreamValue = () => {
+    setPizzaBtnValue(false);
+    setSoupsBtnValue(false);
+    setSnacksBtnValue(false);
+    setColdSnacksBtnValue(false);
+    setIceCreamBtnValue(true);
     setSaladsBtnValue(false);
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
@@ -107,6 +124,7 @@ const NavLinks = ({
     setSoupsBtnValue(false);
     setSnacksBtnValue(false);
     setColdSnacksBtnValue(false);
+    setIceCreamBtnValue(false);
     setSaladsBtnValue(true);
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
@@ -117,6 +135,7 @@ const NavLinks = ({
     setSoupsBtnValue(false);
     setSnacksBtnValue(false);
     setColdSnacksBtnValue(false);
+    setIceCreamBtnValue(false);
     setSaladsBtnValue(false);
     setPastesBtnValue(true);
     setBeerSnacksBtnValue(false);
@@ -127,6 +146,7 @@ const NavLinks = ({
     setSoupsBtnValue(false);
     setSnacksBtnValue(false);
     setColdSnacksBtnValue(false);
+    setIceCreamBtnValue(false);
     setSaladsBtnValue(false);
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(true);
@@ -137,6 +157,7 @@ const NavLinks = ({
     setSoupsBtnValue(false);
     setSnacksBtnValue(false);
     setColdSnacksBtnValue(false);
+    setIceCreamBtnValue(false);
     setSaladsBtnValue(false);
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
@@ -145,7 +166,7 @@ const NavLinks = ({
 
   const changeCigarettesValue = () => {
     setCigarettesBtnValue(true);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -167,7 +188,7 @@ const NavLinks = ({
 
   const changeHookahsValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(true)
+    setHookahsBtnValue(true);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -188,7 +209,7 @@ const NavLinks = ({
   };
   const changeJuiceValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(true);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -209,7 +230,7 @@ const NavLinks = ({
   };
   const changeCoffeeValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(true);
     setTeaBtnValue(false);
@@ -230,7 +251,7 @@ const NavLinks = ({
   };
   const changeTeaValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(true);
@@ -251,7 +272,7 @@ const NavLinks = ({
   };
   const changeBottledBeerValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -272,7 +293,7 @@ const NavLinks = ({
   };
   const changeWineValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -293,7 +314,7 @@ const NavLinks = ({
   };
   const changeChampagneValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -314,7 +335,7 @@ const NavLinks = ({
   };
   const changeVermouthValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -335,7 +356,7 @@ const NavLinks = ({
   };
   const changeAperativesValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -356,7 +377,7 @@ const NavLinks = ({
   };
   const changeRumValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -377,7 +398,7 @@ const NavLinks = ({
   };
   const changeCognacValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -398,7 +419,7 @@ const NavLinks = ({
   };
   const changeBrandyValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -419,7 +440,7 @@ const NavLinks = ({
   };
   const changeWhiskeyValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -440,7 +461,7 @@ const NavLinks = ({
   };
   const changeGinValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -461,7 +482,7 @@ const NavLinks = ({
   };
   const changeTequilaValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -482,7 +503,7 @@ const NavLinks = ({
   };
   const changeTincturesValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -503,7 +524,7 @@ const NavLinks = ({
   };
   const changeVodkaValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -524,7 +545,7 @@ const NavLinks = ({
   };
   const changeLiqueursValue = () => {
     setCigarettesBtnValue(false);
-    setHookahsBtnValue(false)
+    setHookahsBtnValue(false);
     setJuiceBtnValue(false);
     setCoffeeBtnValue(false);
     setTeaBtnValue(false);
@@ -555,10 +576,20 @@ const NavLinks = ({
   return (
     <section className="navLinks">
       <div className="navLinks__btns">
-        <button className={`navLinks__btn-food ${btnFood && 'navLinks__btn-food_active'}`} onClick={selectMenuFood}>
+        <button
+          className={`navLinks__btn-food ${
+            btnFood && "navLinks__btn-food_active"
+          }`}
+          onClick={selectMenuFood}
+        >
           Еда
         </button>
-        <button className={`navLinks__btn-food ${btnBar && 'navLinks__btn-food_active'}`} onClick={selectMenuBar}>
+        <button
+          className={`navLinks__btn-food ${
+            btnBar && "navLinks__btn-food_active"
+          }`}
+          onClick={selectMenuBar}
+        >
           Напитки
         </button>
       </div>
@@ -571,6 +602,14 @@ const NavLinks = ({
             onClick={changeColdSnacksValue}
           >
             Холодные закуски
+          </button>
+          <button
+            className={`navLinks__btn ${
+             iceCreamBtnValue && "navLinks__btn_active"
+            }`}
+            onClick={changeIceCreamValue}
+          >
+            Мороженое
           </button>
           <button
             className={`navLinks__btn ${

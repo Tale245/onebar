@@ -14,6 +14,8 @@ import auth from "../../utils/Auth";
 import UsersList from "../UsersList/UsersList";
 import PopupAddItem from "../PopupAddItem/PopupAddItem";
 import MyOrders from "../MyOrders/MyOrders";
+import PageNotFound from "../PageNotFound/PageNotFound";
+import PopupConfirm from "../PopupConfirm/PopupConfirm";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -30,6 +32,7 @@ function App() {
   const [soupsBtnValue, setSoupsBtnValue] = useState(false);
   const [snacksBtnValue, setSnacksBtnValue] = useState(false);
   const [coldSnacksBtnValue, setColdSnacksBtnValue] = useState(false);
+  const [iceCreamBtnValue, setIceCreamBtnValue] = useState(false);
   const [saladsBtnValue, setSaladsBtnValue] = useState(false);
   const [pastesBtnValue, setPastesBtnValue] = useState(false);
   const [beerSnacksBtnValue, setBeerSnacksBtnValue] = useState(false);
@@ -59,6 +62,7 @@ function App() {
   const [liqueursBtnValue, setLiqueursBtnValue] = useState(false);
 
   const [isPopupAddItemOpen, setIsPopupAddItemOpen] = useState(false);
+  const [isPopupConfirmOpen, setIsPopupConfirmOpen] = useState(false);
   const [userList, setUserList] = useState([]);
   const [dataLoad, setDataLoad] = useState(false);
 
@@ -70,6 +74,8 @@ function App() {
 
   const [isUserCartEmpty, setIsUserCartEmpty] = useState(false);
   const [isUserCreateOrder, setIsUserCreateOrder] = useState(false);
+
+  const [deleteCard, setDeleteCard] = useState({});
 
   const navigate = useNavigate();
 
@@ -153,6 +159,7 @@ function App() {
   };
   const closePopups = () => {
     setIsPopupAddItemOpen(false);
+    setIsPopupConfirmOpen(false);
   };
 
   const addToCart = (name, description, price, gram, imageLink) => {
@@ -260,25 +267,26 @@ function App() {
       console.log(data);
       food.getFoods().then((data) => {
         setFoodMenu(data);
+        closePopups();
       });
     });
   };
 
   const deleteElementInBarMenu = (index, deleteItem) => {
-    debugger
     food.deleteElementInMenu(index, deleteItem).then((data) => {
       console.log(data);
-      food.getFoodBar().then((data) => setFoodMenuBar(data));
+      food.getFoodBar().then((data) => {
+        setFoodMenuBar(data);
+        closePopups()
+      });
     });
   };
   const signin = (email, password, codeWord) => {
     auth.signin(email, password, codeWord).then((data) => {
-      debugger;
       console.log("Успешная авторизация!");
       setIsLoggedIn(true);
       console.log(userInfo);
       if (userInfo.admin === true) {
-        debugger;
         navigate("/orders");
       } else {
         navigate("/main");
@@ -294,9 +302,15 @@ function App() {
   const download = (object, name) => {
     orderApi.downLoad(object, name).then((data) => console.log(data));
   };
+
+  const openPopupConfirm = (thisCard, category) => {
+    setDeleteCard({ thisCard, category });
+    setIsPopupConfirmOpen(true);
+  };
+  console.log(isPopupConfirmOpen);
   return (
     <div className="app">
-      <Header userInfo={userInfo} btnBar={btnBar} cost={cost}/>
+      <Header userInfo={userInfo} btnBar={btnBar} cost={cost} />
       <div className="app__container">
         <Routes>
           <Route
@@ -323,6 +337,7 @@ function App() {
             path="/main"
             element={
               <Main
+                openPopupConfirm={openPopupConfirm}
                 userInfo={userInfo}
                 foodMenu={foodMenu}
                 addToCart={addToCart}
@@ -332,6 +347,7 @@ function App() {
                 soupsBtnValue={soupsBtnValue}
                 snacksBtnValue={snacksBtnValue}
                 coldSnacksBtnValue={coldSnacksBtnValue}
+                iceCreamBtnValue={iceCreamBtnValue}
                 saladsBtnValue={saladsBtnValue}
                 pastesBtnValue={pastesBtnValue}
                 beerSnacksBtnValue={beerSnacksBtnValue}
@@ -340,6 +356,7 @@ function App() {
                 setSoupsBtnValue={setSoupsBtnValue}
                 setSnacksBtnValue={setSnacksBtnValue}
                 setColdSnacksBtnValue={setColdSnacksBtnValue}
+                setIceCreamBtnValue={setIceCreamBtnValue}
                 setSaladsBtnValue={setSaladsBtnValue}
                 setPastesBtnValue={setPastesBtnValue}
                 setBeerSnacksBtnValue={setBeerSnacksBtnValue}
@@ -396,38 +413,53 @@ function App() {
               />
             }
           />
-          <Route
-            path="/orders"
-            element={
-              <Orders
-                orders={orders}
-                updateDoneStatus={updateDoneStatus}
-                btnOrders={btnOrders}
-                btnHistoryOrders={btnHistoryOrders}
-                setBtnOrders={setBtnOrders}
-                setBtnHistoryOrders={setBtnHistoryOrders}
-                download={download}
-                userInfo={userInfo}
-              />
-            }
-          />
-          <Route path="/signin" element={<Signin signin={signin} />} />
-          <Route
-            path="/userList"
-            element={
-              <UsersList userList={userList} changeLimit={changeLimit} />
-            }
-          />
+          {userInfo.admin === true && (
+            <Route
+              path="/orders"
+              element={
+                <Orders
+                  orders={orders}
+                  updateDoneStatus={updateDoneStatus}
+                  btnOrders={btnOrders}
+                  btnHistoryOrders={btnHistoryOrders}
+                  setBtnOrders={setBtnOrders}
+                  setBtnHistoryOrders={setBtnHistoryOrders}
+                  download={download}
+                  userInfo={userInfo}
+                />
+              }
+            />
+          )}
+          {isLoggedIn === false && (
+            <Route path="/signin" element={<Signin signin={signin} />} />
+          )}
+          {userInfo.admin === true && (
+            <Route
+              path="/userList"
+              element={
+                <UsersList userList={userList} changeLimit={changeLimit} />
+              }
+            />
+          )}
           <Route
             path="/myOrders"
             element={<MyOrders orders={orders} userInfo={userInfo} />}
           />
+          <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
         <PopupAddItem
           isPopupAddItemOpen={isPopupAddItemOpen}
           closePopups={closePopups}
           addNewElementInMenu={addNewElementInMenu}
           addNewElementInBarMenu={addNewElementInBarMenu}
+          btnBar={btnBar}
+        />
+        <PopupConfirm
+          deleteCard={deleteCard}
+          isPopupConfirmOpen={isPopupConfirmOpen}
+          closePopups={closePopups}
+          deleteElementInMenu={deleteElementInMenu}
+          deleteElementInBarMenu={deleteElementInBarMenu}
           btnBar={btnBar}
         />
       </div>

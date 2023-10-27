@@ -26,11 +26,9 @@ class Auth {
       }),
     })
       .then((res) => {
-        debugger;
         return this._checkResponse(res);
       })
       .then((data) => {
-        debugger;
         localStorage.setItem("token", data.token);
       });
   }

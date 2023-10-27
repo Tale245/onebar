@@ -4,7 +4,6 @@ import "../Main/Main.css";
 import FoodList from "../FoodList/FoodList";
 import NavLinks from "../NavLinks/NavLinks";
 
-
 const Main = ({
   foodMenu,
   addToCart,
@@ -15,6 +14,7 @@ const Main = ({
   soupsBtnValue,
   snacksBtnValue,
   coldSnacksBtnValue,
+  iceCreamBtnValue,
   saladsBtnValue,
   pastesBtnValue,
   beerSnacksBtnValue,
@@ -23,6 +23,7 @@ const Main = ({
   setSoupsBtnValue,
   setSnacksBtnValue,
   setColdSnacksBtnValue,
+  setIceCreamBtnValue,
   setSaladsBtnValue,
   setPastesBtnValue,
   setBeerSnacksBtnValue,
@@ -73,6 +74,8 @@ const Main = ({
   setBtnFood,
   foodMenuBar,
   deleteElementInBarMenu,
+  setDeleteCard,
+  openPopupConfirm,
 }) => {
   return (
     <main className="main">
@@ -80,6 +83,7 @@ const Main = ({
         setPizzaBtnValue={setPizzaBtnValue}
         setSoupsBtnValue={setSoupsBtnValue}
         setColdSnacksBtnValue={setColdSnacksBtnValue}
+        setIceCreamBtnValue={setIceCreamBtnValue}
         setSnacksBtnValue={setSnacksBtnValue}
         setSaladsBtnValue={setSaladsBtnValue}
         setPastesBtnValue={setPastesBtnValue}
@@ -89,6 +93,7 @@ const Main = ({
         soupsBtnValue={soupsBtnValue}
         snacksBtnValue={snacksBtnValue}
         coldSnacksBtnValue={coldSnacksBtnValue}
+        iceCreamBtnValue={iceCreamBtnValue}
         saladsBtnValue={saladsBtnValue}
         pastesBtnValue={pastesBtnValue}
         beerSnacksBtnValue={beerSnacksBtnValue}
@@ -145,6 +150,7 @@ const Main = ({
         pizzaBtnValue={pizzaBtnValue}
         soupsBtnValue={soupsBtnValue}
         coldSnacksBtnValue={coldSnacksBtnValue}
+        iceCreamBtnValue={iceCreamBtnValue}
         snacksBtnValue={snacksBtnValue}
         saladsBtnValue={saladsBtnValue}
         pastesBtnValue={pastesBtnValue}
@@ -174,9 +180,9 @@ const Main = ({
         foodMenuBar={foodMenuBar}
         btnBar={btnBar}
         btnFood={btnFood}
-        deleteElementInBarMenu={deleteElementInBarMenu }
+        deleteElementInBarMenu={deleteElementInBarMenu}
+        openPopupConfirm={openPopupConfirm}
       />
-      
     </main>
   );
 };

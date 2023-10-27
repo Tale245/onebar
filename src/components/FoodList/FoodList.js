@@ -15,6 +15,7 @@ const FoodList = ({
   soupsBtnValue,
   snacksBtnValue,
   coldSnacksBtnValue,
+  iceCreamBtnValue,
   saladsBtnValue,
   pastesBtnValue,
   beerSnacksBtnValue,
@@ -43,7 +44,8 @@ const FoodList = ({
   foodMenuBar,
   btnBar,
   btnFood,
-  deleteElementInBarMenu 
+  deleteElementInBarMenu,
+  openPopupConfirm
 }) => {
   let valueArray = foodArray;
   let title = "";
@@ -61,6 +63,9 @@ const FoodList = ({
       } else if (coldSnacksBtnValue === true) {
         valueArray = foodArray[0].coldSnacks;
         title = foodArray[0].coldSnacksTitle;
+      } else if (iceCreamBtnValue === true) {
+        valueArray = foodArray[0].iceCream;
+        title = foodArray[0].iceCreamTitle;
       } else if (saladsBtnValue === true) {
         valueArray = foodArray[0].salads;
         title = foodArray[0].saladsTitle;
@@ -87,7 +92,7 @@ const FoodList = ({
       } else if (hookahsBtnValue === true) {
         valueArray = foodMenuBar[0].hookahs;
         title = foodMenuBar[0].hookahsTitle;
-      }  else if (coffeesBtnValue === true) {
+      } else if (coffeesBtnValue === true) {
         valueArray = foodMenuBar[0].coffee;
         title = foodMenuBar[0].coffeeTitle;
       } else if (teaBtnValue === true) {
@@ -148,6 +153,7 @@ const FoodList = ({
         {valueArray &&
           valueArray.map((item) => (
             <FoodCard
+            openPopupConfirm={openPopupConfirm}
               title={item.name}
               priceRelax={item.priceRelax ? item.priceRelax : undefined}
               img={item.linkImage ? item.linkImage : item.imageLink}
@@ -167,6 +173,7 @@ const FoodList = ({
               pizzaBtnValue={pizzaBtnValue}
               soupsBtnValue={soupsBtnValue}
               coldSnacksBtnValue={coldSnacksBtnValue}
+              iceCreamBtnValue={iceCreamBtnValue}
               snacksBtnValue={snacksBtnValue}
               saladsBtnValue={saladsBtnValue}
               pastesBtnValue={pastesBtnValue}
@@ -192,11 +199,11 @@ const FoodList = ({
               tincturesBtnValue={tincturesBtnValue}
               vodkaBtnValue={vodkaBtnValue}
               liqueursBtnValue={liqueursBtnValue}
-              deleteElementInBarMenu ={deleteElementInBarMenu }
+              deleteElementInBarMenu={deleteElementInBarMenu}
             />
           ))}
       </div>
-      {userInfo.admin && (
+      {(userInfo.admin && userInfo.waiter === false) && (
         <button
           className="foodList__popup-open"
           onClick={openPopupAddItem}
