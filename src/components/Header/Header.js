@@ -9,7 +9,7 @@ import basketLogoBar from "../../images/basketLogo_bar.svg";
 import profileAvatar from "../../images/profileAvatar.svg";
 import profileAvatarBar from "../../images/profileAvatar_bar.svg";
 
-const Header = ({ userInfo, btnBar, cost }) => {
+const Header = ({ userInfo, btnBar, cost}) => {
   return (
     <header className="header">
       <NavLink to="/main">

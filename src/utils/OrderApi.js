@@ -58,7 +58,7 @@ class Order {
       return this._checkResponse(res);
     });
   }
-  downLoad(object, name) {
+  downLoad(object) {
     return fetch(`${this._baseUrl}/download`, {
       method: "POST",
       headers: {
@@ -66,12 +66,39 @@ class Order {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        object: object,
-        name: name,
+       data: object,
       }),
     }).then((res) => {
       return this._checkResponse(res);
     });
+  }
+
+  async download(object, name) {
+    try {
+      const response = await fetch(`${this._baseUrl}/downloadOne`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fileName: name, 
+          dataArray: object
+        }),
+      });
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "example.txt";
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Ошибка при скачивании файла:", error);
+    }
   }
 }
 

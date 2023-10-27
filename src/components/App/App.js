@@ -299,15 +299,20 @@ function App() {
       userApi.getUsers().then((data) => setUserList(data));
     });
   };
-  const download = (object, name) => {
-    orderApi.downLoad(object, name).then((data) => console.log(data));
-  };
+  // const download = (object, name) => {
+  //   orderApi.downLoad(object, name).then((data) => console.log(data));
+  // };
 
   const openPopupConfirm = (thisCard, category) => {
     setDeleteCard({ thisCard, category });
     setIsPopupConfirmOpen(true);
   };
-  console.log(isPopupConfirmOpen);
+
+  const download = (object, name) => {
+    debugger
+    orderApi.download(object, name).then((data) => console.log(data))
+  } 
+   console.log(isPopupConfirmOpen);
   return (
     <div className="app">
       <Header userInfo={userInfo} btnBar={btnBar} cost={cost} />

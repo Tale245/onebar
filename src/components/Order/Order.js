@@ -12,7 +12,7 @@ const Order = ({
   btnOrders,
   item,
   download,
-  userInfo
+  userInfo,
 }) => {
   const [hide, setHide] = useState(false);
 
@@ -25,9 +25,23 @@ const Order = ({
   const downloadItem = () => {
     let array = [];
     item.foods.forEach((item) => {
-      array.push({ имя: item.name, цена: item.price });
+      array.push(`${item.name} - ${item.price} рублей`);
     });
     console.log(array);
+    array.unshift("  ");
+    array.unshift("Название:     Цена:");
+    array.unshift("  ");
+    array.unshift(nameWhoOrders);
+    array.unshift("  ");
+    array.unshift("     РЦ НЕОН");
+
+    let date = new Date();
+    let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
+    array.push(" ");
+    array.push("Подпись официанта ____________");
+    array.push(" ");
+
+    array.push(dateNow);
 
     download(array, _id);
   };
