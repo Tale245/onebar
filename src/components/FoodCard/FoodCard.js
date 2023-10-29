@@ -292,7 +292,7 @@ const FoodCard = ({
     <div
       className="foodCard"
       onClick={
-        cart || (userInfo.admin === false && userInfo.waiter === false)
+        cart 
           ? findIndex
           : onClickCard
       }

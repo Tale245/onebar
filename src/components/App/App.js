@@ -120,39 +120,39 @@ function App() {
 
   // Получаем информацию о пользователе и карточки с позициями для меню
 
-  // useEffect(() => {
-  //   console.log(isLoggedIn);
-  //   if (isLoggedIn) {
-  //     if (userInfo.admin === true) {
-  //       window.setInterval(() => {
-  //         console.log(2.2);
-  //         orderApi.getOrders().then((data) => {
-  //           setOrders(data);
-  //         });
-  //         userApi.getUsers().then((data) => setUserList(data));
-  //       }, 10000);
-  //     } else if (userInfo.admin === false) {
-  //       window.setInterval(() => {
-  //         console.log(1.1);
-  //         userApi.getMyInfo().then((data) => {
-  //           setUserInfo(data);
-  //         });
-  //         food.getFoods().then((data) => {
-  //           setFoodMenu(data);
-  //           console.log(3.3);
-  //           // setColdSnacksBtnValue(true);
-  //         });
-  //         orderApi.getOrders().then((data) => {
-  //           setOrders(data);
-  //         });
-  //       }, 10000);
-  //     }
-  //     setInterval(() => {
-  //       window.location.reload();
-  //     }, 604800000);
-  //     return () => clearInterval();
-  //   }
-  // }, [dataLoad]);
+  useEffect(() => {
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
+      if (userInfo.admin === true) {
+        window.setInterval(() => {
+          console.log(2.2);
+          orderApi.getOrders().then((data) => {
+            setOrders(data);
+          });
+          userApi.getUsers().then((data) => setUserList(data));
+        }, 10000);
+      } else if (userInfo.admin === false) {
+        window.setInterval(() => {
+          console.log(1.1);
+          userApi.getMyInfo().then((data) => {
+            setUserInfo(data);
+          });
+          food.getFoods().then((data) => {
+            setFoodMenu(data);
+            console.log(3.3);
+            // setColdSnacksBtnValue(true);
+          });
+          orderApi.getOrders().then((data) => {
+            setOrders(data);
+          });
+        }, 10000);
+      }
+      setInterval(() => {
+        window.location.reload();
+      }, 604800000);
+      return () => clearInterval();
+    }
+  }, [dataLoad]);
 
   const openPopupAddItem = () => {
     setIsPopupAddItemOpen(true);
@@ -415,6 +415,7 @@ function App() {
                 setBtnFood={setBtnFood}
                 foodMenuBar={foodMenuBar}
                 deleteElementInBarMenu={deleteElementInBarMenu}
+                deleteFromCart={deleteFromCart}
               />
             }
           />

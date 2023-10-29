@@ -38,6 +38,8 @@ const Order = ({
     let date = new Date();
     let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
     array.push(" ");
+    array.push(`ИТОГ: ${price} рублей`)
+    array.push(" ");
     array.push("Подпись официанта ____________");
     array.push(" ");
 
