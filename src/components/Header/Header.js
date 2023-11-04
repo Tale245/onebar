@@ -17,7 +17,7 @@ const Header = ({ userInfo, btnBar, cost}) => {
         <img className="header__logo" src={logo} alt="логотип" />
       </NavLink>
       <div className="header__container">
-        <div className="header__admin-links">
+        <div className={`header__links ${userInfo.admin && 'header__admin-links'}`}>
           {(userInfo.admin === false || userInfo.admin === true) && (
             <NavLink
               to="/main"
@@ -46,7 +46,7 @@ const Header = ({ userInfo, btnBar, cost}) => {
                 <img
                   className="header__basket-ico"
                   src={btnBar === true ? basketLogoBar : basketLogo}
-                />
+                alt="ico"/>
               </div>
             </NavLink>
           )}
@@ -59,6 +59,11 @@ const Header = ({ userInfo, btnBar, cost}) => {
           {userInfo.admin && (
             <NavLink to="/orders" className="header__link">
               Заказы
+            </NavLink>
+          )}
+          {userInfo.admin && (
+            <NavLink to="/receipts" className="header__link">
+              Напечатать чек
             </NavLink>
           )}
         </div>

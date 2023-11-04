@@ -125,9 +125,6 @@ const FoodCard = ({
       return;
     }
   };
-  console.log(date === "Thu");
-  console.log(hookahsBtnValue === true && date === "Thu");
-  console.log(Mon, Tue, Wed, Thu);
   useEffect(() => {
     whatDate();
     setInterval(() => {}, 21600000);

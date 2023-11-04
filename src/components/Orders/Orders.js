@@ -28,8 +28,6 @@ const Orders = ({
     ordersNew.push(element);
   });
 
-  console.log("ordersOld:", orders);
-  console.log("ordersNew:", ordersNew);
 
   return (
     <section className="orders">

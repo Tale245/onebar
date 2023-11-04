@@ -16,6 +16,9 @@ import PopupAddItem from "../PopupAddItem/PopupAddItem";
 import MyOrders from "../MyOrders/MyOrders";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import PopupConfirm from "../PopupConfirm/PopupConfirm";
+import receiptApi from "../../utils/ReceiptApi";
+import Receipt from "../Receipt/Receipt";
+import Receipts from "../Receipts/Receipts";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -77,12 +80,17 @@ function App() {
 
   const [deleteCard, setDeleteCard] = useState({});
 
+  const [receipts, setReceipts] = useState([]);
+  const [priceReceipt, setPriceReceipt] = useState(0);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);
+    } else {
+      navigate("/signin");
     }
   }, []);
   // Получаем информацию о пользователе и карточки с позициями для меню
@@ -115,6 +123,12 @@ function App() {
       orderApi.getOrders().then((data) => {
         setOrders(data);
       });
+      receiptApi.getReceipt().then((data) => {
+        setReceipts(data);
+      });
+      receiptApi
+        .findMyReceipt("654576d3d62dc1ffe095ef81")
+        .then((data) => setPriceReceipt(data));
     }
   }, [isLoggedIn]);
 
@@ -208,6 +222,35 @@ function App() {
         }, 5000);
       })
       .catch((e) => console.log(e));
+    foods.forEach((item) => {
+      if (userInfo.name === "СТОЛ 1") {
+        receiptApi
+          .addToReceipt(
+            item.name,
+            item.description,
+            item.price,
+            item.gram,
+            item.imageLink,
+            "654576d3d62dc1ffe095ef81"
+          )
+          .then((data) => {
+            console.log("price", priceReceipt.price);
+            receiptApi
+              .changePrice(
+                priceReceipt.price + price,
+                "654576d3d62dc1ffe095ef81"
+              )
+              .then(() => {
+                receiptApi
+                  .findMyReceipt("654576d3d62dc1ffe095ef81")
+                  .then((data) => {
+                    setPriceReceipt(data);
+                    receiptApi.getReceipt();
+                  });
+              });
+          });
+      }
+    });
   };
 
   const updateDoneStatus = (doneStatus, id) => {
@@ -277,7 +320,7 @@ function App() {
       console.log(data);
       food.getFoodBar().then((data) => {
         setFoodMenuBar(data);
-        closePopups()
+        closePopups();
       });
     });
   };
@@ -309,10 +352,15 @@ function App() {
   };
 
   const download = (object, name) => {
-    debugger
-    orderApi.download(object, name).then((data) => console.log(data))
-  } 
-   console.log(isPopupConfirmOpen);
+    orderApi.download(object, name).then((data) => console.log(data));
+  };
+  const clearReceipt = () => {
+    receiptApi.clearReceipt("654576d3d62dc1ffe095ef81").then((data) => {
+      receiptApi.changePrice(0, "654576d3d62dc1ffe095ef81").then((data) => {
+        receiptApi.getReceipt().then((data) => setReceipts(data));
+      });
+    });
+  };
   return (
     <div className="app">
       <Header userInfo={userInfo} btnBar={btnBar} cost={cost} />
@@ -450,6 +498,16 @@ function App() {
           <Route
             path="/myOrders"
             element={<MyOrders orders={orders} userInfo={userInfo} />}
+          />
+          <Route
+            path="/receipts"
+            element={
+              <Receipts
+                receipts={receipts}
+                download={download}
+                clearReceipt={clearReceipt}
+              />
+            }
           />
           <Route path="*" element={<PageNotFound />}></Route>
         </Routes>

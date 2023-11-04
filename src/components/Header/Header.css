@@ -20,12 +20,18 @@
   margin: 0;
   width: 200px;
 }
+.header__links {
+  margin: 0;
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+}
 .header__admin-links {
   margin: 0;
   margin-right: 30px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 24px;
 }
 .header__link {
   margin: 0;

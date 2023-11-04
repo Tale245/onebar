@@ -1,0 +1,68 @@
+.receipt {
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(0, 255, 234);
+  gap: 20px;
+}
+.receipt__client {
+  margin: 0;
+  margin-top: 5px;
+  margin-left: 20px;
+  text-align: start;
+  font-family: inter, Arial, Helvetica, sans-serif;
+  color: #fff;
+}
+.receipt__food-name {
+  margin: 0 auto;
+  color: #fff;
+  font-family: inter, Arial, Helvetica, sans-serif;
+}
+.receipt__price {
+  margin: 0;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  text-align: end;
+  font-family: inter, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  color: #fff;
+}
+.receipt__btn-container{
+  margin: 0;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.receipt__print-receipt {
+  margin: 0;
+  height: 40px;
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  font-family: Inter;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  transition: opacity 200ms ease-in-out;
+}
+.receipt__print-receipt:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.receipt__clear-receipt {
+  margin: 0;
+  height: 40px;
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  font-family: Inter;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  transition: opacity 200ms ease-in-out;
+}

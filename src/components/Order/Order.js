@@ -20,7 +20,6 @@ const Order = ({
     updateDoneStatus(true, _id);
     setHide(true);
   };
-  console.log(item.foods[0]);
 
   const downloadItem = () => {
     let array = [];

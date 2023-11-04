@@ -1,4 +1,4 @@
-class UserApi {
+class Receipt {
   constructor() {
     this._baseUrl = "http://192.168.0.104:3001";
   }
@@ -12,10 +12,20 @@ class UserApi {
     }
   }
 
-  // Получить информацию о всех пользователях
+  // Получаем заказ
 
-  getUsers() {
-    return fetch(`${this._baseUrl}/users`, {
+  getReceipt() {
+    return fetch(`${this._baseUrl}/getReceipts`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
+  findMyReceipt(id) {
+    return fetch(`${this._baseUrl}/findMyReceipt/${id}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -25,21 +35,28 @@ class UserApi {
     });
   }
 
-  // Получить информацию о текущем пользователе
+  // Создаем заказ
 
-  getMyInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
+  createReceipt(nameWhoOrders, foods, price, doneStatus) {
+    return fetch(`${this._baseUrl}/createReceipt`, {
+      method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        nameWhoOrders: nameWhoOrders,
+        foods: foods,
+        price: price,
+        doneStatus: doneStatus,
+      }),
     }).then((res) => {
       return this._checkResponse(res);
     });
   }
 
-  addToCart(name, description, price, gram, imageLink) {
-    return fetch(`${this._baseUrl}/user/cards`, {
+  addToReceipt(name, description, price, gram, imageLink, id) {
+    return fetch(`${this._baseUrl}/addPositionInReceipt/${id}`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -56,45 +73,34 @@ class UserApi {
       return this._checkResponse(res);
     });
   }
-  deleteFromCart(index) {
-    return fetch(`${this._baseUrl}/user/cards/${index}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      return this._checkResponse(res);
-    });
-  }
 
-  clearCart() {
-    return fetch(`${this._baseUrl}/clearCart`, {
-      method: "DELETE",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      return this._checkResponse(res);
-    });
-  }
-  changeLimit(limit, id) {
-    return fetch(`${this._baseUrl}/updateLimit/${id}`, {
-      method: "PUT",
+  changePrice(price, id) {
+    return fetch(`${this._baseUrl}/changePrice/${id}`, {
+      method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        newLimit: limit,
+        newPrice: price,
       }),
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
+  clearReceipt(id) {
+    return fetch(`${this._baseUrl}/clearReceipt/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
     }).then((res) => {
       return this._checkResponse(res);
     });
   }
 }
 
-const userApi = new UserApi();
+const receiptApi = new Receipt();
 
-export default userApi;
+export default receiptApi;
