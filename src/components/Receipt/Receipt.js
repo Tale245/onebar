@@ -26,7 +26,7 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt }) => {
 
     array.push(dateNow);
 
-    download(array, _id);
+    download(array, _id, dateNow);
   };
   return (
     <div className="receipt">

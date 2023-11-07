@@ -37,14 +37,14 @@ const Order = ({
     let date = new Date();
     let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
     array.push(" ");
-    array.push(`ИТОГ: ${price} рублей`)
+    array.push(`ИТОГ: ${price} рублей`);
     array.push(" ");
     array.push("Подпись официанта ____________");
     array.push(" ");
 
     array.push(dateNow);
 
-    download(array, _id);
+    download(array, _id, dateNow);
   };
   return (
     <div

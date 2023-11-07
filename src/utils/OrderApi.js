@@ -66,14 +66,14 @@ class Order {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-       data: object,
+        data: object,
       }),
     }).then((res) => {
       return this._checkResponse(res);
     });
   }
 
-  async download(object, name) {
+  async download(object, name, dateNow) {
     try {
       const response = await fetch(`${this._baseUrl}/downloadOne`, {
         method: "POST",
@@ -82,8 +82,8 @@ class Order {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fileName: name, 
-          dataArray: object
+          fileName: name,
+          dataArray: object,
         }),
       });
 
@@ -91,7 +91,7 @@ class Order {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "example.txt";
+      a.download = `${dateNow}.txt`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);

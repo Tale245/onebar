@@ -127,7 +127,7 @@ function App() {
         setReceipts(data);
       });
       receiptApi
-        .findMyReceipt("654576d3d62dc1ffe095ef81")
+        .findMyReceipt("6545920ac15542e47a2e5541")
         .then((data) => setPriceReceipt(data));
     }
   }, [isLoggedIn]);
@@ -231,18 +231,18 @@ function App() {
             item.price,
             item.gram,
             item.imageLink,
-            "654576d3d62dc1ffe095ef81"
+            "6545920ac15542e47a2e5541"
           )
           .then((data) => {
             console.log("price", priceReceipt.price);
             receiptApi
               .changePrice(
                 priceReceipt.price + price,
-                "654576d3d62dc1ffe095ef81"
+                "6545920ac15542e47a2e5541"
               )
               .then(() => {
                 receiptApi
-                  .findMyReceipt("654576d3d62dc1ffe095ef81")
+                  .findMyReceipt("6545920ac15542e47a2e5541")
                   .then((data) => {
                     setPriceReceipt(data);
                     receiptApi.getReceipt();
@@ -351,12 +351,12 @@ function App() {
     setIsPopupConfirmOpen(true);
   };
 
-  const download = (object, name) => {
-    orderApi.download(object, name).then((data) => console.log(data));
+  const download = (object, name, dateNow) => {
+    orderApi.download(object, name, dateNow).then((data) => console.log(data));
   };
   const clearReceipt = () => {
-    receiptApi.clearReceipt("654576d3d62dc1ffe095ef81").then((data) => {
-      receiptApi.changePrice(0, "654576d3d62dc1ffe095ef81").then((data) => {
+    receiptApi.clearReceipt("6545920ac15542e47a2e5541").then((data) => {
+      receiptApi.changePrice(0, "6545920ac15542e47a2e5541").then((data) => {
         receiptApi.getReceipt().then((data) => setReceipts(data));
       });
     });
