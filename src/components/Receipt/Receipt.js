@@ -1,8 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./Receipt.css";
 
-const Receipt = ({ name, foods, price, item, download, _id, clearReceipt }) => {
+const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWhoOrder, owner }) => {
+
+  const whatId = () => {
+    if (nameWhoOrder === 'Стол 1') {
+      clearReceipt('6568f0ce9925afaa13ad69c6', '6568ef249925afaa13ad69a4')
+    } else if (nameWhoOrder === 'Стол 2') {
+      clearReceipt('6568f19e9925afaa13ad69f3', '6568ef3a9925afaa13ad69a6')
+    } else if (nameWhoOrder === 'admin') {
+      clearReceipt('6568f1a39925afaa13ad69f6', '6568ee919925afaa13ad699f')
+    } else if (nameWhoOrder === 'Стол 3') {
+      clearReceipt('6568f1a39925afaa13ad69f6', '6568ef469925afaa13ad69a8')
+    } else if (nameWhoOrder === 'Стол 4') {
+      clearReceipt('6568f1a69925afaa13ad69fc', '6568ef569925afaa13ad69aa')
+    } else if (nameWhoOrder === 'Стол 5') {
+      clearReceipt('6568f1a89925afaa13ad69ff', '6568ef6a9925afaa13ad69ac')
+    } else if (nameWhoOrder === 'Стол 6') {
+      clearReceipt('6568f1aa9925afaa13ad6a02', '6568ef789925afaa13ad69ae')
+    } else if (nameWhoOrder === 'Стол 7') {
+      clearReceipt('6568f1ac9925afaa13ad6a05', '6568ef879925afaa13ad69b0')
+    } else if (nameWhoOrder === 'Стол 8') {
+      clearReceipt('6568f1b29925afaa13ad6a0b', '6568ef959925afaa13ad69b2')
+    } else if (nameWhoOrder === 'Стол 9') {
+      clearReceipt('6568f1b49925afaa13ad6a0e', '6568efa49925afaa13ad69b4')
+    } else if (nameWhoOrder === 'Стол 10') {
+      clearReceipt('6568f1b69925afaa13ad6a11', '6568efd19925afaa13ad69b8')
+    } else if (nameWhoOrder === 'Стол 11') {
+      clearReceipt('6568f1b99925afaa13ad6a17', '6568efe29925afaa13ad69ba')
+    }
+  }
   const downloadItem = () => {
     let array = [];
     item.foods.forEach((item) => {
@@ -41,7 +69,7 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt }) => {
         <button className="receipt__print-receipt" onClick={downloadItem}>
           Напечатать чек
         </button>
-        <button className="receipt__clear-receipt" onClick={clearReceipt}>
+        <button className="receipt__clear-receipt" onClick={whatId}>
           Очистить чек
         </button>
       </div>

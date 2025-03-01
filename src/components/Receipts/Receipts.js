@@ -3,7 +3,7 @@ import React from "react";
 import "./Receipts.css";
 import Receipt from "../Receipt/Receipt";
 
-const Receipts = ({ receipts, download, clearReceipt }) => {
+const Receipts = ({ receipts, download, clearReceipt, setId }) => {
   return (
     <section className="receipts">
       <h1 className="receipts__title">Распечатать чек</h1>
@@ -17,6 +17,9 @@ const Receipts = ({ receipts, download, clearReceipt }) => {
             download={download}
             _id={item._id}
             clearReceipt={clearReceipt}
+            nameWhoOrder={item.nameWhoOrders}
+            setId={setId}
+            owner={item.owner}
           />
         ))}
     </section>

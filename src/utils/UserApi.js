@@ -1,13 +1,13 @@
 class UserApi {
   constructor() {
-    this._baseUrl = "http://192.168.0.104:3001";
+    this._baseUrl = "http://192.168.1.185:3002";
   }
 
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
     } else {
-      // window.location.reload();
+      window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }

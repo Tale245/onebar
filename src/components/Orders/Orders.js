@@ -23,7 +23,7 @@ const Orders = ({
 
   let ordersNew = [];
 
-  let whatArray = btnOrders === true ? orders : ordersNew
+  let whatArray = ordersNew
   orders.forEach((element) => {
     ordersNew.push(element);
   });

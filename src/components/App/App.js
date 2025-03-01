@@ -83,6 +83,9 @@ function App() {
   const [receipts, setReceipts] = useState([]);
   const [priceReceipt, setPriceReceipt] = useState(0);
 
+  const [id, setId] = useState('6568f0ce9925afaa13ad69c6')
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -109,6 +112,32 @@ function App() {
           setIsUserCartEmpty(false);
           setIsUserCreateOrder(false);
         }
+        console.log(data)
+        if (data.name === 'СТОЛ 1') {
+          setId('6568f0ce9925afaa13ad69c6')
+        } else if (data.name === 'Стол 2') {
+          setId('6568f19e9925afaa13ad69f3')
+        } else if (data.name === 'admin') {
+          setId('6568f1a39925afaa13ad69f6')
+        } else if (data.name === 'Стол 3') {
+          setId('6568f1a39925afaa13ad69f6')
+        } else if (data.name === 'Стол 4') {
+          setId('6568f1a69925afaa13ad69fc')
+        } else if (data.name === 'Стол 5') {
+          setId('6568f1a89925afaa13ad69ff')
+        } else if (data.name === 'Стол 6') {
+          setId('6568f1aa9925afaa13ad6a02')
+        } else if (data.name === 'Стол 7') {
+          setId('6568f1ac9925afaa13ad6a05')
+        } else if (data.name === 'Стол 8') {
+          setId('6568f1b29925afaa13ad6a0b')
+        } else if (data.name === 'Стол 9') {
+          setId('6568f1b49925afaa13ad6a0e')
+        } else if (data.name === 'Стол 10') {
+          setId('6568f1b69925afaa13ad6a11')
+        } else if (data.name === 'Стол 11') {
+          setId('6568f1b99925afaa13ad6a17')
+        }
       });
       food.getFoods().then((data) => {
         setFoodMenu(data);
@@ -127,13 +156,13 @@ function App() {
         setReceipts(data);
       });
       receiptApi
-        .findMyReceipt("6545920ac15542e47a2e5541")
+        .findMyReceipt(id)
         .then((data) => setPriceReceipt(data));
     }
   }, [isLoggedIn]);
 
+  console.log(priceReceipt)
   // Получаем информацию о пользователе и карточки с позициями для меню
-
   useEffect(() => {
     console.log(isLoggedIn);
     if (isLoggedIn) {
@@ -144,6 +173,9 @@ function App() {
             setOrders(data);
           });
           userApi.getUsers().then((data) => setUserList(data));
+          receiptApi.getReceipt().then((data) => {
+            setReceipts(data);
+          });
         }, 10000);
       } else if (userInfo.admin === false) {
         window.setInterval(() => {
@@ -159,6 +191,11 @@ function App() {
           orderApi.getOrders().then((data) => {
             setOrders(data);
           });
+          receiptApi.getReceipt().then((data) => {
+            setReceipts(data);
+          });
+          userApi.getUsers().then((data) => setUserList(data));
+
         }, 10000);
       }
       setInterval(() => {
@@ -182,6 +219,9 @@ function App() {
       .then((data) => {
         console.log(data);
         setIsUserCartEmpty(false);
+        receiptApi
+          .findMyReceipt(id)
+          .then((data) => setPriceReceipt(data));
         userApi.getMyInfo().then((data) => {
           console.log(data);
           setUserInfo(data);
@@ -194,6 +234,9 @@ function App() {
       .deleteFromCart(index)
       .then((data) => {
         console.log(data);
+        receiptApi
+          .findMyReceipt(id)
+          .then((data) => setPriceReceipt(data));
         userApi.getMyInfo().then((data) => {
           console.log(data);
           setUserInfo(data);
@@ -220,36 +263,39 @@ function App() {
           setIsUserCreateOrder(false);
           setIsUserCartEmpty(true);
         }, 5000);
+        receiptApi
+          .findMyReceipt(id)
+          .then((data) => setPriceReceipt(data));
       })
       .catch((e) => console.log(e));
     foods.forEach((item) => {
-      if (userInfo.name === "СТОЛ 1") {
-        receiptApi
-          .addToReceipt(
-            item.name,
-            item.description,
-            item.price,
-            item.gram,
-            item.imageLink,
-            "6545920ac15542e47a2e5541"
-          )
-          .then((data) => {
-            console.log("price", priceReceipt.price);
-            receiptApi
-              .changePrice(
-                priceReceipt.price + price,
-                "6545920ac15542e47a2e5541"
-              )
-              .then(() => {
-                receiptApi
-                  .findMyReceipt("6545920ac15542e47a2e5541")
-                  .then((data) => {
-                    setPriceReceipt(data);
-                    receiptApi.getReceipt();
-                  });
-              });
-          });
-      }
+      receiptApi
+        .addToReceipt(
+          item.name,
+          item.description,
+          item.price,
+          item.gram,
+          item.imageLink,
+          id
+        )
+        .then((data) => {
+          debugger
+          console.log("price", priceReceipt.price);
+          receiptApi
+            .changePrice(
+              priceReceipt.price + price,
+              id
+            )
+            .then(() => {
+              receiptApi
+                .findMyReceipt(id)
+                .then((data) => {
+                  setPriceReceipt(data);
+                  receiptApi.getReceipt();
+                });
+            });
+        });
+
     });
   };
 
@@ -337,6 +383,7 @@ function App() {
     });
   };
   const changeLimit = (limit, id) => {
+    debugger
     userApi.changeLimit(limit, id).then((data) => {
       console.log(data);
       userApi.getUsers().then((data) => setUserList(data));
@@ -354,10 +401,13 @@ function App() {
   const download = (object, name, dateNow) => {
     orderApi.download(object, name, dateNow).then((data) => console.log(data));
   };
-  const clearReceipt = () => {
-    receiptApi.clearReceipt("6545920ac15542e47a2e5541").then((data) => {
-      receiptApi.changePrice(0, "6545920ac15542e47a2e5541").then((data) => {
-        receiptApi.getReceipt().then((data) => setReceipts(data));
+  const clearReceipt = (id, userId) => {
+    receiptApi.clearReceipt(id).then((data) => {
+      receiptApi.changePrice(0, id).then((data) => {
+        receiptApi.getReceipt().then((data) => {
+          setReceipts(data)
+          changeLimit(0, userId)
+        });
       });
     });
   };
@@ -467,7 +517,7 @@ function App() {
               />
             }
           />
-          {userInfo.admin === true && (
+          {(userInfo.admin === true || userInfo.waiter === true) && (
             <Route
               path="/orders"
               element={
@@ -487,7 +537,7 @@ function App() {
           {isLoggedIn === false && (
             <Route path="/signin" element={<Signin signin={signin} />} />
           )}
-          {userInfo.admin === true && (
+          {(userInfo.admin === true || userInfo.waiter === true) && (
             <Route
               path="/userList"
               element={
@@ -506,6 +556,7 @@ function App() {
                 receipts={receipts}
                 download={download}
                 clearReceipt={clearReceipt}
+                setId={setId}
               />
             }
           />
