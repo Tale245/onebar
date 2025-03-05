@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import "../Orders/Orders.css";
 import Order from "../Order/Order";
@@ -11,7 +11,9 @@ const Orders = ({
   setBtnHistoryOrders,
   download,
   userInfo,
+  downloadItem,
 }) => {
+console.log(orders)
   const selectOrdersBtn = () => {
     setBtnOrders(true);
     setBtnHistoryOrders(false);
@@ -23,11 +25,10 @@ const Orders = ({
 
   let ordersNew = [];
 
-  let whatArray = ordersNew
+  let whatArray = ordersNew;
   orders.forEach((element) => {
     ordersNew.push(element);
   });
-
 
   return (
     <section className="orders">
@@ -66,6 +67,7 @@ const Orders = ({
               download={download}
               item={item}
               userInfo={userInfo}
+              downloadItem={downloadItem}
             />
           ))}
         </div>

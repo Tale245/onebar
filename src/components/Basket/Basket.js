@@ -17,7 +17,7 @@ const Basket = ({
   isUserCreateOrder,
 }) => {
   const createNewOrder = () => {
-    console.log(userInfo.foods.length);
+    console.log(userInfo);
     if (userInfo.foods.length === 0) {
       console.log("вы не можете сделать пустой заказ!");
     } else {
@@ -41,7 +41,10 @@ const Basket = ({
         <p className="basket__text"> Корзина пуста!</p>
       )}
       {isUserCreateOrder === true && (
-        <p className="basket__text basket__text_order"> МЫ УЖЕ НАЧАЛИ ГОТОВИТЬ ВАШ ЗАКАЗ!</p>
+        <p className="basket__text basket__text_order">
+          {" "}
+          МЫ УЖЕ НАЧАЛИ ГОТОВИТЬ ВАШ ЗАКАЗ!
+        </p>
       )}
       <div className="basket__container">
         <NavLink to="/main" className="basket__link-back">

@@ -40,6 +40,8 @@ const NavLinks = ({
   tincturesBtnValue,
   vodkaBtnValue,
   liqueursBtnValue,
+  cocktailsBtnValue,
+  shotsBtnValue,
   setCigarettesBtnValue,
   setHookahsBtnValue,
   setJuiceBtnValue,
@@ -59,6 +61,8 @@ const NavLinks = ({
   setTincturesBtnValue,
   setVodkaBtnValue,
   setLiqueursBtnValue,
+  setCocktailsBtnValue,
+  setShotsBtnValue,
   btnBar,
   setBtnBar,
   btnFood,
@@ -74,6 +78,8 @@ const NavLinks = ({
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
     setHotDishesBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeSoupsValue = () => {
     setPizzaBtnValue(false);
@@ -85,6 +91,8 @@ const NavLinks = ({
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
     setHotDishesBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeSnacksValue = () => {
     setPizzaBtnValue(false);
@@ -96,6 +104,8 @@ const NavLinks = ({
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
     setHotDishesBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeColdSnacksValue = () => {
     setPizzaBtnValue(false);
@@ -107,6 +117,8 @@ const NavLinks = ({
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
     setHotDishesBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeIceCreamValue = () => {
     setPizzaBtnValue(false);
@@ -118,6 +130,8 @@ const NavLinks = ({
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
     setHotDishesBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeSaladsValue = () => {
     setPizzaBtnValue(false);
@@ -129,6 +143,8 @@ const NavLinks = ({
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
     setHotDishesBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changePastesValue = () => {
     setPizzaBtnValue(false);
@@ -140,6 +156,8 @@ const NavLinks = ({
     setPastesBtnValue(true);
     setBeerSnacksBtnValue(false);
     setHotDishesBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeBeerSnacksValue = () => {
     setPizzaBtnValue(false);
@@ -151,6 +169,8 @@ const NavLinks = ({
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(true);
     setHotDishesBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeHotDishesValue = () => {
     setPizzaBtnValue(false);
@@ -162,6 +182,8 @@ const NavLinks = ({
     setPastesBtnValue(false);
     setBeerSnacksBtnValue(false);
     setHotDishesBtnValue(true);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
 
   const changeCigarettesValue = () => {
@@ -184,6 +206,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
 
   const changeHookahsValue = () => {
@@ -206,6 +230,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeJuiceValue = () => {
     setCigarettesBtnValue(false);
@@ -227,6 +253,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeCoffeeValue = () => {
     setCigarettesBtnValue(false);
@@ -248,6 +276,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeTeaValue = () => {
     setCigarettesBtnValue(false);
@@ -269,6 +299,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeBottledBeerValue = () => {
     setCigarettesBtnValue(false);
@@ -290,6 +322,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeWineValue = () => {
     setCigarettesBtnValue(false);
@@ -311,6 +345,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeChampagneValue = () => {
     setCigarettesBtnValue(false);
@@ -332,6 +368,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeVermouthValue = () => {
     setCigarettesBtnValue(false);
@@ -353,6 +391,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeAperativesValue = () => {
     setCigarettesBtnValue(false);
@@ -374,6 +414,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeRumValue = () => {
     setCigarettesBtnValue(false);
@@ -395,6 +437,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeCognacValue = () => {
     setCigarettesBtnValue(false);
@@ -416,6 +460,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeBrandyValue = () => {
     setCigarettesBtnValue(false);
@@ -437,6 +483,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeWhiskeyValue = () => {
     setCigarettesBtnValue(false);
@@ -458,6 +506,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeGinValue = () => {
     setCigarettesBtnValue(false);
@@ -479,6 +529,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeTequilaValue = () => {
     setCigarettesBtnValue(false);
@@ -500,6 +552,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeTincturesValue = () => {
     setCigarettesBtnValue(false);
@@ -521,6 +575,8 @@ const NavLinks = ({
     setTincturesBtnValue(true);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeVodkaValue = () => {
     setCigarettesBtnValue(false);
@@ -542,6 +598,8 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(true);
     setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
   };
   const changeLiqueursValue = () => {
     setCigarettesBtnValue(false);
@@ -563,6 +621,54 @@ const NavLinks = ({
     setTincturesBtnValue(false);
     setVodkaBtnValue(false);
     setLiqueursBtnValue(true);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(false);
+  };
+  const changeCocktailsValue = () => {
+    setCigarettesBtnValue(false);
+    setHookahsBtnValue(false);
+    setJuiceBtnValue(false);
+    setCoffeeBtnValue(false);
+    setTeaBtnValue(false);
+    setBottledBeerBtnValue(false);
+    setWineBtnValue(false);
+    setChampagneBtnValue(false);
+    setVermouthBtnValue(false);
+    setAperativesBtnValue(false);
+    setRumBtnValue(false);
+    setCognacBtnValue(false);
+    setBrandyBtnValue(false);
+    setWhiskeyBtnValue(false);
+    setGinBtnValue(false);
+    setTequilaBtnValue(false);
+    setTincturesBtnValue(false);
+    setVodkaBtnValue(false);
+    setLiqueursBtnValue(false);
+    setCocktailsBtnValue(true);
+    setShotsBtnValue(false);
+  };
+  const changeShotsValue = () => {
+    setCigarettesBtnValue(false);
+    setHookahsBtnValue(false);
+    setJuiceBtnValue(false);
+    setCoffeeBtnValue(false);
+    setTeaBtnValue(false);
+    setBottledBeerBtnValue(false);
+    setWineBtnValue(false);
+    setChampagneBtnValue(false);
+    setVermouthBtnValue(false);
+    setAperativesBtnValue(false);
+    setRumBtnValue(false);
+    setCognacBtnValue(false);
+    setBrandyBtnValue(false);
+    setWhiskeyBtnValue(false);
+    setGinBtnValue(false);
+    setTequilaBtnValue(false);
+    setTincturesBtnValue(false);
+    setVodkaBtnValue(false);
+    setLiqueursBtnValue(false);
+    setCocktailsBtnValue(false);
+    setShotsBtnValue(true);
   };
 
   const selectMenuBar = () => {
@@ -605,7 +711,7 @@ const NavLinks = ({
           </button>
           <button
             className={`navLinks__btn ${
-             iceCreamBtnValue && "navLinks__btn_active"
+              iceCreamBtnValue && "navLinks__btn_active"
             }`}
             onClick={changeIceCreamValue}
           >
@@ -822,6 +928,22 @@ const NavLinks = ({
             onClick={changeLiqueursValue}
           >
             Ликеры
+          </button>
+          <button
+            className={`navLinks__btn ${
+              cocktailsBtnValue && "navLinks__btn_activeBar"
+            }`}
+            onClick={changeCocktailsValue}
+          >
+            Коктейли
+          </button>
+          <button
+            className={`navLinks__btn ${
+              shotsBtnValue && "navLinks__btn_activeBar"
+            }`}
+            onClick={changeShotsValue}
+          >
+            Шоты
           </button>
         </nav>
       )}

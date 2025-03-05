@@ -4,7 +4,7 @@ import Main from "../Main/Main";
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Basket from "../Basket/Basket";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import userApi from "../../utils/UserApi";
 import food from "../../utils/FoodApi";
 import orderApi from "../../utils/OrderApi";
@@ -19,6 +19,7 @@ import PopupConfirm from "../PopupConfirm/PopupConfirm";
 import receiptApi from "../../utils/ReceiptApi";
 import Receipt from "../Receipt/Receipt";
 import Receipts from "../Receipts/Receipts";
+import PopupNewOrder from "../PopupNewOrder/PopupNewOrder";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -63,9 +64,12 @@ function App() {
   const [tincturesBtnValue, setTincturesBtnValue] = useState(false);
   const [vodkaBtnValue, setVodkaBtnValue] = useState(false);
   const [liqueursBtnValue, setLiqueursBtnValue] = useState(false);
+  const [cocktailsBtnValue, setCocktailsBtnValue] = useState(false);
+  const [shotsBtnValue, setShotsBtnValue] = useState(false);
 
   const [isPopupAddItemOpen, setIsPopupAddItemOpen] = useState(false);
   const [isPopupConfirmOpen, setIsPopupConfirmOpen] = useState(false);
+  const [isPopupNewOrderOpen, setIsPopupNewOrderOpen] = useState(false);
   const [userList, setUserList] = useState([]);
   const [dataLoad, setDataLoad] = useState(false);
 
@@ -83,10 +87,57 @@ function App() {
   const [receipts, setReceipts] = useState([]);
   const [priceReceipt, setPriceReceipt] = useState(0);
 
-  const [id, setId] = useState('6568f0ce9925afaa13ad69c6')
-
+  const [id, setId] = useState("67c62b92586f294846573c07");
 
   const navigate = useNavigate();
+
+  const downloadedOrders = useRef(new Set()); // Храним ID уже скачанных заказов
+  const [prevOrdersState, setPrevOrdersState] = useState([]); // Храним предыдущее состояние заказов
+  
+  useEffect(() => {
+    // Загружаем из localStorage уже скачанные заказы
+    const savedDownloadedOrders = JSON.parse(localStorage.getItem('downloadedOrders')) || [];
+    savedDownloadedOrders.forEach((orderId) => downloadedOrders.current.add(orderId));
+  
+    setPrevOrdersState(savedDownloadedOrders);
+  }, []); // Выполняется только при загрузке компонента
+  
+  useEffect(() => {
+    if (!orders || orders.length === 0) return; // Если заказов нет – выходим
+  
+    console.log("Проверка заказов:", orders);
+  
+    // Смотрим, изменилось ли содержимое заказов
+    const newOrders = orders
+      .map((order) => ({
+        ...order,
+        foods: order.foods.filter((food) => food.category !== "Напиток"), // Убираем напитки
+      }))
+      .filter((order) => order.foods.length > 0); // Исключаем заказы, где остались только напитки
+  
+    // Если новых заказов нет – выходим
+    if (newOrders.length === 0) return;
+  
+    // Выбираем заказ, который ещё не скачан
+    const newOrder = newOrders.find((order) => !downloadedOrders.current.has(order._id));
+  
+    if (!newOrder) return; // Если все заказы уже скачаны – выходим
+  
+    console.log("Скачиваю новый заказ:", newOrder);
+  
+    // Скачиваем новый заказ
+    downloadItem(newOrder.foods, newOrder.nameWhoOrders, newOrder._id, 0, true);
+  
+    // Отмечаем заказ как скачанный
+    downloadedOrders.current.add(newOrder._id);
+  
+    // Сохраняем ID скачанных заказов в localStorage
+    localStorage.setItem('downloadedOrders', JSON.stringify(Array.from(downloadedOrders.current)));
+  
+    // Обновляем состояние предыдущих заказов
+    setPrevOrdersState(newOrders);
+  
+  }, [orders]); // Следим за изменением orders
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -96,13 +147,12 @@ function App() {
       navigate("/signin");
     }
   }, []);
+
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
     if (isLoggedIn) {
-      console.log(1);
       userApi.getUsers().then((data) => setUserList(data));
       userApi.getMyInfo().then((data) => {
-        console.log(2);
         setDataLoad(true);
         setUserInfo(data);
         if (data.foods.length === 0) {
@@ -112,63 +162,56 @@ function App() {
           setIsUserCartEmpty(false);
           setIsUserCreateOrder(false);
         }
-        console.log(data)
-        if (data.name === 'СТОЛ 1') {
-          setId('6568f0ce9925afaa13ad69c6')
-        } else if (data.name === 'Стол 2') {
-          setId('6568f19e9925afaa13ad69f3')
-        } else if (data.name === 'admin') {
-          setId('6568f1a39925afaa13ad69f6')
-        } else if (data.name === 'Стол 3') {
-          setId('6568f1a39925afaa13ad69f6')
-        } else if (data.name === 'Стол 4') {
-          setId('6568f1a69925afaa13ad69fc')
-        } else if (data.name === 'Стол 5') {
-          setId('6568f1a89925afaa13ad69ff')
-        } else if (data.name === 'Стол 6') {
-          setId('6568f1aa9925afaa13ad6a02')
-        } else if (data.name === 'Стол 7') {
-          setId('6568f1ac9925afaa13ad6a05')
-        } else if (data.name === 'Стол 8') {
-          setId('6568f1b29925afaa13ad6a0b')
-        } else if (data.name === 'Стол 9') {
-          setId('6568f1b49925afaa13ad6a0e')
-        } else if (data.name === 'Стол 10') {
-          setId('6568f1b69925afaa13ad6a11')
-        } else if (data.name === 'Стол 11') {
-          setId('6568f1b99925afaa13ad6a17')
+        console.log(data);
+        if (data.name === "СТОЛ 1") {
+          setId("6568f0ce9925afaa13ad69c6");
+        } else if (data.name === "Стол 2") {
+          setId("6568f19e9925afaa13ad69f3");
+        } else if (data.name === "admin") {
+          setId("67c62b7e586f294846573c05");
+        } else if (data.name === "Стол 3") {
+          setId("6568f1a39925afaa13ad69f6");
+        } else if (data.name === "Стол 4") {
+          setId("6568f1a69925afaa13ad69fc");
+        } else if (data.name === "Стол 5") {
+          setId("6568f1a89925afaa13ad69ff");
+        } else if (data.name === "Стол 6") {
+          setId("6568f1aa9925afaa13ad6a02");
+        } else if (data.name === "Стол 7") {
+          setId("6568f1ac9925afaa13ad6a05");
+        } else if (data.name === "Стол 8") {
+          setId("6568f1b29925afaa13ad6a0b");
+        } else if (data.name === "Стол 9") {
+          setId("6568f1b49925afaa13ad6a0e");
+        } else if (data.name === "Стол 10") {
+          setId("6568f1b69925afaa13ad6a11");
+        } else if (data.name === "Стол 11") {
+          setId("6568f1b99925afaa13ad6a17");
         }
       });
       food.getFoods().then((data) => {
         setFoodMenu(data);
-        console.log(3);
         setColdSnacksBtnValue(true);
       });
       food.getFoodBar().then((data) => {
         setFoodMenuBar(data);
         setCigarettesBtnValue(true);
       });
-      console.log(4);
       orderApi.getOrders().then((data) => {
         setOrders(data);
       });
       receiptApi.getReceipt().then((data) => {
         setReceipts(data);
       });
-      receiptApi
-        .findMyReceipt(id)
-        .then((data) => setPriceReceipt(data));
+      receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
     }
   }, [isLoggedIn]);
 
-  console.log(priceReceipt)
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
-    console.log(isLoggedIn);
     if (isLoggedIn) {
       if (userInfo.admin === true) {
         window.setInterval(() => {
-          console.log(2.2);
           orderApi.getOrders().then((data) => {
             setOrders(data);
           });
@@ -176,16 +219,14 @@ function App() {
           receiptApi.getReceipt().then((data) => {
             setReceipts(data);
           });
-        }, 10000);
+        }, 5000);
       } else if (userInfo.admin === false) {
         window.setInterval(() => {
-          console.log(1.1);
           userApi.getMyInfo().then((data) => {
             setUserInfo(data);
           });
           food.getFoods().then((data) => {
             setFoodMenu(data);
-            console.log(3.3);
             // setColdSnacksBtnValue(true);
           });
           orderApi.getOrders().then((data) => {
@@ -195,12 +236,11 @@ function App() {
             setReceipts(data);
           });
           userApi.getUsers().then((data) => setUserList(data));
-
-        }, 10000);
+        }, 5000);
       }
-      setInterval(() => {
-        window.location.reload();
-      }, 604800000);
+      // setInterval(() => {
+      //   window.location.reload();
+      // }, 604800000);
       return () => clearInterval();
     }
   }, [dataLoad]);
@@ -208,20 +248,20 @@ function App() {
   const openPopupAddItem = () => {
     setIsPopupAddItemOpen(true);
   };
+
   const closePopups = () => {
     setIsPopupAddItemOpen(false);
     setIsPopupConfirmOpen(false);
+    setIsPopupNewOrderOpen(false);
   };
 
-  const addToCart = (name, description, price, gram, imageLink) => {
+  const addToCart = (name, description, price, gram, imageLink, category) => {
     userApi
-      .addToCart(name, description, price, gram, imageLink)
+      .addToCart(name, description, price, gram, imageLink, category)
       .then((data) => {
         console.log(data);
         setIsUserCartEmpty(false);
-        receiptApi
-          .findMyReceipt(id)
-          .then((data) => setPriceReceipt(data));
+        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
         userApi.getMyInfo().then((data) => {
           console.log(data);
           setUserInfo(data);
@@ -234,9 +274,7 @@ function App() {
       .deleteFromCart(index)
       .then((data) => {
         console.log(data);
-        receiptApi
-          .findMyReceipt(id)
-          .then((data) => setPriceReceipt(data));
+        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
         userApi.getMyInfo().then((data) => {
           console.log(data);
           setUserInfo(data);
@@ -249,6 +287,45 @@ function App() {
       .catch((e) => console.log(e));
   };
 
+  const download = (object, name, dateNow) => {
+    orderApi.download(object, name, dateNow).then((data) => console.log(data));
+  };
+
+  const downloadItem = (item, nameWhoOrders, _id, price, value) => {
+    if (userInfo.name !== "admin" && userInfo.name === 'официант') {
+      console.log("Скачивание запрещено: аккаунт не админ.");
+      setIsPopupNewOrderOpen(value)
+      return;
+    }
+    let itemsArray = [];
+    if (item.foods) {
+      itemsArray = item.foods;
+    } else {
+      itemsArray = item;
+    }
+    let array = [];
+    itemsArray.forEach((item) => {
+      array.push(`${item.name} - ${item.price} рублей`);
+    });
+    array.unshift("  ");
+    array.unshift("Название:     Цена:");
+    array.unshift("  ");
+    array.unshift(nameWhoOrders);
+    array.unshift("  ");
+    array.unshift("     РЦ НЕОН");
+
+    let date = new Date();
+    let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
+    array.push(" ");
+    array.push(`ИТОГ: ${price} рублей`);
+    array.push(" ");
+    array.push("Подпись официанта ____________");
+    array.push(" ");
+
+    array.push(dateNow);
+
+    download(array, _id, dateNow);
+  };
   const createOrder = (nameWhoOrder, foods, price, doneStatus) => {
     orderApi
       .createOrder(nameWhoOrder, foods, price, doneStatus)
@@ -256,46 +333,33 @@ function App() {
         orderApi.getOrders().then((data) => {
           setOrders(data);
         });
-        console.log(data);
         setIsUserCreateOrder(true);
         setIsUserCartEmpty(false);
         setTimeout(() => {
           setIsUserCreateOrder(false);
           setIsUserCartEmpty(true);
         }, 5000);
-        receiptApi
-          .findMyReceipt(id)
-          .then((data) => setPriceReceipt(data));
+        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
       })
       .catch((e) => console.log(e));
     foods.forEach((item) => {
-      receiptApi
-        .addToReceipt(
-          item.name,
-          item.description,
-          item.price,
-          item.gram,
-          item.imageLink,
-          id
-        )
-        .then((data) => {
-          debugger
-          console.log("price", priceReceipt.price);
-          receiptApi
-            .changePrice(
-              priceReceipt.price + price,
-              id
-            )
-            .then(() => {
-              receiptApi
-                .findMyReceipt(id)
-                .then((data) => {
-                  setPriceReceipt(data);
-                  receiptApi.getReceipt();
-                });
-            });
-        });
-
+      receiptApi.addToReceipt(
+        item.name,
+        item.description,
+        item.price,
+        item.gram,
+        item.imageLink,
+        id
+      );
+      // .then((data) => {
+      //   debugger;
+      //   receiptApi.changePrice(priceReceipt.price + price, id).then(() => {
+      //     receiptApi.findMyReceipt(id).then((data) => {
+      //       setPriceReceipt(data);
+      //       receiptApi.getReceipt();
+      //     });
+      //   });
+      // });
     });
   };
 
@@ -327,7 +391,6 @@ function App() {
     food
       .addNewElementInMenu(newItem, name, description, price, gram, linkImage)
       .then((data) => {
-        console.log(data);
         food.getFoods().then((data) => {
           setFoodMenu(data);
         });
@@ -339,12 +402,20 @@ function App() {
     description,
     price,
     gram,
-    linkImage
+    linkImage,
+    category
   ) => {
     food
-      .addNewElementInMenu(newItem, name, description, price, gram, linkImage)
+      .addNewElementInMenu(
+        newItem,
+        name,
+        description,
+        price,
+        gram,
+        linkImage,
+        category
+      )
       .then((data) => {
-        console.log(data);
         food.getFoodBar().then((data) => {
           setFoodMenuBar(data);
         });
@@ -353,7 +424,6 @@ function App() {
 
   const deleteElementInMenu = (index, deleteItem) => {
     food.deleteElementInMenu(index, deleteItem).then((data) => {
-      console.log(data);
       food.getFoods().then((data) => {
         setFoodMenu(data);
         closePopups();
@@ -363,7 +433,6 @@ function App() {
 
   const deleteElementInBarMenu = (index, deleteItem) => {
     food.deleteElementInMenu(index, deleteItem).then((data) => {
-      console.log(data);
       food.getFoodBar().then((data) => {
         setFoodMenuBar(data);
         closePopups();
@@ -374,7 +443,6 @@ function App() {
     auth.signin(email, password, codeWord).then((data) => {
       console.log("Успешная авторизация!");
       setIsLoggedIn(true);
-      console.log(userInfo);
       if (userInfo.admin === true) {
         navigate("/orders");
       } else {
@@ -383,9 +451,7 @@ function App() {
     });
   };
   const changeLimit = (limit, id) => {
-    debugger
     userApi.changeLimit(limit, id).then((data) => {
-      console.log(data);
       userApi.getUsers().then((data) => setUserList(data));
     });
   };
@@ -398,15 +464,12 @@ function App() {
     setIsPopupConfirmOpen(true);
   };
 
-  const download = (object, name, dateNow) => {
-    orderApi.download(object, name, dateNow).then((data) => console.log(data));
-  };
   const clearReceipt = (id, userId) => {
     receiptApi.clearReceipt(id).then((data) => {
       receiptApi.changePrice(0, id).then((data) => {
         receiptApi.getReceipt().then((data) => {
-          setReceipts(data)
-          changeLimit(0, userId)
+          setReceipts(data);
+          changeLimit(0, userId);
         });
       });
     });
@@ -433,6 +496,7 @@ function App() {
                 isUserCreateOrder={isUserCreateOrder}
                 setIsUserCreateOrder={setIsUserCreateOrder}
                 setIsUserCartEmpty={setIsUserCartEmpty}
+                downloadItem={downloadItem}
               />
             }
           />
@@ -483,6 +547,8 @@ function App() {
                 tincturesBtnValue={tincturesBtnValue}
                 vodkaBtnValue={vodkaBtnValue}
                 liqueursBtnValue={liqueursBtnValue}
+                cocktailsBtnValue={cocktailsBtnValue}
+                shotsBtnValue={shotsBtnValue}
                 setCigarettesBtnValue={setCigarettesBtnValue}
                 setJuiceBtnValue={setJuiceBtnValue}
                 setHookahsBtnValue={setHookahsBtnValue}
@@ -502,6 +568,8 @@ function App() {
                 setTincturesBtnValue={setTincturesBtnValue}
                 setVodkaBtnValue={setVodkaBtnValue}
                 setLiqueursBtnValue={setLiqueursBtnValue}
+                setCocktailsBtnValue={setCocktailsBtnValue}
+                setShotsBtnValue={setShotsBtnValue}
                 deleteElementInMenu={deleteElementInMenu}
                 openPopupAddItem={openPopupAddItem}
                 isPopupAddItemOpen={isPopupAddItemOpen}
@@ -530,6 +598,7 @@ function App() {
                   setBtnHistoryOrders={setBtnHistoryOrders}
                   download={download}
                   userInfo={userInfo}
+                  downloadItem={downloadItem}
                 />
               }
             />
@@ -576,6 +645,10 @@ function App() {
           deleteElementInMenu={deleteElementInMenu}
           deleteElementInBarMenu={deleteElementInBarMenu}
           btnBar={btnBar}
+        />
+        <PopupNewOrder
+          isPopupNewOrderOpen={isPopupNewOrderOpen}
+          closePopups={closePopups}
         />
       </div>
     </div>

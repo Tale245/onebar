@@ -41,12 +41,16 @@ const FoodList = ({
   tincturesBtnValue,
   vodkaBtnValue,
   liqueursBtnValue,
+  cocktailsBtnValue,
+  shotsBtnValue,
   foodMenuBar,
   btnBar,
   btnFood,
   deleteElementInBarMenu,
-  openPopupConfirm
+  openPopupConfirm,
 }) => {
+
+  console.log('foodArrayInFoodList', foodArray)
   let valueArray = foodArray;
   let title = "";
   const whatValue = () => {
@@ -140,6 +144,12 @@ const FoodList = ({
       } else if (liqueursBtnValue === true) {
         valueArray = foodMenuBar[0].liqueurs;
         title = foodMenuBar[0].liqueursTitle;
+      } else if (cocktailsBtnValue === true) {
+        valueArray = foodMenuBar[0].cocktails;
+        title = foodMenuBar[0].cocktailsTitle;
+      } else if (shotsBtnValue === true) {
+        valueArray = foodMenuBar[0].shots;
+        title = foodMenuBar[0].shotsTitle;
       }
     }
   };
@@ -153,7 +163,8 @@ const FoodList = ({
         {valueArray &&
           valueArray.map((item) => (
             <FoodCard
-            openPopupConfirm={openPopupConfirm}
+              item={item}
+              openPopupConfirm={openPopupConfirm}
               title={item.name}
               priceRelax={item.priceRelax ? item.priceRelax : undefined}
               img={item.linkImage ? item.linkImage : item.imageLink}
@@ -161,6 +172,7 @@ const FoodList = ({
               description={item.description}
               gram={item.gram}
               key={item._id}
+              foodCategory={item.category}
               addToCart={addToCart}
               foodArray={foodArray}
               foodMenuBar={foodMenuBar}
@@ -199,11 +211,13 @@ const FoodList = ({
               tincturesBtnValue={tincturesBtnValue}
               vodkaBtnValue={vodkaBtnValue}
               liqueursBtnValue={liqueursBtnValue}
+              cocktailsBtnValue={cocktailsBtnValue}
+              shotsBtnValue={shotsBtnValue}
               deleteElementInBarMenu={deleteElementInBarMenu}
             />
           ))}
       </div>
-      {(userInfo.admin && userInfo.waiter === false) && (
+      {userInfo.admin && userInfo.waiter === false && (
         <button
           className="foodList__popup-open"
           onClick={openPopupAddItem}

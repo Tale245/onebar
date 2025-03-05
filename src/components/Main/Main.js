@@ -49,6 +49,8 @@ const Main = ({
   tincturesBtnValue,
   vodkaBtnValue,
   liqueursBtnValue,
+  cocktailsBtnValue,
+  shotsBtnValue,
   setCigarettesBtnValue,
   setHookahsBtnValue,
   setJuiceBtnValue,
@@ -68,6 +70,8 @@ const Main = ({
   setTincturesBtnValue,
   setVodkaBtnValue,
   setLiqueursBtnValue,
+  setCocktailsBtnValue,
+  setShotsBtnValue,
   btnBar,
   setBtnBar,
   btnFood,
@@ -77,6 +81,8 @@ const Main = ({
   setDeleteCard,
   openPopupConfirm,
 }) => {
+
+  console.log('foodArrayInMain', foodMenu)
   return (
     <main className="main">
       <NavLinks
@@ -117,6 +123,8 @@ const Main = ({
         tincturesBtnValue={tincturesBtnValue}
         vodkaBtnValue={vodkaBtnValue}
         liqueursBtnValue={liqueursBtnValue}
+        cocktailsBtnValue={cocktailsBtnValue}
+        shotsBtnValue={shotsBtnValue}
         setCigarettesBtnValue={setCigarettesBtnValue}
         setHookahsBtnValue={setHookahsBtnValue}
         setJuiceBtnValue={setJuiceBtnValue}
@@ -136,6 +144,8 @@ const Main = ({
         setTincturesBtnValue={setTincturesBtnValue}
         setVodkaBtnValue={setVodkaBtnValue}
         setLiqueursBtnValue={setLiqueursBtnValue}
+        setCocktailsBtnValue={setCocktailsBtnValue}
+        setShotsBtnValue={setShotsBtnValue}
         btnBar={btnBar}
         setBtnBar={setBtnBar}
         btnFood={btnFood}
@@ -177,6 +187,8 @@ const Main = ({
         tincturesBtnValue={tincturesBtnValue}
         vodkaBtnValue={vodkaBtnValue}
         liqueursBtnValue={liqueursBtnValue}
+        cocktailsBtnValue={cocktailsBtnValue}
+        shotsBtnValue={shotsBtnValue}
         foodMenuBar={foodMenuBar}
         btnBar={btnBar}
         btnFood={btnFood}

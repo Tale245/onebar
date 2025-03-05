@@ -1,6 +1,6 @@
 class Food {
   constructor() {
-    this._baseUrl = "http://192.168.1.185:3002";
+    this._baseUrl = "http://192.168.0.108:3002";
   }
 
   _checkResponse(res) {
@@ -34,6 +34,7 @@ class Food {
     });
   }
   addNewElementInMenu(newItem, name, description, price, gram, linkImage) {
+    debugger
     return fetch(`${this._baseUrl}/add${newItem}InMenu`, {
       method: "PUT",
       headers: {
@@ -46,7 +47,7 @@ class Food {
           description: description,
           price: price,
           gram: gram,
-          linkImage: linkImage,
+          linkImage: linkImage
         },
       }),
     }).then((res) => {
@@ -54,6 +55,7 @@ class Food {
     });
   }
   deleteElementInMenu(index, deleteItem) {
+    debugger
     return fetch(`${this._baseUrl}/delete${deleteItem}InMenu`, {
       method: "DELETE",
       headers: {

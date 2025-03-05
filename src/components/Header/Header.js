@@ -37,7 +37,7 @@ const Header = ({ userInfo, btnBar, cost }) => {
               БАЛАНС: <span className="app__text-limit">{userInfo.limit}р</span>{" "}
             </p>
           )}
-          {userInfo.waiter === false && userInfo.admin === false && (
+          {userInfo.admin === false && (
             <NavLink to="/basket">
               {" "}
               <div className="header__basket">

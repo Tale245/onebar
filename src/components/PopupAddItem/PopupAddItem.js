@@ -39,7 +39,9 @@ const PopupAddItem = ({
       );
     }
 
-    // reset();
+    closePopups();
+
+    reset();
   };
 
   return (
@@ -245,6 +247,18 @@ const PopupAddItem = ({
                 value="Liqueurs"
               >
                 Ликеры
+              </option>
+              <option
+                className="popup__item popup__item_bar-theme"
+                value="Cocktails"
+              >
+                Коктейли
+              </option>
+              <option
+                className="popup__item popup__item_bar-theme"
+                value="Shots"
+              >
+                Шоты
               </option>
             </select>
           )}

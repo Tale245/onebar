@@ -1,0 +1,50 @@
+.PopupNewOrder {
+  margin: 0;
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  right: 15px;
+  bottom: 35vh;
+  border: 1px solid red;
+  width: 500px;
+  height: 250px;
+  background-color: #f1f1f1;
+}
+
+.PopupNewOrder_open{
+  display: flex;
+}
+/* .PopupNewOrder__overlay{
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0000004f;
+} */
+.PopupNewOrder__container {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.PopupNewOrder__title {
+  margin: 0;
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+.PopupNewOrder__close-btn{
+    margin: 0;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff0808;
+    border: 1px solid #000;
+    outline: none;
+}

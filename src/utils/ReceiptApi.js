@@ -1,15 +1,16 @@
 class Receipt {
   constructor() {
-    this._baseUrl = "http://192.168.1.185:3002";
+    this._baseUrl = "http://192.168.0.108:3002";
   }
 
   _checkResponse(res) {
-    if (res.ok) {
-      return res.json();
-    } else {
-      window.location.reload();
-      return Promise.reject(`Ошибка ${res.status}`);
-    }
+    console.log("Привет!");
+    // if (res.ok) {
+    //   return res.json();
+    // } else {
+    //   window.location.reload();
+    //   return Promise.reject(`Ошибка ${res.status}`);
+    // }
   }
 
   // Получаем заказ
@@ -21,6 +22,7 @@ class Receipt {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
+
       return this._checkResponse(res);
     });
   }
@@ -38,6 +40,7 @@ class Receipt {
   // Создаем заказ
 
   createReceipt(nameWhoOrders, foods, price, doneStatus) {
+    debugger
     return fetch(`${this._baseUrl}/createReceipt`, {
       method: "POST",
       headers: {
@@ -51,11 +54,13 @@ class Receipt {
         doneStatus: doneStatus,
       }),
     }).then((res) => {
+      debugger;
       return this._checkResponse(res);
     });
   }
 
   addToReceipt(name, description, price, gram, imageLink, id) {
+    debugger;
     return fetch(`${this._baseUrl}/addPositionInReceipt/${id}`, {
       method: "POST",
       headers: {

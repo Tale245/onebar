@@ -18,7 +18,7 @@ const UserCard = ({ userName, userLimit, id, changeLimit }) => {
   };
   return (
     <>
-      {userName !== 'admin' && userName !== 'официант' && <div className="userCard">
+      {userName !== 'admin' && <div className="userCard">
         <div className="userCard__container">
           <p className="userCard__user-name">{userName}</p>
           <form className="userCard__form" onSubmit={handleSubmit(onSubmit)}>

@@ -13,8 +13,10 @@ const PopupConfirm = ({
   const cardItem = () => {
     console.log(deleteCard);
     if (btnBar === true) {
+      debugger
       deleteElementInBarMenu(deleteCard.thisCard, deleteCard.category);
     } else {
+      debugger
       deleteElementInMenu(deleteCard.thisCard, deleteCard.category);
     }
   };

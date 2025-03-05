@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "../Order/Order.css";
 const Order = ({
@@ -11,8 +11,8 @@ const Order = ({
   createsAt,
   btnOrders,
   item,
-  download,
   userInfo,
+  downloadItem,
 }) => {
   const [hide, setHide] = useState(false);
 
@@ -21,31 +21,10 @@ const Order = ({
     setHide(true);
   };
 
-  const downloadItem = () => {
-    let array = [];
-    item.foods.forEach((item) => {
-      array.push(`${item.name} - ${item.price} рублей`);
-    });
-    console.log(array);
-    array.unshift("  ");
-    array.unshift("Название:     Цена:");
-    array.unshift("  ");
-    array.unshift(nameWhoOrders);
-    array.unshift("  ");
-    array.unshift("     РЦ НЕОН");
-
-    let date = new Date();
-    let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
-    array.push(" ");
-    array.push(`ИТОГ: ${price} рублей`);
-    array.push(" ");
-    array.push("Подпись официанта ____________");
-    array.push(" ");
-
-    array.push(dateNow);
-
-    download(array, _id, dateNow);
+  const downloadReceipt = () => {
+    downloadItem(item, nameWhoOrders, _id, price);
   };
+
   return (
     <div
       className={
@@ -91,7 +70,7 @@ const Order = ({
         {btnOrders === true && (
           <button className="order__done-btn" onClick={hideOrder}></button>
         )}
-        <button className="order__print-receipt" onClick={downloadItem}>
+        <button className="order__print-receipt" onClick={downloadReceipt}>
           Напечатать чек
         </button>
       </div>

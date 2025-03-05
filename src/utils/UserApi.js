@@ -1,6 +1,6 @@
 class UserApi {
   constructor() {
-    this._baseUrl = "http://192.168.1.185:3002";
+    this._baseUrl = "http://192.168.0.108:3002";
   }
 
   _checkResponse(res) {
@@ -38,7 +38,7 @@ class UserApi {
     });
   }
 
-  addToCart(name, description, price, gram, imageLink) {
+  addToCart(name, description, price, gram, imageLink, category) {
     return fetch(`${this._baseUrl}/user/cards`, {
       method: "POST",
       headers: {
@@ -51,6 +51,7 @@ class UserApi {
         price: price,
         gram: gram,
         imageLink: imageLink,
+        category: category
       }),
     }).then((res) => {
       return this._checkResponse(res);
