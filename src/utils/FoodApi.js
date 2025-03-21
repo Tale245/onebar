@@ -69,6 +69,40 @@ class Food {
       return this._checkResponse(res);
     });
   }
+  changeElementValueInMenu(nameOfCategory, categoryValue, newValue, objectId) {
+    return fetch(`${this._baseUrl}/changeValueMenu`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        categories: nameOfCategory,
+        categoriesValue: categoryValue,
+        newValue: newValue,
+        objectId: objectId
+      }),
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
+  changeElementValueInBarMenu(nameOfCategory, categoryValue, newValue, objectId) {
+    return fetch(`${this._baseUrl}/changeValueBarMenu`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        categories: nameOfCategory,
+        categoriesValue: categoryValue,
+        newValue: newValue,
+        objectId: objectId
+      }),
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
+  }
 }
 
 const food = new Food();

@@ -20,6 +20,7 @@ import receiptApi from "../../utils/ReceiptApi";
 import Receipt from "../Receipt/Receipt";
 import Receipts from "../Receipts/Receipts";
 import PopupNewOrder from "../PopupNewOrder/PopupNewOrder";
+import PopupChangeInfo from "../PopupChangeInfo/PopupChangeInfo";
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
@@ -70,6 +71,8 @@ function App() {
   const [isPopupAddItemOpen, setIsPopupAddItemOpen] = useState(false);
   const [isPopupConfirmOpen, setIsPopupConfirmOpen] = useState(false);
   const [isPopupNewOrderOpen, setIsPopupNewOrderOpen] = useState(false);
+  const [isPopupChangeInfoOpen, setIsPopupChangeInfoOpen] = useState(false);
+  const [cardId, setIsCardId] = useState("");
   const [userList, setUserList] = useState([]);
   const [dataLoad, setDataLoad] = useState(false);
 
@@ -93,20 +96,23 @@ function App() {
 
   const downloadedOrders = useRef(new Set()); // Храним ID уже скачанных заказов
   const [prevOrdersState, setPrevOrdersState] = useState([]); // Храним предыдущее состояние заказов
-  
+
   useEffect(() => {
     // Загружаем из localStorage уже скачанные заказы
-    const savedDownloadedOrders = JSON.parse(localStorage.getItem('downloadedOrders')) || [];
-    savedDownloadedOrders.forEach((orderId) => downloadedOrders.current.add(orderId));
-  
+    const savedDownloadedOrders =
+      JSON.parse(localStorage.getItem("downloadedOrders")) || [];
+    savedDownloadedOrders.forEach((orderId) =>
+      downloadedOrders.current.add(orderId)
+    );
+
     setPrevOrdersState(savedDownloadedOrders);
   }, []); // Выполняется только при загрузке компонента
-  
+
   useEffect(() => {
     if (!orders || orders.length === 0) return; // Если заказов нет – выходим
-  
+
     console.log("Проверка заказов:", orders);
-  
+
     // Смотрим, изменилось ли содержимое заказов
     const newOrders = orders
       .map((order) => ({
@@ -114,29 +120,33 @@ function App() {
         foods: order.foods.filter((food) => food.category !== "Напиток"), // Убираем напитки
       }))
       .filter((order) => order.foods.length > 0); // Исключаем заказы, где остались только напитки
-  
+
     // Если новых заказов нет – выходим
     if (newOrders.length === 0) return;
-  
+
     // Выбираем заказ, который ещё не скачан
-    const newOrder = newOrders.find((order) => !downloadedOrders.current.has(order._id));
-  
+    const newOrder = newOrders.find(
+      (order) => !downloadedOrders.current.has(order._id)
+    );
+
     if (!newOrder) return; // Если все заказы уже скачаны – выходим
-  
+
     console.log("Скачиваю новый заказ:", newOrder);
-  
+
     // Скачиваем новый заказ
     downloadItem(newOrder.foods, newOrder.nameWhoOrders, newOrder._id, 0, true);
-  
+
     // Отмечаем заказ как скачанный
     downloadedOrders.current.add(newOrder._id);
-  
+
     // Сохраняем ID скачанных заказов в localStorage
-    localStorage.setItem('downloadedOrders', JSON.stringify(Array.from(downloadedOrders.current)));
-  
+    localStorage.setItem(
+      "downloadedOrders",
+      JSON.stringify(Array.from(downloadedOrders.current))
+    );
+
     // Обновляем состояние предыдущих заказов
     setPrevOrdersState(newOrders);
-  
   }, [orders]); // Следим за изменением orders
 
   useEffect(() => {
@@ -248,11 +258,16 @@ function App() {
   const openPopupAddItem = () => {
     setIsPopupAddItemOpen(true);
   };
+  const openPopupChangeInfo = (cardId) => {
+    setIsCardId(cardId);
+    setIsPopupChangeInfoOpen(true);
+  };
 
   const closePopups = () => {
     setIsPopupAddItemOpen(false);
     setIsPopupConfirmOpen(false);
     setIsPopupNewOrderOpen(false);
+    setIsPopupChangeInfoOpen(false);
   };
 
   const addToCart = (name, description, price, gram, imageLink, category) => {
@@ -292,9 +307,9 @@ function App() {
   };
 
   const downloadItem = (item, nameWhoOrders, _id, price, value) => {
-    if (userInfo.name !== "admin" && userInfo.name === 'официант') {
+    if (userInfo.name !== "admin" && userInfo.name === "официант") {
       console.log("Скачивание запрещено: аккаунт не админ.");
-      setIsPopupNewOrderOpen(value)
+      setIsPopupNewOrderOpen(value);
       return;
     }
     let itemsArray = [];
@@ -395,6 +410,45 @@ function App() {
           setFoodMenu(data);
         });
       });
+  };
+
+  const changeValueOfMenuElement = (
+    nameOfCategory,
+    categoryValue,
+    newValue,
+    objectId
+  ) => {
+    food
+      .changeElementValueInMenu(
+        nameOfCategory,
+        categoryValue,
+        newValue,
+        objectId
+      )
+      .then((data) =>
+        food.getFoods().then((data) => {
+          setFoodMenu(data);
+        })
+      );
+  };
+  const changeValueOfBarMenuElement = (
+    nameOfCategory,
+    categoryValue,
+    newValue,
+    objectId
+  ) => {
+    food
+      .changeElementValueInBarMenu(
+        nameOfCategory,
+        categoryValue,
+        newValue,
+        objectId
+      )
+      .then((data) =>
+        food.getFoodBar().then((data) => {
+          setFoodMenuBar(data);
+        })
+      );
   };
   const addNewElementInBarMenu = (
     newItem,
@@ -582,6 +636,7 @@ function App() {
                 foodMenuBar={foodMenuBar}
                 deleteElementInBarMenu={deleteElementInBarMenu}
                 deleteFromCart={deleteFromCart}
+                openPopupChangeInfo={openPopupChangeInfo}
               />
             }
           />
@@ -649,6 +704,46 @@ function App() {
         <PopupNewOrder
           isPopupNewOrderOpen={isPopupNewOrderOpen}
           closePopups={closePopups}
+        />
+
+        <PopupChangeInfo
+          isPopupChangeInfoOpen={isPopupChangeInfoOpen}
+          closePopups={closePopups}
+          changeValueOfBarMenuElement={changeValueOfBarMenuElement}
+          changeValueOfMenuElement={changeValueOfMenuElement}
+          cardId={cardId}
+          btnBar={btnBar}
+          btnFood={btnFood}
+          pizzaBtnValue={pizzaBtnValue}
+          soupsBtnValue={soupsBtnValue}
+          snacksBtnValue={snacksBtnValue}
+          coldSnacksBtnValue={coldSnacksBtnValue}
+          iceCreamBtnValue={iceCreamBtnValue}
+          saladsBtnValue={saladsBtnValue}
+          pastesBtnValue={pastesBtnValue}
+          beerSnacksBtnValue={beerSnacksBtnValue}
+          hotDishesBtnValue={hotDishesBtnValue}
+          cigarettesBtnValue={cigarettesBtnValue}
+          hookahsBtnValue={hookahsBtnValue}
+          juiceBtnValue={juiceBtnValue}
+          coffeesBtnValue={coffeesBtnValue}
+          teaBtnValue={teaBtnValue}
+          bottledBeerBtnValue={bottledBeerBtnValue}
+          wineBtnValue={wineBtnValue}
+          champagneBtnValue={champagneBtnValue}
+          vermouthBtnValue={vermouthBtnValue}
+          aperativesBtnValue={aperativesBtnValue}
+          rumBtnValue={rumBtnValue}
+          cognacBtnValue={cognacBtnValue}
+          brandyBtnValue={brandyBtnValue}
+          whiskeyBtnValue={whiskeyBtnValue}
+          ginBtnValue={ginBtnValue}
+          tequilaBtnValue={tequilaBtnValue}
+          tincturesBtnValue={tincturesBtnValue}
+          vodkaBtnValue={vodkaBtnValue}
+          liqueursBtnValue={liqueursBtnValue}
+          cocktailsBtnValue={cocktailsBtnValue}
+          shotsBtnValue={shotsBtnValue}
         />
       </div>
     </div>

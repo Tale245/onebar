@@ -80,6 +80,7 @@ const Main = ({
   deleteElementInBarMenu,
   setDeleteCard,
   openPopupConfirm,
+  openPopupChangeInfo
 }) => {
 
   console.log('foodArrayInMain', foodMenu)
@@ -194,6 +195,7 @@ const Main = ({
         btnFood={btnFood}
         deleteElementInBarMenu={deleteElementInBarMenu}
         openPopupConfirm={openPopupConfirm}
+        openPopupChangeInfo={openPopupChangeInfo}
       />
     </main>
   );

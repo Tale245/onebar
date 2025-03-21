@@ -48,6 +48,7 @@ const FoodList = ({
   btnFood,
   deleteElementInBarMenu,
   openPopupConfirm,
+  openPopupChangeInfo
 }) => {
 
   console.log('foodArrayInFoodList', foodArray)
@@ -214,6 +215,7 @@ const FoodList = ({
               cocktailsBtnValue={cocktailsBtnValue}
               shotsBtnValue={shotsBtnValue}
               deleteElementInBarMenu={deleteElementInBarMenu}
+              openPopupChangeInfo={openPopupChangeInfo}
             />
           ))}
       </div>

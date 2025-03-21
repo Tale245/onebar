@@ -53,6 +53,7 @@ const FoodCard = ({
   deleteElementInBarMenu,
   openPopupConfirm,
   item,
+  openPopupChangeInfo
 }) => {
   console.log("foodArrayInFoodCard", foodCategory);
 
@@ -264,14 +265,17 @@ const FoodCard = ({
         thisGram = gram;
       }
       addToCart(title, description, price, thisGram, img, foodCategory);
-      debugger
+      debugger;
     } else if (userInfo.admin === true) {
       console.log("индекс этой карточки:", thisCard);
       if (btnBar === true) {
-        try123(thisCard, category);
+        // try123(thisCard, category);
+        console.log("Я удаляю карточку в if номер карточки:", thisCard);
+
         // deleteElementInBarMenu(thisCard, category);
       } else {
-        try123(thisCard, category);
+        // try123(thisCard, category);
+        console.log("Я удаляю карточку в else номер карточки:", thisCard);
         // deleteElementInMenu(thisCard, category);
       }
     } else {
@@ -290,6 +294,10 @@ const FoodCard = ({
     deleteFromCart(thisCard);
   };
 
+  const openPopupChangeValue = () => {
+    openPopupChangeInfo(cardId)
+  }
+
   const imagePath = require(`../../imageForMenu/${img}`);
   const whatPrice =
     (Mon === true && hookahsBtnValue === true) ||
@@ -300,8 +308,13 @@ const FoodCard = ({
       : `${priceRelax}р`;
 
   return (
-    <div className="foodCard" onClick={cart ? findIndex : onClickCard}>
-      <img className="foodCard__image" src={imagePath} alt={title} />
+    <div className="foodCard">
+      <img
+        className="foodCard__image"
+        src={imagePath}
+        alt={title}
+        onClick={cart ? findIndex : onClickCard}
+      />
       <div className="foodCard__text-container">
         {" "}
         <h3 className="foodCard__title">{title}</h3>
@@ -322,7 +335,11 @@ const FoodCard = ({
           className={`foodCard__btn-add ${
             (cart || userInfo.admin === true) && "foodCard__btn-trash"
           }`}
+          onClick={cart ? findIndex : onClickCard}
         ></button>
+      )}
+      {userInfo.waiter === false && (
+        <button className={`foodCard__btn-change`} onClick={openPopupChangeValue}></button>
       )}
     </div>
   );
