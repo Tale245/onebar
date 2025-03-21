@@ -269,14 +269,10 @@ const FoodCard = ({
     } else if (userInfo.admin === true) {
       console.log("индекс этой карточки:", thisCard);
       if (btnBar === true) {
-        // try123(thisCard, category);
-        console.log("Я удаляю карточку в if номер карточки:", thisCard);
+        try123(thisCard, category);
 
-        // deleteElementInBarMenu(thisCard, category);
       } else {
-        // try123(thisCard, category);
-        console.log("Я удаляю карточку в else номер карточки:", thisCard);
-        // deleteElementInMenu(thisCard, category);
+        try123(thisCard, category);
       }
     } else {
       console.log("у вас нет доступа");
