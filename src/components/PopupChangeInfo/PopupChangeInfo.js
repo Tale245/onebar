@@ -42,6 +42,7 @@ const PopupChangeInfo = ({
   liqueursBtnValue,
   cocktailsBtnValue,
   shotsBtnValue,
+  isHideChangeInfo,
 }) => {
   const {
     watch,
@@ -57,6 +58,11 @@ const PopupChangeInfo = ({
 
   const handleSelectChange = (event) => {
     setIsFileInput(event.target.value === "linkImage");
+  };
+
+  const closePopup = () => {
+    closePopups();
+    reset();
   };
 
   const onSubmit = (data) => {
@@ -89,12 +95,31 @@ const PopupChangeInfo = ({
       if (hotDishesBtnValue) {
         categories = "hotDishes";
       }
-      changeValueOfMenuElement(
-        categories ? categories : "",
-        data.type,
-        isFileInput ? data.newValue[0].name : data.newValue,
-        cardId
-      );
+      if (isHideChangeInfo) {
+        if (isHideChangeInfo && data.hide !== "Не выбрано") {
+          changeValueOfMenuElement(
+            categories ? categories : "",
+            "hide",
+            isFileInput ? data.newValue[0].name : data.hide,
+            cardId
+          );
+          closePopups()
+          reset()
+        } else {
+          console.log("Выберите значение!");
+        }
+
+        return;
+      }
+
+      if (!isHideChangeInfo) {
+        changeValueOfMenuElement(
+          categories ? categories : "",
+          data.type,
+          isFileInput ? data.newValue[0].name : data.newValue,
+          cardId
+        );
+      }
     } else if (btnBar) {
       if (cigarettesBtnValue) {
         categories = "cigarettes";
@@ -159,14 +184,33 @@ const PopupChangeInfo = ({
       if (shotsBtnValue) {
         categories = "shots";
       }
-      changeValueOfBarMenuElement(
-        categories ? categories : "",
-        data.type,
-        isFileInput ? data.newValue[0].name : data.newValue,
-        cardId
-      );
+      if (isHideChangeInfo) {
+        if (isHideChangeInfo && data.hide !== "Не выбрано") {
+          changeValueOfBarMenuElement(
+            categories ? categories : "",
+            "hide",
+            isFileInput ? data.newValue[0].name : data.hide,
+            cardId
+          );
+          closePopups()
+          reset()
+        } else {
+          console.log("Выберите значение!");
+        }
+
+        return;
+      }
+
+      if (!isHideChangeInfo) {
+        changeValueOfBarMenuElement(
+          categories ? categories : "",
+          data.type,
+          isFileInput ? data.newValue[0].name : data.newValue,
+          cardId
+        );
+      }
     }
-    setIsFileInput(false)
+    setIsFileInput(false);
     reset();
   };
 
@@ -178,52 +222,80 @@ const PopupChangeInfo = ({
     >
       <button
         className="popupChangeInfo__btn-close"
-        onClick={closePopups}
+        onClick={closePopup}
       ></button>
       <form className="popupChangeInfo__form" onSubmit={handleSubmit(onSubmit)}>
         <h3 className="popupChangeInfo__title">Изменить данные</h3>
         <div className="popupChangeInfo__container">
-          <select
-            {...register("type", { required: true })}
-            onChange={handleSelectChange}
-            className="popupChangeInfo__select"
-            placeholder="скрыть"
-          >
-            <option className="popupChangeInfo__select-status" value="name">
-              Название
-            </option>
-            <option
-              className="popupChangeInfo__select-status"
-              value="description"
+          {!isHideChangeInfo && (
+            <select
+              {...register("type", { required: true })}
+              onChange={handleSelectChange}
+              className="popupChangeInfo__select"
             >
-              {`${btnBar ? "Страна" : "Описание"}`}
-            </option>
-            <option className="popupChangeInfo__select-status" value="price">
-              Цена
-            </option>
-            <option className="popupChangeInfo__select-status" value="gram">
-              Вес
-            </option>
-            <option
-              className="popupChangeInfo__select-status"
-              value="linkImage"
-            >
-              Изображение
-            </option>
-          </select>
-          <p className="popupChangeInfo__text">-</p>
-          {isFileInput ? (
-            <input type='file'
-              {...register("newValue", { required: true })}
-              className="popupChangeInfo__input"
-            />
-          ) : (
-            <input
-              {...register("newValue", { required: true })}
-              className="popupChangeInfo__input"
-            />
+              <option className="popupChangeInfo__select-status" value="name">
+                Название
+              </option>
+              <option
+                className="popupChangeInfo__select-status"
+                value="description"
+              >
+                {`${btnBar ? "Страна" : "Описание"}`}
+              </option>
+              <option className="popupChangeInfo__select-status" value="price">
+                Цена
+              </option>
+              <option className="popupChangeInfo__select-status" value="gram">
+                Вес
+              </option>
+              <option
+                className="popupChangeInfo__select-status"
+                value="linkImage"
+              >
+                Изображение
+              </option>
+            </select>
+          )}
+          {!isHideChangeInfo && <p className="popupChangeInfo__text">-</p>}
+          {!isHideChangeInfo && (
+            <div className="popupChangeInfo__div">
+              {" "}
+              {isFileInput ? (
+                <input
+                  type="file"
+                  {...register("newValue", { required: true })}
+                  className="popupChangeInfo__input"
+                />
+              ) : (
+                <input
+                  {...register("newValue", { required: true })}
+                  className="popupChangeInfo__input"
+                />
+              )}
+            </div>
           )}
         </div>
+        {isHideChangeInfo && (
+          <div className="popupChangeInfo__container">
+            {" "}
+            <p className="popupChangeInfo__text">Скрыть / вернуть</p>
+            <select
+              {...register("hide")}
+              onChange={handleSelectChange}
+              className="popupChangeInfo__select"
+            >
+              <option className="popupChangeInfo__option" value="Не выбрано">
+                Не выбрано
+              </option>
+              <option className="popupChangeInfo__option" value="true">
+                Скрыть
+              </option>
+              <option className="popupChangeInfo__option" value="false">
+                Вернуть
+              </option>
+            </select>
+          </div>
+        )}
 
         <button className="popupChangeInfo__submit-btn">Сохранить</button>
       </form>

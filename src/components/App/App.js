@@ -73,6 +73,7 @@ function App() {
   const [isPopupNewOrderOpen, setIsPopupNewOrderOpen] = useState(false);
   const [isPopupChangeInfoOpen, setIsPopupChangeInfoOpen] = useState(false);
   const [cardId, setIsCardId] = useState("");
+  const [isHideChangeInfo, setIsHideChangeInfo] = useState(false);
   const [userList, setUserList] = useState([]);
   const [dataLoad, setDataLoad] = useState(false);
 
@@ -237,7 +238,9 @@ function App() {
           });
           food.getFoods().then((data) => {
             setFoodMenu(data);
-            // setColdSnacksBtnValue(true);
+          });
+          food.getFoodBar().then((data) => {
+            setFoodMenuBar(data);
           });
           orderApi.getOrders().then((data) => {
             setOrders(data);
@@ -258,8 +261,9 @@ function App() {
   const openPopupAddItem = () => {
     setIsPopupAddItemOpen(true);
   };
-  const openPopupChangeInfo = (cardId) => {
+  const openPopupChangeInfo = (cardId, value) => {
     setIsCardId(cardId);
+    setIsHideChangeInfo(value)
     setIsPopupChangeInfoOpen(true);
   };
 
@@ -712,6 +716,7 @@ function App() {
           changeValueOfBarMenuElement={changeValueOfBarMenuElement}
           changeValueOfMenuElement={changeValueOfMenuElement}
           cardId={cardId}
+          isHideChangeInfo={isHideChangeInfo}
           btnBar={btnBar}
           btnFood={btnFood}
           pizzaBtnValue={pizzaBtnValue}

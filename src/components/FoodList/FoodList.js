@@ -165,6 +165,7 @@ const FoodList = ({
           valueArray.map((item) => (
             <FoodCard
               item={item}
+              itemHide={item.hide}
               openPopupConfirm={openPopupConfirm}
               title={item.name}
               priceRelax={item.priceRelax ? item.priceRelax : undefined}

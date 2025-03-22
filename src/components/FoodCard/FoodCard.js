@@ -53,10 +53,10 @@ const FoodCard = ({
   deleteElementInBarMenu,
   openPopupConfirm,
   item,
-  openPopupChangeInfo
+  openPopupChangeInfo,
+  itemHide,
 }) => {
   console.log("foodArrayInFoodCard", foodCategory);
-
   const [Mon, setMon] = useState(false);
   const [Tue, setTue] = useState(false);
   const [Wed, setWed] = useState(false);
@@ -270,7 +270,6 @@ const FoodCard = ({
       console.log("индекс этой карточки:", thisCard);
       if (btnBar === true) {
         try123(thisCard, category);
-
       } else {
         try123(thisCard, category);
       }
@@ -291,8 +290,11 @@ const FoodCard = ({
   };
 
   const openPopupChangeValue = () => {
-    openPopupChangeInfo(cardId)
-  }
+    openPopupChangeInfo(cardId, false);
+  };
+  const openPopupChangeHideValue = () => {
+    openPopupChangeInfo(cardId, true);
+  };
 
   const imagePath = require(`../../imageForMenu/${img}`);
   const whatPrice =
@@ -303,8 +305,19 @@ const FoodCard = ({
       ? `${price}р`
       : `${priceRelax}р`;
 
+      let hide
+      let zeroHide
+
+      if(itemHide && userInfo.name === 'администратор'){
+        hide = true
+      } else if(itemHide && userInfo.name !== 'администратор'){
+        zeroHide = true
+      }
+
   return (
-    <div className="foodCard">
+    <div
+      className={`foodCard ${hide ? 'foodCard_hide': '' } ${zeroHide && userInfo.name !== 'администратор' ? 'foodCard_hide-zero': '' }`}
+    >
       <img
         className="foodCard__image"
         src={imagePath}
@@ -334,8 +347,17 @@ const FoodCard = ({
           onClick={cart ? findIndex : onClickCard}
         ></button>
       )}
-      {userInfo.waiter === false && (
-        <button className={`foodCard__btn-change`} onClick={openPopupChangeValue}></button>
+      {userInfo.admin === true && (
+        <button
+          className={`foodCard__btn-change`}
+          onClick={openPopupChangeValue}
+        ></button>
+      )}
+      {userInfo.admin === true && (
+        <button
+          className={`foodCard__btn-hide`}
+          onClick={openPopupChangeHideValue}
+        ></button>
       )}
     </div>
   );

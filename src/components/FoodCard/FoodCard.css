@@ -19,7 +19,7 @@
   object-fit: cover;
 }
 .foodCard__image:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 .foodCard__text-container {
   margin: 0 auto;
@@ -121,9 +121,37 @@
   cursor: pointer;
   transition: opacity 200ms ease-in-out;
 }
+.foodCard__btn-change:hover {
+  opacity: 0.8;
+}
 .foodCard__btn-trash {
   background-image: url("../../images/btn-trash.svg");
 }
 .foodCard__btn-add:hover {
   opacity: 0.8;
+}
+.foodCard__btn-hide {
+  margin: 0;
+  position: absolute;
+  z-index: 10;
+  left: 5px;
+  top: 65px;
+  width: 25px;
+  height: 25px;
+  background: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  background-image: url("../../images/hide-svgrepo-com\ 1.svg");
+  cursor: pointer;
+  transition: opacity 200ms ease-in-out;
+}
+.foodCard__btn-hide:hover {
+  opacity: 0.8;
+}
+.foodCard_hide{
+  opacity: .5;
+}
+.foodCard_hide-zero{
+  display: none;
 }
