@@ -16,7 +16,7 @@
   font-family: Inter;
   font-size: 30px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
 }
 .basket__container {
@@ -32,19 +32,19 @@
   margin: 0;
   color: #fff;
 
-  font-family: Russo One;
+  font-family: inter;
   font-size: 20px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
 }
 .basket__price-limit {
   margin: 0;
   color: #3a9738;
-  font-family: Russo One;
+  font-family: inter;
   font-size: 20px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
 }
 .basket__btn-order {
@@ -54,7 +54,7 @@
   font-family: Inter;
   font-size: 25px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
   border: none;
   border: 1px solid #d82e2e;
@@ -66,7 +66,7 @@
   margin: 0;
   color: #fff;
 
-  font-family: Russo One;
+  font-family: inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;

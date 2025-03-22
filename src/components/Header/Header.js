@@ -2,7 +2,8 @@ import React from "react";
 
 import "./Header.css";
 
-import logo from "../../images/neonLogo.png";
+// import logo from "../../images/neonLogo.png";
+import logo from "../../images/Frame 28.png";
 import { NavLink } from "react-router-dom";
 import basketLogo from "../../images/basketLogo.svg";
 import basketLogoBar from "../../images/basketLogo_bar.svg";

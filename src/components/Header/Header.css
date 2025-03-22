@@ -18,7 +18,8 @@
 }
 .header__logo {
   margin: 0;
-  width: 200px;
+  padding-left: 60px;
+  width: 100px;
 }
 .header__links {
   margin: 0;
@@ -40,7 +41,7 @@
   font-family: Inter;
   font-size: 17px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 300;
   line-height: normal;
   text-decoration: none;
 }
@@ -56,7 +57,7 @@
   line-height: normal;
 }
 .header__account-name_bar {
-  color: #eaa51a;
+  color: #4da4c7;
 }
 .app__text-limit_text {
   color: #fff;
@@ -108,7 +109,7 @@
 .header__text-limit {
   margin: 0;
   text-align: center;
-  color: #eaa51a;
+  color: #4da4c7;
 
   font-family: Inter;
   font-size: 15px;

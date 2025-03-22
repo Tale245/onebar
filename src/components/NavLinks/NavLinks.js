@@ -680,7 +680,13 @@ const NavLinks = ({
     setBtnFood(true);
   };
   return (
-    <section className="navLinks">
+    <section
+      className={`navLinks ${
+        btnFood
+          ? "navLinks ::-webkit-scrollbar-thumb"
+          : "navLinks_bar ::-webkit-scrollbar-thumb"
+      }`}
+    >
       <div className="navLinks__btns">
         <button
           className={`navLinks__btn-food ${

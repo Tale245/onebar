@@ -4,12 +4,12 @@
 @import url(../src/vendor/normalize.css);
 body {
   margin: 0 auto;
-  max-width: 100%;
-  background-image: url('./images/ajy.jpg');
+  width: 100%;
+  background-color: black;
+  background-image: url('./images/Frame\ 27\ \(1\)\ 1.png');
   background-size: cover;
   background-repeat: no-repeat;
-  position: relative;
-	font-family: 'DrukWideCyr-Bold', Arial, Helvetica, sans-serif;
+	/* font-family: 'DrukWideCyr-Bold', Arial, Helvetica, sans-serif; */
 
-  /* font-family: "inter", Arial, Helvetica, sans-serif; */
+  font-family: "inter", Arial, Helvetica, sans-serif;
 }

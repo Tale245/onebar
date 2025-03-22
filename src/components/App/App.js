@@ -263,7 +263,7 @@ function App() {
   };
   const openPopupChangeInfo = (cardId, value) => {
     setIsCardId(cardId);
-    setIsHideChangeInfo(value)
+    setIsHideChangeInfo(value);
     setIsPopupChangeInfoOpen(true);
   };
 
@@ -311,9 +311,11 @@ function App() {
   };
 
   const downloadItem = (item, nameWhoOrders, _id, price, value) => {
-    if (userInfo.name !== "admin" && userInfo.name === "официант") {
+    if (userInfo.name !== "администратор") {
       console.log("Скачивание запрещено: аккаунт не админ.");
-      setIsPopupNewOrderOpen(value);
+      if (userInfo.name === "официант") {
+        setIsPopupNewOrderOpen(value);
+      }
       return;
     }
     let itemsArray = [];

@@ -1,6 +1,7 @@
 .myOrder {
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-top: 30px;
+ padding-bottom: 50px;
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -8,7 +9,7 @@
   gap: 20px;
 }
 .myOrder__container {
-  border: 0.5px solid #fe4141;
+  /* background-color: #6afe41; */
 }
 .myOrder__title {
   margin: 0;
@@ -19,7 +20,7 @@
   font-family: Inter;
   font-size: 19px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: normal;
 }
 .myOrder__text-name {
@@ -30,7 +31,7 @@
   font-family: Inter;
   font-size: 19px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: normal;
 }
 .myOrder__text {
@@ -41,7 +42,7 @@
   font-family: Inter;
   font-size: 19px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: normal;
 }
 .myOrder__price {
@@ -52,17 +53,17 @@
   font-family: Inter;
   font-size: 19px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
 }
 .myOrder__text_done {
   margin-right: 10px;
-  color: #6afe41;
+  color: #58c23b;
 }
 .myOrder__text_not-done {
   margin-right: 10px;
 
-  color: #fe7041;
+  color: #f83434;
 }
 .myOrder__text-container {
   margin: 0;
@@ -75,6 +76,6 @@
   font-family: Inter;
   font-size: 15px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
 }
