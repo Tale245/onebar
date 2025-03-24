@@ -4,6 +4,7 @@ import "./Receipts.css";
 import Receipt from "../Receipt/Receipt";
 
 const Receipts = ({ receipts, download, clearReceipt, setId }) => {
+  console.log(receipts)
   return (
     <section className="receipts">
       <h1 className="receipts__title">Распечатать чек</h1>

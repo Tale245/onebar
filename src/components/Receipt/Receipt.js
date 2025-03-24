@@ -42,7 +42,6 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWh
     array.unshift("  ");
     array.unshift(name);
     array.unshift("  ");
-    array.unshift("     РЦ НЕОН");
 
     let date = new Date();
     let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });

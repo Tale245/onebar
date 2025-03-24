@@ -91,7 +91,7 @@ function App() {
   const [receipts, setReceipts] = useState([]);
   const [priceReceipt, setPriceReceipt] = useState(0);
 
-  const [id, setId] = useState("67c62b92586f294846573c07");
+  const [id, setId] = useState("6568ef019925afaa13ad69a2");
 
   const navigate = useNavigate();
 
@@ -174,12 +174,12 @@ function App() {
           setIsUserCreateOrder(false);
         }
         console.log(data);
-        if (data.name === "СТОЛ 1") {
-          setId("6568f0ce9925afaa13ad69c6");
+        if (data.name === "Стол 1") {
+          setId("6568ef249925afaa13ad69a4");
         } else if (data.name === "Стол 2") {
           setId("6568f19e9925afaa13ad69f3");
         } else if (data.name === "admin") {
-          setId("67c62b7e586f294846573c05");
+          setId("6568ee919925afaa13ad699f");
         } else if (data.name === "Стол 3") {
           setId("6568f1a39925afaa13ad69f6");
         } else if (data.name === "Стол 4") {
@@ -212,6 +212,7 @@ function App() {
         setOrders(data);
       });
       receiptApi.getReceipt().then((data) => {
+        debugger
         setReceipts(data);
       });
       receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
@@ -311,7 +312,7 @@ function App() {
   };
 
   const downloadItem = (item, nameWhoOrders, _id, price, value) => {
-    if (userInfo.name !== "администратор") {
+    if (userInfo.name !== "admin") {
       console.log("Скачивание запрещено: аккаунт не админ.");
       if (userInfo.name === "официант") {
         setIsPopupNewOrderOpen(value);
@@ -333,7 +334,6 @@ function App() {
     array.unshift("  ");
     array.unshift(nameWhoOrders);
     array.unshift("  ");
-    array.unshift("     РЦ НЕОН");
 
     let date = new Date();
     let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
@@ -371,7 +371,7 @@ function App() {
         item.gram,
         item.imageLink,
         id
-      );
+      )
       // .then((data) => {
       //   debugger;
       //   receiptApi.changePrice(priceReceipt.price + price, id).then(() => {

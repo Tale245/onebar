@@ -1,11 +1,12 @@
 class Receipt {
   constructor() {
-    this._baseUrl = "http://192.168.0.108:3002";
+    this._baseUrl = "http://192.168.1.185:3002";
   }
 
   _checkResponse(res) {
     console.log("Привет!");
     // if (res.ok) {
+    //   debugger
     //   return res.json();
     // } else {
     //   window.location.reload();
@@ -20,6 +21,7 @@ class Receipt {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Accept": "application/json",
       },
     }).then((res) => {
 
@@ -31,6 +33,7 @@ class Receipt {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Accept": "application/json",
       },
     }).then((res) => {
       return this._checkResponse(res);

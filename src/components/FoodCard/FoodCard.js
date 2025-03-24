@@ -308,9 +308,9 @@ const FoodCard = ({
       let hide
       let zeroHide
 
-      if(itemHide && userInfo.name === 'администратор'){
+      if(itemHide && userInfo.name === 'admin'){
         hide = true
-      } else if(itemHide && userInfo.name !== 'администратор'){
+      } else if(itemHide && userInfo.name !== 'admin'){
         zeroHide = true
       }
 
