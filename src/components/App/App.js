@@ -91,7 +91,7 @@ function App() {
   const [receipts, setReceipts] = useState([]);
   const [priceReceipt, setPriceReceipt] = useState(0);
 
-  const [id, setId] = useState("6568ef019925afaa13ad69a2");
+  const [id, setId] = useState("67e281dc02c1e5788ec5248d");
 
   const navigate = useNavigate();
 
@@ -135,7 +135,7 @@ function App() {
     console.log("Скачиваю новый заказ:", newOrder);
 
     // Скачиваем новый заказ
-    downloadItem(newOrder.foods, newOrder.nameWhoOrders, newOrder._id, 0, true);
+    downloadItem1(newOrder.foods, newOrder.nameWhoOrders, newOrder._id, 0, true);
 
     // Отмечаем заказ как скачанный
     downloadedOrders.current.add(newOrder._id);
@@ -175,11 +175,11 @@ function App() {
         }
         console.log(data);
         if (data.name === "Стол 1") {
-          setId("6568ef249925afaa13ad69a4");
+          setId("67e281dc02c1e5788ec5248d");
         } else if (data.name === "Стол 2") {
           setId("6568f19e9925afaa13ad69f3");
-        } else if (data.name === "admin") {
-          setId("6568ee919925afaa13ad699f");
+        } else if (data.name === "Администратор") {
+          setId("67e2813902c1e5788ec52399");
         } else if (data.name === "Стол 3") {
           setId("6568f1a39925afaa13ad69f6");
         } else if (data.name === "Стол 4") {
@@ -215,7 +215,7 @@ function App() {
         debugger
         setReceipts(data);
       });
-      receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
+      // receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
     }
   }, [isLoggedIn]);
 
@@ -307,12 +307,13 @@ function App() {
       .catch((e) => console.log(e));
   };
 
-  const download = (object, name, dateNow) => {
-    orderApi.download(object, name, dateNow).then((data) => console.log(data));
+  const download = (object, name, dateNow, whoDownLoad) => {
+    debugger
+    orderApi.download(object, name, dateNow, whoDownLoad).then((data) => console.log(data));
   };
 
-  const downloadItem = (item, nameWhoOrders, _id, price, value) => {
-    if (userInfo.name !== "admin") {
+  const downloadItem1 = (item, nameWhoOrders, _id, price, value) => {
+    if (userInfo.name !== "администратор") {
       console.log("Скачивание запрещено: аккаунт не админ.");
       if (userInfo.name === "официант") {
         setIsPopupNewOrderOpen(value);
@@ -344,8 +345,36 @@ function App() {
     array.push(" ");
 
     array.push(dateNow);
+    download(array, _id, dateNow, 'printer-kitchen');
+  };
+  const downloadItem = (item, nameWhoOrders, _id, price) => {
+    let itemsArray = [];
+    if (item.foods) {
+      itemsArray = item.foods;
+    } else {
+      itemsArray = item;
+    }
+    let array = [];
+    itemsArray.forEach((item) => {
+      array.push(`${item.name} - ${item.price} рублей`);
+    });
+    array.unshift("  ");
+    array.unshift("Название:     Цена:");
+    array.unshift("  ");
+    array.unshift(nameWhoOrders);
+    array.unshift("  ");
 
-    download(array, _id, dateNow);
+    let date = new Date();
+    let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
+    array.push(" ");
+    array.push(`ИТОГ: ${price} рублей`);
+    array.push(" ");
+    array.push("Подпись официанта ____________");
+    array.push(" ");
+
+    array.push(dateNow);
+
+    download(array, _id, dateNow, 'printer-waiter');
   };
   const createOrder = (nameWhoOrder, foods, price, doneStatus) => {
     orderApi
@@ -372,15 +401,15 @@ function App() {
         item.imageLink,
         id
       )
-      // .then((data) => {
-      //   debugger;
-      //   receiptApi.changePrice(priceReceipt.price + price, id).then(() => {
-      //     receiptApi.findMyReceipt(id).then((data) => {
-      //       setPriceReceipt(data);
-      //       receiptApi.getReceipt();
-      //     });
-      //   });
-      // });
+      .then((data) => {
+        debugger;
+        receiptApi.changePrice(priceReceipt.price + price, id).then(() => {
+          receiptApi.findMyReceipt(id).then((data) => {
+            setPriceReceipt(data);
+            receiptApi.getReceipt();
+          });
+        });
+      });
     });
   };
 

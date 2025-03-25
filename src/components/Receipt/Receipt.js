@@ -6,7 +6,7 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWh
 
   const whatId = () => {
     if (nameWhoOrder === 'Стол 1') {
-      clearReceipt('6568f0ce9925afaa13ad69c6', '6568ef249925afaa13ad69a4')
+      clearReceipt('67e281dc02c1e5788ec5248d', '67dd7549aa2260cba96d58bb')
     } else if (nameWhoOrder === 'Стол 2') {
       clearReceipt('6568f19e9925afaa13ad69f3', '6568ef3a9925afaa13ad69a6')
     } else if (nameWhoOrder === 'admin') {
@@ -53,7 +53,7 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWh
 
     array.push(dateNow);
 
-    download(array, _id, dateNow);
+    download(array, _id, dateNow, 'printer-waiter');
   };
   return (
     <div className="receipt">

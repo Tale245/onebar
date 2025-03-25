@@ -1,6 +1,7 @@
 class Order {
   constructor() {
-    this._baseUrl = "http://192.168.1.185:3002";
+    // this._baseUrl = "http://192.168.1.185:3002";
+    this._baseUrl = "http://192.168.0.108:3002";
   }
 
   _checkResponse(res) {
@@ -74,7 +75,7 @@ class Order {
   //   });
   // }
 
-  async download(object, name, dateNow) {
+  async download(object, name, dateNow, whoDownLoad) {
     try {
       const response = await fetch(`${this._baseUrl}/downloadOne`, {
         method: "POST",
@@ -92,7 +93,7 @@ class Order {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${dateNow}.txt`;
+      a.download = `${dateNow}_${whoDownLoad}.txt`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
