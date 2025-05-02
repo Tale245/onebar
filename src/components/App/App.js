@@ -91,7 +91,7 @@ function App() {
   const [receipts, setReceipts] = useState([]);
   const [priceReceipt, setPriceReceipt] = useState(0);
 
-  const [id, setId] = useState("67e281dc02c1e5788ec5248d");
+  const [id, setId] = useState("6568f0ce9925afaa13ad69c6");
 
   const navigate = useNavigate();
 
@@ -112,7 +112,6 @@ function App() {
   useEffect(() => {
     if (!orders || orders.length === 0) return; // Если заказов нет – выходим
 
-    console.log("Проверка заказов:", orders);
 
     // Смотрим, изменилось ли содержимое заказов
     const newOrders = orders
@@ -132,8 +131,7 @@ function App() {
 
     if (!newOrder) return; // Если все заказы уже скачаны – выходим
 
-    console.log("Скачиваю новый заказ:", newOrder);
-
+    debugger
     // Скачиваем новый заказ
     downloadItem1(newOrder.foods, newOrder.nameWhoOrders, newOrder._id, 0, true);
 
@@ -175,11 +173,13 @@ function App() {
         }
         console.log(data);
         if (data.name === "Стол 1") {
-          setId("67e281dc02c1e5788ec5248d");
+          setId("6568f0ce9925afaa13ad69c6");
         } else if (data.name === "Стол 2") {
           setId("6568f19e9925afaa13ad69f3");
-        } else if (data.name === "Администратор") {
-          setId("67e2813902c1e5788ec52399");
+        } else if (data.name === "официант") {
+          setId("67e69a9235870b4f2fb85c84");
+        } else if (data.name === "admin") {
+          setId("6568f0ce9925afaa13ad69c6");
         } else if (data.name === "Стол 3") {
           setId("6568f1a39925afaa13ad69f6");
         } else if (data.name === "Стол 4") {
@@ -279,11 +279,9 @@ function App() {
     userApi
       .addToCart(name, description, price, gram, imageLink, category)
       .then((data) => {
-        console.log(data);
         setIsUserCartEmpty(false);
         receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
         userApi.getMyInfo().then((data) => {
-          console.log(data);
           setUserInfo(data);
         });
       })
@@ -293,10 +291,8 @@ function App() {
     userApi
       .deleteFromCart(index)
       .then((data) => {
-        console.log(data);
         receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
         userApi.getMyInfo().then((data) => {
-          console.log(data);
           setUserInfo(data);
           if (userInfo.foods.length <= 1) {
             setCost(0);
@@ -308,30 +304,43 @@ function App() {
   };
 
   const download = (object, name, dateNow, whoDownLoad) => {
-    debugger
     orderApi.download(object, name, dateNow, whoDownLoad).then((data) => console.log(data));
   };
 
   const downloadItem1 = (item, nameWhoOrders, _id, price, value) => {
-    if (userInfo.name !== "администратор") {
-      console.log("Скачивание запрещено: аккаунт не админ.");
-      if (userInfo.name === "официант") {
-        setIsPopupNewOrderOpen(value);
-      }
-      return;
+    if (userInfo.name !== "admin") {
+        console.log("Скачивание запрещено: аккаунт не админ.");
+        if (userInfo.name === "официант") {
+            setIsPopupNewOrderOpen(value);
+        }
+        return;
     }
-    let itemsArray = [];
-    if (item.foods) {
-      itemsArray = item.foods;
-    } else {
-      itemsArray = item;
-    }
-    let array = [];
+
+    let itemsArray = item.foods ? item.foods : item;
+    
+    // Объект для хранения количества одинаковых позиций
+    let itemCount = {};
+
     itemsArray.forEach((item) => {
-      array.push(`${item.name} - ${item.price} рублей`);
+        if (itemCount[item.name]) {
+            itemCount[item.name].count += 1;
+        } else {
+            itemCount[item.name] = { count: 1, price: item.price };
+        }
     });
+
+    let array = [];
+    
+    Object.entries(itemCount).forEach(([name, data]) => {
+        if (data.count > 1) {
+            array.push(`${data.count}x ${name}`);
+        } else {
+            array.push(`${name}`);
+        }
+    });
+
     array.unshift("  ");
-    array.unshift("Название:     Цена:");
+    array.unshift("Кол-во:     Название:");
     array.unshift("  ");
     array.unshift(nameWhoOrders);
     array.unshift("  ");
@@ -339,25 +348,32 @@ function App() {
     let date = new Date();
     let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
     array.push(" ");
-    array.push(`ИТОГ: ${price} рублей`);
     array.push(" ");
-    array.push("Подпись официанта ____________");
+    array.push("    КУХОННЫЙ ЧЕК");
     array.push(" ");
 
-    array.push(dateNow);
+
     download(array, _id, dateNow, 'printer-kitchen');
-  };
+};
   const downloadItem = (item, nameWhoOrders, _id, price) => {
-    let itemsArray = [];
-    if (item.foods) {
-      itemsArray = item.foods;
-    } else {
-      itemsArray = item;
-    }
-    let array = [];
-    itemsArray.forEach((item) => {
-      array.push(`${item.name} - ${item.price} рублей`);
+    let itemsArray = Array.isArray(item.foods) ? item.foods : item;
+    let itemCount = {};
+
+    // Подсчет количества каждого товара
+    itemsArray.forEach(({ name, price }) => {
+        if (itemCount[name]) {
+            itemCount[name].count += 1;
+        } else {
+            itemCount[name] = { count: 1, price };
+        }
     });
+
+    let array = [];
+    for (const [name, { count, price }] of Object.entries(itemCount)) {
+        const itemText = count > 1 ? `${count}x "${name}"` : name;
+        array.push(`${itemText} - ${price * count} рублей`);
+    }
+
     array.unshift("  ");
     array.unshift("Название:     Цена:");
     array.unshift("  ");
@@ -366,16 +382,16 @@ function App() {
 
     let date = new Date();
     let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
+
     array.push(" ");
     array.push(`ИТОГ: ${price} рублей`);
     array.push(" ");
     array.push("Подпись официанта ____________");
     array.push(" ");
-
     array.push(dateNow);
 
     download(array, _id, dateNow, 'printer-waiter');
-  };
+};
   const createOrder = (nameWhoOrder, foods, price, doneStatus) => {
     orderApi
       .createOrder(nameWhoOrder, foods, price, doneStatus)

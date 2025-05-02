@@ -1,14 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Receipt.css";
 
 const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWhoOrder, owner }) => {
 
+  const [groupedFoods, setGroupedFoods] = useState([]);
+
+  useEffect(() => {
+    const groupFoods = (foods) => {
+      let itemCount = {};
+
+      // Подсчет одинаковых позиций
+      foods.forEach((item) => {
+        if (itemCount[item.name]) {
+          itemCount[item.name].count += 1;
+        } else {
+          itemCount[item.name] = { count: 1 };
+        }
+      });
+
+      // Формируем новый массив
+      return Object.entries(itemCount).map(([name, data]) => 
+        data.count > 1 ? `${data.count}x ${name} `: name
+      );
+    };
+
+    setGroupedFoods(groupFoods(foods));
+  }, [foods]); // Вызываем эффект при изменении
+
   const whatId = () => {
     if (nameWhoOrder === 'Стол 1') {
-      clearReceipt('67e281dc02c1e5788ec5248d', '67dd7549aa2260cba96d58bb')
+      clearReceipt('6568f0ce9925afaa13ad69c6', '6568ef249925afaa13ad69a4')
     } else if (nameWhoOrder === 'Стол 2') {
       clearReceipt('6568f19e9925afaa13ad69f3', '6568ef3a9925afaa13ad69a6')
+    } else if (nameWhoOrder === 'Официант') {
+      clearReceipt('67e69a9235870b4f2fb85c84', '6568ef019925afaa13ad69a2')
     } else if (nameWhoOrder === 'admin') {
       clearReceipt('6568f1a39925afaa13ad69f6', '6568ee919925afaa13ad699f')
     } else if (nameWhoOrder === 'Стол 3') {
@@ -33,10 +59,26 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWh
   }
   const downloadItem = () => {
     let array = [];
+    let itemCount = {};
+
+    // Подсчитываем количество одинаковых позиций
     item.foods.forEach((item) => {
-      array.push(`${item.name} - ${item.price} рублей`);
+        if (itemCount[item.name]) {
+            itemCount[item.name].count += 1;
+        } else {
+            itemCount[item.name] = { count: 1, price: item.price };
+        }
     });
-    console.log(array);
+
+    // Формируем чек с учетом количества позиций
+    Object.entries(itemCount).forEach(([name, data]) => {
+        if (data.count > 1) {
+            array.push(`${data.count}x ${name} - ${data.price * data.count} рублей`);
+        } else {
+            array.push(`${name} - ${data.price} рублей`);
+        }
+    });
+
     array.unshift("  ");
     array.unshift("Название:     Цена:");
     array.unshift("  ");
@@ -45,22 +87,22 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWh
 
     let date = new Date();
     let dateNow = date.toLocaleString("en-US", { timeZone: "Europe/Moscow" });
+
     array.push(" ");
     array.push(`ИТОГ: ${price} рублей`);
     array.push(" ");
     array.push("Подпись официанта ____________");
     array.push(" ");
-
     array.push(dateNow);
 
     download(array, _id, dateNow, 'printer-waiter');
-  };
+};
   return (
     <div className="receipt">
       <h1 className="receipt__client">{name}</h1>
-      {foods.map((item) => (
+      {groupedFoods.map((item) => (
         <p className="receipt__food-name">
-          {item.name} - {item.price}руб
+          {item}
         </p>
       ))}
       <h4 className="receipt__price">Общая цена: {price}</h4>

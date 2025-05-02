@@ -134,7 +134,7 @@ const FoodCard = ({
   };
   useEffect(() => {
     whatDate();
-    setInterval(() => {}, 21600000);
+    setInterval(() => { }, 21600000);
   }, []);
 
   let category;
@@ -297,26 +297,26 @@ const FoodCard = ({
   };
 
   const imagePath = require(`../../imageForMenu/${img}`);
-  const whatPrice =
-    (Mon === true && hookahsBtnValue === true) ||
-    (Tue === true && hookahsBtnValue === true) ||
-    (Wed === true && hookahsBtnValue === true) ||
-    (Thu === true && hookahsBtnValue === true)
-      ? `${price}р`
-      : `${priceRelax}р`;
+  // const whatPrice =
+  //   (Mon === true && hookahsBtnValue === true) ||
+  //   (Tue === true && hookahsBtnValue === true) ||
+  //   (Wed === true && hookahsBtnValue === true) ||
+  //   (Thu === true && hookahsBtnValue === true)
+  //     ? `${price}р`
+  //     : `${priceRelax}р`;
 
-      let hide
-      let zeroHide
+  let hide
+  let zeroHide
 
-      if(itemHide && userInfo.name === 'admin'){
-        hide = true
-      } else if(itemHide && userInfo.name !== 'admin'){
-        zeroHide = true
-      }
+  if (itemHide && userInfo.name === 'admin' || itemHide && userInfo.name === 'официант') {
+    hide = true
+  } else if (itemHide && userInfo.name !== 'admin' || itemHide && userInfo.name !== 'официант') {
+    zeroHide = true
+  }
 
   return (
     <div
-      className={`foodCard ${hide ? 'foodCard_hide': '' } ${zeroHide && userInfo.name !== 'администратор' ? 'foodCard_hide-zero': '' }`}
+      className={`foodCard ${hide ? 'foodCard_hide' : ''} ${zeroHide && userInfo.name !== 'администратор' || zeroHide && userInfo.name !== 'официант' ? 'foodCard_hide-zero' : ''}`}
     >
       <img
         className="foodCard__image"
@@ -328,9 +328,7 @@ const FoodCard = ({
         {" "}
         <h3 className="foodCard__title">{title}</h3>
         <h4 className="foodCard__price">
-          {hookahsBtnValue === true && btnBar === true
-            ? `${whatPrice}`
-            : `${price}р`}
+          {`${price}р`}
         </h4>
       </div>
       <div className="foodCard__description-container">
@@ -341,19 +339,18 @@ const FoodCard = ({
       </div>
       {userInfo.waiter === false && (
         <button
-          className={`foodCard__btn-add ${
-            (cart || userInfo.admin === true) && "foodCard__btn-trash"
-          }`}
+          className={`foodCard__btn-add ${(cart || userInfo.admin === true) && "foodCard__btn-trash"
+            }`}
           onClick={cart ? findIndex : onClickCard}
         ></button>
       )}
-      {userInfo.admin === true && (
+      {userInfo.admin === true || userInfo.name === 'официант' && (
         <button
           className={`foodCard__btn-change`}
           onClick={openPopupChangeValue}
         ></button>
       )}
-      {userInfo.admin === true && (
+      {userInfo.admin === true || userInfo.name === 'официант' && (
         <button
           className={`foodCard__btn-hide`}
           onClick={openPopupChangeHideValue}

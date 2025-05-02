@@ -1,14 +1,18 @@
 class UserApi {
   constructor() {
     // this._baseUrl = "http://192.168.1.185:3002";
-    this._baseUrl = "http://192.168.0.108:3002";
+    this._baseUrl = "http://192.168.1.117:3002";
+
+    // this._baseUrl = "http://192.168.0.108:3002";
   }
 
   _checkResponse(res) {
     if (res.ok) {
+
       return res.json();
     } else {
-      window.location.reload();
+      debugger
+      // window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
@@ -40,6 +44,7 @@ class UserApi {
   }
 
   addToCart(name, description, price, gram, imageLink, category) {
+    debugger
     return fetch(`${this._baseUrl}/user/cards`, {
       method: "POST",
       headers: {

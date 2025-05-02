@@ -1,14 +1,18 @@
 class Food {
   constructor() {
     // this._baseUrl = "http://192.168.1.185:3002";
-    this._baseUrl = "http://192.168.0.108:3002";
+    this._baseUrl = "http://192.168.1.117:3002";
+
+    // this._baseUrl = "http://192.168.0.108:3002";
   }
 
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
     } else {
-      window.location.reload();
+      debugger
+      // window.location.reload();
+      debugger
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }

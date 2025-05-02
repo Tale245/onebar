@@ -39,9 +39,9 @@ const PopupAddItem = ({
       );
     }
 
-    closePopups();
+    // closePopups();
 
-    reset();
+    // reset();
   };
 
   return (
