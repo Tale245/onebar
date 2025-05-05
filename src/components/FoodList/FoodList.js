@@ -51,7 +51,6 @@ const FoodList = ({
   openPopupChangeInfo
 }) => {
 
-  console.log('foodArrayInFoodList', foodArray)
   let valueArray = foodArray;
   let title = "";
   const whatValue = () => {
@@ -159,7 +158,7 @@ const FoodList = ({
 
   return (
     <div className="foodList">
-      <h1 className="foodList__title">{title}</h1>
+      <h1 className={`foodList__title ${btnBar === true && 'foodList__title_bar'}`}>{title}</h1>
       <div className="foodList__container">
         {valueArray &&
           valueArray.map((item) => (

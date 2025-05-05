@@ -12,7 +12,6 @@ const UserCard = ({ userName, userLimit, id, changeLimit }) => {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
-    console.log(data);
     changeLimit(data.limit, id);
     reset();
   };

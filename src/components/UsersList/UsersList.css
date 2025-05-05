@@ -9,8 +9,8 @@
 .userList__title {
   margin: 0;
   text-align: center;
-  color: #fff;
-
+  color: #ff2a70;
+  text-shadow: 0 0 4px #ff2a70;
   font-family: Inter;
   font-size: 30px;
   font-style: normal;

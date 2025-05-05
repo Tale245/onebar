@@ -5,49 +5,99 @@
   width: 270px;
   height: 220px;
   position: relative;
+  overflow: hidden;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+  /* Градиентная рамка + свечение */
+  border: 2px solid transparent;
+  border-image: linear-gradient(to right, #00b7ff, #ff2a70) 1;
+  box-shadow: 0 0 10px #00b7ff, 0 0 20px #ff2a70;
 }
+
 .foodCard:hover {
   cursor: pointer;
+  transform: scale(1.02);
+  box-shadow: 0 0 15px #ff2a70, 0 0 25px #00b7ff;
 }
+
+/* Вспышка при клике */
+.foodCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.foodCard:active::after {
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+
+.foodCard:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 20px #00b7ff, 0 0 30px #ff2a70;
+}
+
+/* --- Внутренности карточки --- */
+
+.foodCard__overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.15);
+  inset: 0;
+  z-index: 10;
+  transition: background-color 300ms ease-in-out;
+}
+
+.foodCard__overlay:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .foodCard__image {
-  margin: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.7;
-  transition: opacity 200ms ease-in-out;
-
   object-fit: cover;
+  transition: opacity 200ms ease-in-out;
 }
-.foodCard__image:hover {
-  opacity: 0.5;
-}
+
 .foodCard__text-container {
   margin: 0 auto;
+  height: 20px;
+  padding-bottom: 10px;
   text-wrap: nowrap;
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.349);
+  background-color: rgba(0, 0, 0, 0.596);
   position: absolute;
   left: 0px;
   right: 0px;
-  bottom: 35px;
+  bottom: 54px;
+  z-index: 16;
 }
+
 .foodCard__description-container {
   margin: 0;
-  margin-bottom: 20px;
-  height: 22%;
   display: flex;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.349);
+  background-color: rgba(0, 0, 0, 0.637);
   position: absolute;
   left: 0px;
   right: 0px;
   bottom: 0px;
+  z-index: 16;
 }
-.foodCard__title {
+
+.foodCard__title,
+.foodCard__price {
   margin: 0;
   margin-left: 8px;
-  margin-bottom: 35px;
+  margin-right: 8px;
+  margin-bottom: 40px;
   max-width: 220px;
   color: #fff;
 
@@ -57,105 +107,71 @@
   font-weight: 500;
   line-height: normal;
 }
-.foodCard__price {
-  margin: 0;
-  margin-right: 8px;
-  color: #fff;
 
-  font-family: Inter;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-.foodCard__description {
-  margin: 0;
-  margin-bottom: 5px;
-  margin-left: 8px;
-  color: rgba(255, 255, 255, 0.9);
-
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
+.foodCard__description,
 .foodCard__gram {
   margin: 0;
   margin-left: 8px;
-  margin-bottom: 5px;
-  left: 8px;
-  bottom: 3px;
-  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+  color: #fff;
 
   font-family: Inter;
-  font-size: 12px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
-.foodCard__btn-add {
-  margin: 0;
+
+/* Кнопки */
+.foodCard__btn-add,
+.foodCard__btn-change,
+.foodCard__btn-hide {
   position: absolute;
+  width: 22px;
+  height: 22px;
+  background: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  transition: opacity 200ms ease-in-out;
+}
+
+.foodCard__btn-add {
   right: 5px;
   top: 6px;
-  width: 20px;
-  height: 20px;
-  background: none;
-  background-repeat: no-repeat;
-  background-size: contain;
-  border: none;
-  background-image: url("../../images/add-ico.svg");
-  cursor: pointer;
-  transition: opacity 200ms ease-in-out;
+  background-image: url("../../images/add-ico.png");
+  z-index: 20;
 }
+
 .foodCard__btn-change {
-  margin: 0;
-  position: absolute;
-  z-index: 10;
   left: 5px;
   top: 6px;
-  width: 20px;
-  height: 20px;
-  background: none;
-  background-repeat: no-repeat;
-  background-size: contain;
-  border: none;
   background-image: url("../../images/Complete.svg");
-  cursor: pointer;
-  transition: opacity 200ms ease-in-out;
+  z-index: 20;
 }
-.foodCard__btn-change:hover {
-  opacity: 0.8;
-}
-.foodCard__btn-trash {
-  background-image: url("../../images/btn-trash.svg");
-}
-.foodCard__btn-add:hover {
-  opacity: 0.8;
-}
+
 .foodCard__btn-hide {
-  margin: 0;
-  position: absolute;
-  z-index: 10;
   left: 5px;
   top: 65px;
   width: 25px;
   height: 25px;
-  background: none;
-  background-repeat: no-repeat;
-  background-size: contain;
-  border: none;
-  background-image: url("../../images/hide-svgrepo-com\ 1.svg");
-  cursor: pointer;
-  transition: opacity 200ms ease-in-out;
+  background-image: url("../../images/hide-svgrepo-com 1.svg");
+  z-index: 20;
 }
+
+.foodCard__btn-add:hover,
+.foodCard__btn-change:hover,
 .foodCard__btn-hide:hover {
   opacity: 0.8;
+  z-index: 20;
 }
-.foodCard_hide{
-  opacity: .5;
+
+/* Состояния */
+.foodCard_hide {
+  opacity: 0.5;
 }
-.foodCard_hide-zero{
+
+.foodCard_hide-zero {
   display: none;
 }

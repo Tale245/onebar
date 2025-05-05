@@ -6,6 +6,7 @@
   align-items: center;
   gap: 22px;
 }
+
 .foodList__container {
   margin: 0;
   display: flex;
@@ -15,9 +16,13 @@
   row-gap: 16px;
   column-gap: 32px;
 }
+
 .foodList__title {
   margin: 0 auto;
-  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #ff2a70;
+  text-shadow: 0 0 3px #ff2a70;
 
   font-family: Inter;
   font-size: 35px;
@@ -25,6 +30,12 @@
   font-weight: 400;
   line-height: normal;
 }
+
+.foodList__title_bar {
+  color: #00b7ff;
+  text-shadow: 0 0 3px #00b7ff;
+}
+
 .foodList__popup-open {
   margin: 0;
   position: absolute;

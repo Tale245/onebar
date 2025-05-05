@@ -13,7 +13,7 @@ const Orders = ({
   userInfo,
   downloadItem,
 }) => {
-console.log(orders)
+  console.log(orders)
   const selectOrdersBtn = () => {
     setBtnOrders(true);
     setBtnHistoryOrders(false);
@@ -30,30 +30,39 @@ console.log(orders)
     ordersNew.push(element);
   });
 
+  const filteredOrders = whatArray.filter((order) => {
+    const name = order.nameWhoOrders?.toLowerCase().trim() || '';
+    const user = userInfo.name.toLowerCase();
+
+    const isNeonTable = name.includes('neon');
+
+    if (user === 'admin') return true;
+    if (user === 'neon') return isNeonTable;
+    return !isNeonTable;
+  });
+
   return (
     <section className="orders">
       <div className="orders__container">
         <h1 className="orders__title">Заказы</h1>
         <div className="orders__btns">
           <button
-            className={`orders__btn-food ${
-              btnOrders && "orders__btn-food_active"
-            }`}
+            className={`orders__btn-food ${btnOrders && "orders__btn-food_active"
+              }`}
             onClick={selectOrdersBtn}
           >
             Заказы
           </button>
           <button
-            className={`orders__btn-food ${
-              btnHistoryOrders && "orders__btn-food_active"
-            }`}
+            className={`orders__btn-food ${btnHistoryOrders && "orders__btn-food_active"
+              }`}
             onClick={selectHistoryOrdersBtn}
           >
             История заказов
           </button>
         </div>
         <div className="orders__list">
-          {whatArray.reverse().map((item) => (
+          {filteredOrders.reverse().map((item) => (
             <Order
               nameWhoOrders={item.nameWhoOrders}
               price={item.price}

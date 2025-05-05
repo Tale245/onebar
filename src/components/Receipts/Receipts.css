@@ -2,10 +2,12 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  gap: 50px;
 }
 .receipts__title {
   margin: 0 auto;
   margin-top: 40px;
-  color: #fff;
+  color: #ff2a70;
+  text-shadow: 0 0 4px #ff2a70;
   font-family: inter, Arial, Helvetica, sans-serif;
 }

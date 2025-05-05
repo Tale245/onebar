@@ -1,94 +1,168 @@
-/* фон скроллбара */
-::-webkit-scrollbar{
-  background-color: #00000000;
+/* Скроллбар */
+::-webkit-scrollbar {
+  width: 8px;
 }
-/* Кнопка скроллбара */
-::-webkit-scrollbar-button{
-  background-color: #00000000;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
-/* пустое пространство под скроллбаром */
-::-webkit-scrollbar-track{
-  background-color: #00000000;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ff2a70, #00b7ff);
+  border-radius: 10px;
+  box-shadow:
+    0 0 5px #ff2a70,
+    0 0 10px #00b7ff;
 }
-/* фон скроллбара */
-.navLinks ::-webkit-scrollbar-thumb{
-  background-color: #f83434;
-}
-.navLinks_bar ::-webkit-scrollbar-thumb{
-  background-color: #4da4c7;
-}
+/* Обёртка меню */
 .navLinks {
-  margin: 0;
   position: sticky;
-  top:150px;
+  top: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 20px;
 }
+
+/* Контейнер меню */
 .navLinks__container {
-  margin: 0 auto;
-  height: 500px;
-  overflow: auto;
-  display: inline-block;
-  flex-direction: column;
-  justify-content: center;
+  margin: 0;
+  max-width: 90%;
+  display: flex;
+  gap: 15px;
   align-items: center;
+  overflow: auto;
+  flex-wrap: nowrap;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding-top: 5px;
+  padding-bottom: 3px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 10px rgba(0, 183, 255, 0.5);
+  border-image: linear-gradient(to right, #ff2a70, #00b7ff) 1;
+  overflow-x: auto; /* включаем горизонтальный скролл */
+  --scrollbar-height: thin;
 }
+/* Стили горизонтальной полосы прокрутки */
+.navLinks__container::-webkit-scrollbar {
+  height: 5px; /* высота нижнего скроллбара */
+}
+
+.navLinks__container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.navLinks__container::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #ff2a70, #00b7ff);
+  border-radius: 10px;
+  box-shadow:
+    0 0 5px #ff2a70,
+    0 0 10px #00b7ff;
+}
+/* Отключение скроллбара */
+/* .navLinks__container::-webkit-scrollbar {
+  display: none;
+}  */
+
+/* Кнопки меню */
 .navLinks__btn {
   margin: 0;
-  margin-right: 5px;
-  width: 205px;
-  min-height: 100px;
-  display: flex;
-  text-decoration: none;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  border-bottom: 1px solid #7a7a7a65;
-  color: #fff;
+  min-width: 150px;
+  height: 60px;
+  margin: 8px 10px;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-  transition: opacity 200ms ease-in-out;
+  font-weight: 400;
+  color: #dcdcdc;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding-left: 10px;
+  position: relative;
+  transition: 0.3s ease;
 }
+
 .navLinks__btn:hover {
+  color: #ffffff;
+  text-shadow: 0 0 6px #ffffff;
   cursor: pointer;
 }
+
+/* Активный пункт */
 .navLinks__btn_active {
-  background-color: #f83434;
+  color: #ff2a70;
+  background: rgba(255, 42, 112, 0.1);
+  text-shadow: 0 0 8px #ff2a70;
+  border-left: 3px solid #ff2a70;
+  box-shadow: inset 5px 0 20px rgba(255, 42, 112, 0.4);
 }
 .navLinks__btn_activeBar {
-  background-color: #4da4c7;
+  color: #00b7ff;
+  background: rgba(0, 183, 255, 0.2);;
+  text-shadow: 0 0 8px #00b7ff;
+  border-left: 3px solid #00b7ff;
+  box-shadow: inset 5px 0 20px rgba(0, 183, 255, 0.2);;
 }
+
+/* Верхние кнопки: "Еда" и "Напитки" */
 .navLinks__btns {
-  margin: 0;
-  margin-bottom: 10px;
   display: flex;
   gap: 10px;
+  margin-bottom: 15px;
 }
+
 .navLinks__btn-food {
-  margin: 0;
-  min-width: 70px;
-  height: 30px;
-  background: none;
-  border: none;
-  background-color: #000000;
-  border: 1px solid #d82e2e;
-  color: #fff;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  background: transparent;
+  border: 2px solid #ff2a70;
+  transition: 0.3s ease;
 }
+
 .navLinks__btn-food:last-of-type {
-  border: 1px solid #4da4c7;
+  border-color: #00b7ff;
 }
-.navLinks__btn-food:hover {
-  cursor: pointer;
-}
+
 .navLinks__btn-food_active {
-  opacity: 0.7;
+  background: rgba(255, 42, 112, 0.2);
+  box-shadow: 0 0 8px #ff2a70;
+  color: #ffffff;
+  text-shadow: 0 0 6px #ff2a70;
+}
+
+.navLinks__btn-food:last-of-type.navLinks__btn-food_active {
+  background: rgba(0, 183, 255, 0.2);
+  box-shadow: 0 0 8px #00b7ff;
+  color: #ffffff;
+  text-shadow: 0 0 6px #00b7ff;
+}
+
+/* Адаптив до 768px */
+@media (max-width: 768px) {
+  .navLinks__container {
+    width: 90%;
+    height: auto;
+    max-height: 400px;
+    padding: 10px 0;
+  }
+
+  .navLinks__btn {
+    width: 100%;
+    font-size: 18px;
+    height: 50px;
+    padding-left: 15px;
+  }
+
+  .navLinks__btns {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .navLinks__btn-food {
+    width: 80%;
+    font-size: 15px;
+    text-align: center;
+  }
 }

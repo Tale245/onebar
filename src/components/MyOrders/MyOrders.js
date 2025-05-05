@@ -14,8 +14,9 @@ const MyOrders = ({ orders, userInfo }) => {
 
   console.log(array);
   return (
-    <section className="myOrder">
-      <div className="myOrder__container">
+    <section className="myOrders">
+      <h1 className="myOrders__title">Мои заказы</h1>
+      <div className="myOrders__container">
         {array.reverse().map((item) => (
           <MyOrder
             itemFood={item.foods}

@@ -681,25 +681,22 @@ const NavLinks = ({
   };
   return (
     <section
-      className={`navLinks ${
-        btnFood
+      className={`navLinks ${btnFood
           ? "navLinks ::-webkit-scrollbar-thumb"
           : "navLinks_bar ::-webkit-scrollbar-thumb"
-      }`}
+        }`}
     >
       <div className="navLinks__btns">
         <button
-          className={`navLinks__btn-food ${
-            btnFood && "navLinks__btn-food_active"
-          }`}
+          className={`navLinks__btn-food ${btnFood && "navLinks__btn-food_active"
+            }`}
           onClick={selectMenuFood}
         >
           Еда
         </button>
         <button
-          className={`navLinks__btn-food ${
-            btnBar && "navLinks__btn-food_active"
-          }`}
+          className={`navLinks__btn-food ${btnBar && "navLinks__btn-food_active"
+            }`}
           onClick={selectMenuBar}
         >
           Напитки
@@ -708,73 +705,64 @@ const NavLinks = ({
       {btnFood === true && (
         <nav className="navLinks__container">
           <button
-            className={`navLinks__btn ${
-              coldSnacksBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${coldSnacksBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changeColdSnacksValue}
           >
             Холодные закуски
           </button>
           <button
-            className={`navLinks__btn ${
-              iceCreamBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${iceCreamBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changeIceCreamValue}
           >
             Мороженое
           </button>
           <button
-            className={`navLinks__btn ${
-              soupsBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${soupsBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changeSoupsValue}
           >
             Супы
           </button>
           <button
-            className={`navLinks__btn ${
-              pizzaBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${pizzaBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changePizzaValue}
           >
             Пицца
           </button>
           <button
-            className={`navLinks__btn ${
-              snacksBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${snacksBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changeSnacksValue}
           >
             Снэки
           </button>
           <button
-            className={`navLinks__btn ${
-              saladsBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${saladsBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changeSaladsValue}
           >
             Салаты
           </button>
           <button
-            className={`navLinks__btn ${
-              pastesBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${pastesBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changePastesValue}
           >
             Пасты
           </button>
           <button
-            className={`navLinks__btn ${
-              beerSnacksBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${beerSnacksBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changeBeerSnacksValue}
           >
             Закуски к пиву
           </button>
           <button
-            className={`navLinks__btn ${
-              hotDishesBtnValue && "navLinks__btn_active"
-            }`}
+            className={`navLinks__btn ${hotDishesBtnValue && "navLinks__btn_active"
+              }`}
             onClick={changeHotDishesValue}
           >
             Горячие блюда
@@ -784,169 +772,148 @@ const NavLinks = ({
       {btnBar === true && (
         <nav className="navLinks__container">
           <button
-            className={`navLinks__btn ${
-              cigarettesBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${cigarettesBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeCigarettesValue}
           >
             Сигареты
           </button>
           <button
-            className={`navLinks__btn ${
-              hookahsBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${hookahsBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeHookahsValue}
           >
             Кальяны
           </button>
           <button
-            className={`navLinks__btn ${
-              juiceBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${juiceBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeJuiceValue}
           >
             Сок
           </button>
           <button
-            className={`navLinks__btn ${
-              coffeesBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${coffeesBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeCoffeeValue}
           >
             Кофе
           </button>
           <button
-            className={`navLinks__btn ${
-              teaBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${teaBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeTeaValue}
           >
             Чай
           </button>
           <button
-            className={`navLinks__btn ${
-              wineBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${wineBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeWineValue}
           >
             Вино
           </button>
           <button
-            className={`navLinks__btn ${
-              bottledBeerBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${bottledBeerBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeBottledBeerValue}
           >
             Пиво бутылочное
           </button>
           <button
-            className={`navLinks__btn ${
-              champagneBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${champagneBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeChampagneValue}
           >
             Шампанское
           </button>
           <button
-            className={`navLinks__btn ${
-              vermouthBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${vermouthBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeVermouthValue}
           >
             Вермут
           </button>
           <button
-            className={`navLinks__btn ${
-              aperativesBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${aperativesBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeAperativesValue}
           >
             Аперативы
           </button>
           <button
-            className={`navLinks__btn ${
-              rumBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${rumBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeRumValue}
           >
             Ром
           </button>
           <button
-            className={`navLinks__btn ${
-              cognacBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${cognacBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeCognacValue}
           >
             Коньяк
           </button>
           <button
-            className={`navLinks__btn ${
-              brandyBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${brandyBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeBrandyValue}
           >
             Бренди
           </button>
           <button
-            className={`navLinks__btn ${
-              whiskeyBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${whiskeyBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeWhiskeyValue}
           >
             Виски
           </button>
           <button
-            className={`navLinks__btn ${
-              ginBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${ginBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeGinValue}
           >
             Джин
           </button>
           <button
-            className={`navLinks__btn ${
-              tequilaBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${tequilaBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeTequilaValue}
           >
             Текила
           </button>
           <button
-            className={`navLinks__btn ${
-              tincturesBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${tincturesBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeTincturesValue}
           >
             Настойки
           </button>
           <button
-            className={`navLinks__btn ${
-              vodkaBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${vodkaBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeVodkaValue}
           >
             Водка
           </button>
           <button
-            className={`navLinks__btn ${
-              liqueursBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${liqueursBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeLiqueursValue}
           >
             Ликеры
           </button>
           <button
-            className={`navLinks__btn ${
-              cocktailsBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${cocktailsBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeCocktailsValue}
           >
             Коктейли
           </button>
           <button
-            className={`navLinks__btn ${
-              shotsBtnValue && "navLinks__btn_activeBar"
-            }`}
+            className={`navLinks__btn ${shotsBtnValue && "navLinks__btn_activeBar"
+              }`}
             onClick={changeShotsValue}
           >
             Шоты

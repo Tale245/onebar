@@ -1,8 +1,6 @@
 .main {
   margin: 0;
   position: relative;
-  display: flex;
-  align-items: flex-start;
   padding-top: 30px;
 }
 .main__container {

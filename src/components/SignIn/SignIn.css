@@ -5,7 +5,7 @@
 }
 .signin__title {
   margin: 0 auto;
-  color: #ffc37f;
+  color: #7fccff;
 
   font-family: Inter;
   font-size: 30px;
@@ -32,6 +32,6 @@
   height: 35px;
   border: none;
   background: none;
-  border: 1px solid #ffc37f;
-  color: #ffc37f;
+  border: 1px solid #f84343;
+  color: #f84343;
 }

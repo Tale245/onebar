@@ -56,7 +56,6 @@ const FoodCard = ({
   openPopupChangeInfo,
   itemHide,
 }) => {
-  console.log("foodArrayInFoodCard", foodCategory);
   const [Mon, setMon] = useState(false);
   const [Tue, setTue] = useState(false);
   const [Wed, setWed] = useState(false);
@@ -265,9 +264,8 @@ const FoodCard = ({
         thisGram = gram;
       }
       addToCart(title, description, price, thisGram, img, foodCategory);
-      debugger;
+
     } else if (userInfo.admin === true) {
-      console.log("индекс этой карточки:", thisCard);
       if (btnBar === true) {
         try123(thisCard, category);
       } else {
@@ -318,11 +316,12 @@ const FoodCard = ({
     <div
       className={`foodCard ${hide ? 'foodCard_hide' : ''} ${zeroHide && userInfo.name !== 'администратор' || zeroHide && userInfo.name !== 'официант' ? 'foodCard_hide-zero' : ''}`}
     >
+      <div className="foodCard__overlay" onClick={cart ? findIndex : onClickCard}></div>
       <img
         className="foodCard__image"
         src={imagePath}
         alt={title}
-        onClick={cart ? findIndex : onClickCard}
+
       />
       <div className="foodCard__text-container">
         {" "}

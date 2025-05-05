@@ -1,9 +1,8 @@
 class Order {
   constructor() {
     // this._baseUrl = "http://192.168.1.185:3002";
-    this._baseUrl = "http://192.168.1.117:3002";
-
-    // this._baseUrl = "http://192.168.0.108:3002";
+    // this._baseUrl = "http://192.168.1.117:3002";
+    this._baseUrl = "http://192.168.0.108:3002";
   }
 
   _checkResponse(res) {
@@ -11,7 +10,7 @@ class Order {
 
       return res.json();
     } else {
-      debugger
+
       window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
@@ -33,7 +32,7 @@ class Order {
   // Создаем заказ
 
   createOrder(nameWhoOrders, foods, price, doneStatus) {
-    debugger
+
     return fetch(`${this._baseUrl}/createOrder`, {
       method: "POST",
       headers: {
@@ -64,20 +63,6 @@ class Order {
       return this._checkResponse(res);
     });
   }
-  // downLoad(object) {
-  //   return fetch(`${this._baseUrl}/download`, {
-  //     method: "POST",
-  //     headers: {
-  //       authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       data: object,
-  //     }),
-  //   }).then((res) => {
-  //     return this._checkResponse(res);
-  //   });
-  // }
 
   async download(object, name, dateNow, whoDownLoad) {
     try {

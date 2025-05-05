@@ -11,7 +11,8 @@
   margin: 0;
   margin-top: 59px;
   text-align: center;
-  color: #ffffff;
+  color: #ff2a70;
+  text-shadow: 0 0 4px #ff2a70;
 
   font-family: Inter;
   font-size: 30px;
@@ -28,25 +29,31 @@
 }
 .orders__btn-food {
   margin: 0;
-  min-width: 70px;
-  height: 30px;
-  background: none;
-  border: none;
-  background-color: #000000;
-  border: 1px solid #d82e2e;
-  color: #fff;
-  font-family: Inter;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
+  min-width: 100px;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  background: transparent;
+  border: 2px solid #ff2a70;
+  transition: 0.3s ease;
 }
 .orders__btn-food:last-of-type {
-  border: 1px solid #2ea2d8;
+  border-color: #00b7ff;
 }
 .orders__btn-food:hover {
   cursor: pointer;
 }
 .orders__btn-food_active {
-  opacity: 0.7;
+  background: rgba(255, 42, 112, 0.2);
+  box-shadow: 0 0 8px #ff2a70;
+  color: #ffffff;
+  text-shadow: 0 0 6px #ff2a70;
+}
+.orders__btn-food:last-of-type.orders__btn-food_active {
+  background: rgba(0, 183, 255, 0.2);
+  box-shadow: 0 0 8px #00b7ff;
+  color: #ffffff;
+  text-shadow: 0 0 6px #00b7ff;
 }

@@ -17,7 +17,6 @@ import MyOrders from "../MyOrders/MyOrders";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import PopupConfirm from "../PopupConfirm/PopupConfirm";
 import receiptApi from "../../utils/ReceiptApi";
-import Receipt from "../Receipt/Receipt";
 import Receipts from "../Receipts/Receipts";
 import PopupNewOrder from "../PopupNewOrder/PopupNewOrder";
 import PopupChangeInfo from "../PopupChangeInfo/PopupChangeInfo";
@@ -129,6 +128,7 @@ function App() {
       (order) => !downloadedOrders.current.has(order._id)
     );
 
+
     if (!newOrder) return; // Если все заказы уже скачаны – выходим
 
     debugger
@@ -160,7 +160,7 @@ function App() {
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
     if (isLoggedIn) {
-      userApi.getUsers().then((data) => setUserList(data));
+      userApi.getUsers().then((data) => setUserList(data)).catch((e) => console.log(e))
       userApi.getMyInfo().then((data) => {
         setDataLoad(true);
         setUserInfo(data);
@@ -172,58 +172,51 @@ function App() {
           setIsUserCreateOrder(false);
         }
         console.log(data);
-        if (data.name === "Стол 1") {
-          setId("6568f0ce9925afaa13ad69c6");
-        } else if (data.name === "Стол 2") {
-          setId("6568f19e9925afaa13ad69f3");
-        } else if (data.name === "официант") {
-          setId("67e69a9235870b4f2fb85c84");
-        } else if (data.name === "admin") {
-          setId("6568f0ce9925afaa13ad69c6");
-        } else if (data.name === "Стол 3") {
-          setId("6568f1a39925afaa13ad69f6");
-        } else if (data.name === "Стол 4") {
-          setId("6568f1a69925afaa13ad69fc");
-        } else if (data.name === "Стол 5") {
-          setId("6568f1a89925afaa13ad69ff");
-        } else if (data.name === "Стол 6") {
-          setId("6568f1aa9925afaa13ad6a02");
-        } else if (data.name === "Стол 7") {
-          setId("6568f1ac9925afaa13ad6a05");
-        } else if (data.name === "Стол 8") {
-          setId("6568f1b29925afaa13ad6a0b");
-        } else if (data.name === "Стол 9") {
-          setId("6568f1b49925afaa13ad6a0e");
-        } else if (data.name === "Стол 10") {
-          setId("6568f1b69925afaa13ad6a11");
-        } else if (data.name === "Стол 11") {
-          setId("6568f1b99925afaa13ad6a17");
+        const nameToTableId = {
+          "Стол 1": "68178006cf0d216bc5fdfc46",
+          "Стол 2": "6568f19e9925afaa13ad69f3",
+          "официант": "67e69a9235870b4f2fb85c84",
+          "Neon": "681782cecf0d216bc5fe1aed",
+          "admin": "6568f0ce9925afaa13ad69c6",
+          "Стол 3": "6568f1a39925afaa13ad69f6",
+          "Стол 4": "6568f1a69925afaa13ad69fc",
+          "Стол 5": "6568f1a89925afaa13ad69ff",
+          "Стол 6": "6568f1aa9925afaa13ad6a02",
+          "Стол 7": "6568f1ac9925afaa13ad6a05",
+          "Стол 8": "6568f1b29925afaa13ad6a0b",
+          "Стол 9": "6568f1b49925afaa13ad6a0e",
+          "Стол 10": "6568f1b69925afaa13ad6a11",
+          "Стол 11": "6568f1b99925afaa13ad6a17"
+        };
+
+        const tableId = nameToTableId[data.name];
+        if (tableId) {
+          setId(tableId);
         }
-      });
+      }).catch((e) => console.log(e))
       food.getFoods().then((data) => {
         setFoodMenu(data);
         setColdSnacksBtnValue(true);
-      });
+      }).catch((e) => console.log(e))
       food.getFoodBar().then((data) => {
         setFoodMenuBar(data);
         setCigarettesBtnValue(true);
-      });
+      }).catch((e) => console.log(e))
       orderApi.getOrders().then((data) => {
         setOrders(data);
-      });
+      }).catch((e) => console.log(e))
       receiptApi.getReceipt().then((data) => {
-        debugger
         setReceipts(data);
-      });
-      // receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
+      }).catch((e) => console.log(e))
     }
   }, [isLoggedIn]);
 
   // Получаем информацию о пользователе и карточки с позициями для меню
   useEffect(() => {
     if (isLoggedIn) {
+      let IntervalID
       if (userInfo.admin === true) {
-        window.setInterval(() => {
+        IntervalID = window.setInterval(() => {
           orderApi.getOrders().then((data) => {
             setOrders(data);
           });
@@ -233,7 +226,7 @@ function App() {
           });
         }, 5000);
       } else if (userInfo.admin === false) {
-        window.setInterval(() => {
+        IntervalID = window.setInterval(() => {
           userApi.getMyInfo().then((data) => {
             setUserInfo(data);
           });
@@ -252,10 +245,7 @@ function App() {
           userApi.getUsers().then((data) => setUserList(data));
         }, 5000);
       }
-      // setInterval(() => {
-      //   window.location.reload();
-      // }, 604800000);
-      return () => clearInterval();
+      return () => clearInterval(IntervalID);
     }
   }, [dataLoad]);
 
@@ -278,65 +268,85 @@ function App() {
   const addToCart = (name, description, price, gram, imageLink, category) => {
     userApi
       .addToCart(name, description, price, gram, imageLink, category)
-      .then((data) => {
+      .then(() => {
         setIsUserCartEmpty(false);
-        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
-        userApi.getMyInfo().then((data) => {
-          setUserInfo(data);
-        });
+
+        return Promise.all([
+          receiptApi.findMyReceipt(id),
+          userApi.getMyInfo()
+        ]);
       })
-      .catch((e) => console.log(e));
+      .then(([receiptData, userData]) => {
+        setPriceReceipt(receiptData);
+        setUserInfo(userData);
+      })
+      .catch((e) => console.log("Ошибка при добавлении в корзину:", e));
   };
+
   const deleteFromCart = (index) => {
     userApi
       .deleteFromCart(index)
-      .then((data) => {
-        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
-        userApi.getMyInfo().then((data) => {
-          setUserInfo(data);
-          if (userInfo.foods.length <= 1) {
-            setCost(0);
-            setIsUserCartEmpty(true);
-          }
-        });
+      .then(() => {
+        return Promise.all([
+          receiptApi.findMyReceipt(id),
+          userApi.getMyInfo()
+        ]);
       })
-      .catch((e) => console.log(e));
+      .then(([receiptData, userData]) => {
+        setPriceReceipt(receiptData);
+        setUserInfo(userData);
+        if (userData.foods.length === 0) {
+          setCost(0);
+          setIsUserCartEmpty(true);
+        }
+      })
+      .catch((e) => console.log("Ошибка при удалении из корзины:", e));
   };
 
   const download = (object, name, dateNow, whoDownLoad) => {
-    orderApi.download(object, name, dateNow, whoDownLoad).then((data) => console.log(data));
+    orderApi.download(object, name, dateNow, whoDownLoad).then((data) => console.log(data)).catch((e) => console.log(e))
   };
 
   const downloadItem1 = (item, nameWhoOrders, _id, price, value) => {
     if (userInfo.name !== "admin") {
-        console.log("Скачивание запрещено: аккаунт не админ.");
-        if (userInfo.name === "официант") {
-            setIsPopupNewOrderOpen(value);
+      console.log("Скачивание запрещено: аккаунт не админ.");
+      if (userInfo.name.toLowerCase() === "neon") {
+        if (nameWhoOrders?.toLowerCase().includes("neon")) {
+          setIsPopupNewOrderOpen(value);
+        } else {
+          console.log("Заказ не для неона.");
         }
         return;
+      }
+
+      if (userInfo.name.toLowerCase() === "официант") {
+        setIsPopupNewOrderOpen(value);
+        return;
+      }
+      return;
     }
 
     let itemsArray = item.foods ? item.foods : item;
-    
+
     // Объект для хранения количества одинаковых позиций
     let itemCount = {};
 
     itemsArray.forEach((item) => {
-        if (itemCount[item.name]) {
-            itemCount[item.name].count += 1;
-        } else {
-            itemCount[item.name] = { count: 1, price: item.price };
-        }
+      if (itemCount[item.name]) {
+        itemCount[item.name].count += 1;
+      } else {
+        itemCount[item.name] = { count: 1, price: item.price };
+      }
     });
 
     let array = [];
-    
+
     Object.entries(itemCount).forEach(([name, data]) => {
-        if (data.count > 1) {
-            array.push(`${data.count}x ${name}`);
-        } else {
-            array.push(`${name}`);
-        }
+      if (data.count > 1) {
+        array.push(`${data.count}x ${name}`);
+      } else {
+        array.push(`${name}`);
+      }
     });
 
     array.unshift("  ");
@@ -354,24 +364,24 @@ function App() {
 
 
     download(array, _id, dateNow, 'printer-kitchen');
-};
+  };
   const downloadItem = (item, nameWhoOrders, _id, price) => {
     let itemsArray = Array.isArray(item.foods) ? item.foods : item;
     let itemCount = {};
 
     // Подсчет количества каждого товара
     itemsArray.forEach(({ name, price }) => {
-        if (itemCount[name]) {
-            itemCount[name].count += 1;
-        } else {
-            itemCount[name] = { count: 1, price };
-        }
+      if (itemCount[name]) {
+        itemCount[name].count += 1;
+      } else {
+        itemCount[name] = { count: 1, price };
+      }
     });
 
     let array = [];
     for (const [name, { count, price }] of Object.entries(itemCount)) {
-        const itemText = count > 1 ? `${count}x "${name}"` : name;
-        array.push(`${itemText} - ${price * count} рублей`);
+      const itemText = count > 1 ? `${count}x "${name}"` : name;
+      array.push(`${itemText} - ${price * count} рублей`);
     }
 
     array.unshift("  ");
@@ -391,59 +401,62 @@ function App() {
     array.push(dateNow);
 
     download(array, _id, dateNow, 'printer-waiter');
-};
-  const createOrder = (nameWhoOrder, foods, price, doneStatus) => {
-    orderApi
-      .createOrder(nameWhoOrder, foods, price, doneStatus)
-      .then((data) => {
-        orderApi.getOrders().then((data) => {
-          setOrders(data);
-        });
-        setIsUserCreateOrder(true);
-        setIsUserCartEmpty(false);
-        setTimeout(() => {
-          setIsUserCreateOrder(false);
-          setIsUserCartEmpty(true);
-        }, 5000);
-        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data));
-      })
-      .catch((e) => console.log(e));
-    foods.forEach((item) => {
-      receiptApi.addToReceipt(
-        item.name,
-        item.description,
-        item.price,
-        item.gram,
-        item.imageLink,
-        id
-      )
-      .then((data) => {
-        debugger;
-        receiptApi.changePrice(priceReceipt.price + price, id).then(() => {
-          receiptApi.findMyReceipt(id).then((data) => {
-            setPriceReceipt(data);
-            receiptApi.getReceipt();
-          });
-        });
-      });
-    });
+  };
+  const createOrder = async (nameWhoOrder, foods, price, doneStatus) => {
+    try {
+      await orderApi.createOrder(nameWhoOrder, foods, price, doneStatus);
+      const updatedOrders = await orderApi.getOrders();
+      setOrders(updatedOrders);
+
+      setIsUserCreateOrder(true);
+      setIsUserCartEmpty(false);
+
+      setTimeout(() => {
+        setIsUserCreateOrder(false);
+        setIsUserCartEmpty(true);
+      }, 5000);
+
+      // Добавляем все позиции в чек параллельно
+      await Promise.all(
+        foods.map((item) =>
+          receiptApi.addToReceipt(
+            item.name,
+            item.description,
+            item.price,
+            item.gram,
+            item.imageLink,
+            id
+          )
+        )
+      );
+
+      // Обновляем цену чека
+      await receiptApi.changePrice(price, id);
+
+      // Загружаем обновлённый чек
+      const updatedReceipt = await receiptApi.findMyReceipt(id);
+      setPriceReceipt(updatedReceipt);
+    } catch (e) {
+      console.log("Ошибка при создании заказа:", e);
+    }
   };
 
   const updateDoneStatus = (doneStatus, id) => {
     orderApi
       .updateDoneStatus(doneStatus, id)
-      .then((data) => {
-        orderApi.getOrders().then((data) => setOrders(data));
-      })
-      .catch((e) => console.log(e));
+      .then(() => orderApi.getOrders())
+      .then((orders) => setOrders(orders))
+      .catch((e) => console.log("Ошибка при обновлении статуса заказа:", e));
   };
   const clearCart = () => {
-    userApi.clearCart().then((data) => {
-      userApi.getMyInfo().then((data) => {
-        setUserInfo(data);
+    userApi
+      .clearCart()
+      .then(() => userApi.getMyInfo())
+      .then((userData) => {
+        setUserInfo(userData);
         setCost(0);
-      });
-    });
+      })
+      .catch((e) => console.log("Ошибка при очистке корзины:", e));
   };
 
   const addNewElementInMenu = (
@@ -456,11 +469,9 @@ function App() {
   ) => {
     food
       .addNewElementInMenu(newItem, name, description, price, gram, linkImage)
-      .then((data) => {
-        food.getFoods().then((data) => {
-          setFoodMenu(data);
-        });
-      });
+      .then(() => food.getFoods())
+      .then((foods) => setFoodMenu(foods))
+      .catch((e) => console.log("Ошибка при добавлении нового элемента:", e));
   };
 
   const changeValueOfMenuElement = (
@@ -470,17 +481,10 @@ function App() {
     objectId
   ) => {
     food
-      .changeElementValueInMenu(
-        nameOfCategory,
-        categoryValue,
-        newValue,
-        objectId
-      )
-      .then((data) =>
-        food.getFoods().then((data) => {
-          setFoodMenu(data);
-        })
-      );
+      .changeElementValueInMenu(nameOfCategory, categoryValue, newValue, objectId)
+      .then(() => food.getFoods())
+      .then((foods) => setFoodMenu(foods))
+      .catch((e) => console.log("Ошибка при изменении элемента меню:", e));
   };
   const changeValueOfBarMenuElement = (
     nameOfCategory,
@@ -489,17 +493,10 @@ function App() {
     objectId
   ) => {
     food
-      .changeElementValueInBarMenu(
-        nameOfCategory,
-        categoryValue,
-        newValue,
-        objectId
-      )
-      .then((data) =>
-        food.getFoodBar().then((data) => {
-          setFoodMenuBar(data);
-        })
-      );
+      .changeElementValueInBarMenu(nameOfCategory, categoryValue, newValue, objectId)
+      .then(() => food.getFoodBar())
+      .then((barMenu) => setFoodMenuBar(barMenu))
+      .catch((e) => console.log("Ошибка при изменении элемента бара:", e));
   };
   const addNewElementInBarMenu = (
     newItem,
@@ -511,58 +508,61 @@ function App() {
     category
   ) => {
     food
-      .addNewElementInMenu(
-        newItem,
-        name,
-        description,
-        price,
-        gram,
-        linkImage,
-        category
-      )
-      .then((data) => {
-        food.getFoodBar().then((data) => {
-          setFoodMenuBar(data);
-        });
-      });
+      .addNewElementInMenu(newItem, name, description, price, gram, linkImage, category)
+      .then(() => food.getFoodBar())
+      .then((barMenu) => setFoodMenuBar(barMenu))
+      .catch((e) => console.log("Ошибка при добавлении в барное меню:", e));
   };
 
   const deleteElementInMenu = (index, deleteItem) => {
-    food.deleteElementInMenu(index, deleteItem).then((data) => {
-      food.getFoods().then((data) => {
-        setFoodMenu(data);
+    food
+      .deleteElementInMenu(index, deleteItem)
+      .then(() => food.getFoods())
+      .then((menu) => {
+        setFoodMenu(menu);
         closePopups();
-      });
-    });
+      })
+      .catch((e) => console.log("Ошибка при удалении из меню:", e));
   };
 
   const deleteElementInBarMenu = (index, deleteItem) => {
-    food.deleteElementInMenu(index, deleteItem).then((data) => {
-      food.getFoodBar().then((data) => {
-        setFoodMenuBar(data);
+    food
+      .deleteElementInMenu(index, deleteItem)
+      .then(() => food.getFoodBar())
+      .then((barMenu) => {
+        setFoodMenuBar(barMenu);
         closePopups();
-      });
-    });
+      })
+      .catch((e) => console.log("Ошибка при удалении из барного меню:", e));
   };
   const signin = (email, password, codeWord) => {
-    auth.signin(email, password, codeWord).then((data) => {
-      console.log("Успешная авторизация!");
-      setIsLoggedIn(true);
-      if (userInfo.admin === true) {
-        navigate("/orders");
-      } else {
-        navigate("/main");
-      }
-    });
+    auth
+      .signin(email, password, codeWord)
+      .then(() => {
+        console.log("Успешная авторизация!");
+        setIsLoggedIn(true);
+
+        return userApi.getMyInfo(); // загружаем свежую инфу
+      })
+      .then((data) => {
+        setUserInfo(data);
+        if (data.admin === true) {
+          navigate("/orders");
+        } else {
+          navigate("/main");
+        }
+      })
+      .catch((e) => {
+        console.log("Ошибка при авторизации:", e);
+      });
   };
   const changeLimit = (limit, id) => {
-    userApi.changeLimit(limit, id).then((data) => {
-      userApi.getUsers().then((data) => setUserList(data));
-    });
+    userApi
+      .changeLimit(limit, id)
+      .then(() => userApi.getUsers())
+      .then((users) => setUserList(users))
+      .catch((e) => console.log("Ошибка при изменении лимита:", e));
   };
-  // const download = (object, name) => {
-  //   orderApi.downLoad(object, name).then((data) => console.log(data));
-  // };
 
   const openPopupConfirm = (thisCard, category) => {
     setDeleteCard({ thisCard, category });
@@ -570,14 +570,15 @@ function App() {
   };
 
   const clearReceipt = (id, userId) => {
-    receiptApi.clearReceipt(id).then((data) => {
-      receiptApi.changePrice(0, id).then((data) => {
-        receiptApi.getReceipt().then((data) => {
-          setReceipts(data);
-          changeLimit(0, userId);
-        });
-      });
-    });
+    receiptApi
+      .clearReceipt(id)
+      .then(() => receiptApi.changePrice(0, id))
+      .then(() => receiptApi.getReceipt())
+      .then((receipts) => {
+        setReceipts(receipts);
+        changeLimit(0, userId);
+      })
+      .catch((e) => console.log("Ошибка при очистке чека:", e));
   };
   return (
     <div className="app">
@@ -716,7 +717,7 @@ function App() {
             <Route
               path="/userList"
               element={
-                <UsersList userList={userList} changeLimit={changeLimit} />
+                <UsersList userList={userList} userInfo={userInfo} changeLimit={changeLimit} />
               }
             />
           )}
@@ -732,6 +733,7 @@ function App() {
                 download={download}
                 clearReceipt={clearReceipt}
                 setId={setId}
+                userInfo={userInfo}
               />
             }
           />

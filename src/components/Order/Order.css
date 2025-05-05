@@ -1,122 +1,123 @@
 .order {
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
   padding-top: 28px;
-  width: 304px;
+  width: 370px;
   min-height: 121px;
+  position: relative;
+  z-index: 1;
 }
+
 .order_hide {
   display: none;
 }
+
 .order__container {
-  margin: 0 auto;
-  position: relative;
-  max-width: 500px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  border: 0.5px solid #d82e2e;
-}
-.order__author {
-  margin: 0;
-  margin-left: 10px;
-  padding-top: 5px;
-  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
 
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  /* Градиентная рамка и свечение */
+  border: 2px solid transparent;
+  border-image: linear-gradient(to right, #ff2a70, #00b7ff) 1;
+  box-shadow:
+    0 0 10px #00b7ff,
+    0 0 20px #ff2a70;
 }
+
+.order__author{
+  font-size: 13px;
+  color: #ff2a70;
+  text-shadow: 0 0 4px #ff2a70;
+}
+.order__name,
+.order__price {
+  color: #ffffff;
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-shadow: 0 0 1px #ffffff;
+}
+
 .order__name {
-  margin: 0 auto;
-  margin-top: 5px;
-  color: #fff;
-
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  text-align: center;
 }
+
 .order__container-text {
   display: flex;
   justify-content: space-between;
 }
-.order__price {
-  margin: 0;
-  text-align: start;
-  margin-left: 10px;
-  margin-bottom: 5px;
-  color: #fff;
 
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
 .order__price_history {
   font-size: 13px;
-  color: #ffffff;
+  color: #ffffffaa;
 }
+
+.order__createAt {
+  text-align: center;
+  color: #ffffff6e;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.order__order-status {
+  color: #00b7ff;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  text-shadow: 0 0 4px currentColor;
+}
+
+.order__order-status_not-ready {
+  color: #ff2a70;
+  animation: pulse-red 1.2s infinite;
+}
+
+.order__order-status_ready {
+  color: #00b7ff;
+}
+
 .order__done-btn {
-  margin: 0 auto;
   position: absolute;
   top: 25%;
-  bottom: 0;
   right: 10px;
   width: 30px;
   height: 30px;
-  background: none;
+  background: url("../../images/btn-done.svg") no-repeat center / contain;
   border: none;
-  background-image: url("../../images/btn-done.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-.order__createAt {
-  margin: 0;
-  text-align: center;
-  margin-right: 10px;
-  margin-bottom: 5px;
-  color: #ffffff6e;
-
-  font-family: Inter;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-.order__order-status {
-  margin: 0;
-  text-align: center;
-  margin-right: 10px;
-  padding-top: 5px;
-  color: #2cd450d0;
-
-  font-family: Inter;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-.order__order-status_not-ready {
-  color: #f57f1ee3;
-}
-.order__print-receipt {
-  margin: 0;
-  height: 40px;
-  background-color: #ffffff;
-  border: none;
-  color: #000000;
-  font-family: Inter;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  transition: opacity 200ms ease-in-out;
-}
-.order__print-receipt:hover {
-  opacity: .7;
   cursor: pointer;
+  filter: drop-shadow(0 0 6px #00ff62);
+  transition: transform 0.2s;
+  animation: pulse-red 1.2s infinite;
+}
+
+.order__done-btn:hover {
+  transform: scale(1.1);
+}
+
+.order__print-receipt {
+  margin: 0 auto 10px;
+  width: 70%;
+  height: 43px;
+  font-size: 17px;
+  color: #fff;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  background: #000;
+  border: 2px solid transparent;
+  border-image: linear-gradient(to right, #ff2a70, #00b7ff) 1;
+  box-shadow: 0 0 8px #00b7ff, 0 0 16px #ff2a70;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.order__print-receipt:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 12px #ff2a70, 0 0 24px #00b7ff;
 }
