@@ -1,122 +1,121 @@
 .popup {
-  margin: 0 auto;
+  margin: 0;
   height: 100vh;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: fixed;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
   visibility: hidden;
-  transition: visibility 0.5s ease, opacity 0.5s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
 }
+
 .popup_active {
   visibility: visible;
   opacity: 1;
 }
 
-.popup_active {
-  display: flex;
-  opacity: 1;
-}
 .popup__overlay {
-  margin: 0;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #00000098;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
   z-index: 1;
 }
+
 .popup__container {
-  margin: 0 auto;
-  margin-top: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  z-index: 2;
   width: 500px;
   min-height: 300px;
-  background-color: rgb(2, 2, 2);
-  border: 1px solid #d82e2e;
-  z-index: 4;
-}
-.popup__title {
-  margin: 0;
-  text-align: center;
-  margin-top: 30px;
-  font-size: 21px;
-  color: #ffffff;
-}
-.popup__form {
-  margin: 0 auto;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  background-color: #0b0b0b;
+  border: 1px solid #00b7ff;
+  border-image: linear-gradient(to right, #ff2a70, #00b7ff) 1;
+  box-shadow: 0 0 10px #ff2a70, 0 0 25px #00b7ff;
+  border-radius: 10px;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
 }
-.popup__input {
-  margin: 0 auto;
-  box-sizing: border-box;
-  font-family: Inter;
-  padding-left: 10px;
-  border: none;
-  background-color: rgb(255, 255, 255);
-  outline: none;
-  width: 310px;
-  height: 45px;
-}
-.popup__submit-btn {
-  margin: 0 auto;
-  width: 140px;
-  height: 35px;
-  font-family: Inter;
-  margin-top: 20px;
-  border: none;
-  background: #d82e2e;
-  color: #ffffff;
 
-  font-family: Inter;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+.popup__container_bar-theme {
+  border-image: linear-gradient(to right, #eaa51a, #00b7ff) 1;
 }
-.popup__category {
-  margin: 0;
-  display: inline-block;
-  font-family: Inter;
-  width: 310px;
-  min-height: 40px;
+
+.popup__title {
+  font-size: 21px;
+  color: #fff;
+  text-shadow: 0 0 4px #ff2a70;
+  margin-bottom: 30px;
   text-align: center;
 }
+
+.popup__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.popup__input {
+  width: 310px;
+  height: 45px;
+  padding-left: 10px;
+  font-family: Inter;
+  border: none;
+  outline: none;
+  background: #111;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.popup__category {
+  width: 310px;
+  background: linear-gradient(to right, #ff2a70, #00b7ff);
+  min-height: 40px;
+  color: #000000;
+  text-align: center;
+  font-family: Inter;
+}
+
 .popup__item {
-  margin: 0;
+  width: 100%;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height:40px;
-  border-bottom: 1px solid #ffffff;
-  background-color: #d82e2e;
-  color: rgb(255, 255, 255);
-  font-family: Inter;
+  background: linear-gradient(to right, #ff2a70, #00b7ff);
+  color: #000000;
   font-size: 17px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  border-bottom: 1px solid #ffffff22;
+  font-family: Inter;
 }
-.popup__item_bar-theme{
-  background-color: #eaa51a;
+
+.popup__item_bar-theme {
+  background: linear-gradient(to right, #eaa51a, #00b7ff);
 }
-.popup__container_bar-theme {
-  border: 1px solid #eaa51a;
+
+.popup__submit-btn {
+  margin-top: 20px;
+  width: 140px;
+  height: 40px;
+  background: linear-gradient(to right, #ff2a70, #00b7ff);
+  color: #fff;
+  font-family: Inter;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
-.popup__submit-btn_bar-theme{
-  background: #eaa51a;
+
+.popup__submit-btn_bar-theme {
+  background: linear-gradient(to right, #eaa51a, #00b7ff);
+}
+
+.popup__submit-btn:hover {
+  opacity: 0.8;
 }

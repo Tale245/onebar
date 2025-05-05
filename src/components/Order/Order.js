@@ -14,6 +14,7 @@ const Order = ({
   userInfo,
   downloadItem,
 }) => {
+  console.log(foods)
   const [hide, setHide] = useState(false);
 
   const hideOrder = () => {

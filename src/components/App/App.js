@@ -131,7 +131,6 @@ function App() {
 
     if (!newOrder) return; // Если все заказы уже скачаны – выходим
 
-    debugger
     // Скачиваем новый заказ
     downloadItem1(newOrder.foods, newOrder.nameWhoOrders, newOrder._id, 0, true);
 
@@ -264,43 +263,33 @@ function App() {
     setIsPopupNewOrderOpen(false);
     setIsPopupChangeInfoOpen(false);
   };
-
   const addToCart = (name, description, price, gram, imageLink, category) => {
     userApi
       .addToCart(name, description, price, gram, imageLink, category)
       .then(() => {
         setIsUserCartEmpty(false);
-
-        return Promise.all([
-          receiptApi.findMyReceipt(id),
-          userApi.getMyInfo()
-        ]);
-      })
-      .then(([receiptData, userData]) => {
-        setPriceReceipt(receiptData);
-        setUserInfo(userData);
-      })
-      .catch((e) => console.log("Ошибка при добавлении в корзину:", e));
+        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data)).catch((e) => console.log(e))
+        userApi.getMyInfo().then((data) => {
+          setUserInfo(data);
+        }).catch((e) => console.log(e))
+      }).catch((e) => console.log(e))
+      .catch((e) => console.log(e));
   };
 
   const deleteFromCart = (index) => {
     userApi
       .deleteFromCart(index)
       .then(() => {
-        return Promise.all([
-          receiptApi.findMyReceipt(id),
-          userApi.getMyInfo()
-        ]);
+        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data)).catch((e) => console.log(e))
+        userApi.getMyInfo().then((data) => {
+          setUserInfo(data);
+          if (userInfo.foods.length <= 1) {
+            setCost(0);
+            setIsUserCartEmpty(true);
+          }
+        }).catch((e) => console.log(e))
       })
-      .then(([receiptData, userData]) => {
-        setPriceReceipt(receiptData);
-        setUserInfo(userData);
-        if (userData.foods.length === 0) {
-          setCost(0);
-          setIsUserCartEmpty(true);
-        }
-      })
-      .catch((e) => console.log("Ошибка при удалении из корзины:", e));
+      .catch((e) => console.log(e));
   };
 
   const download = (object, name, dateNow, whoDownLoad) => {

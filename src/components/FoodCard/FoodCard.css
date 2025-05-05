@@ -140,15 +140,15 @@
 .foodCard__btn-add {
   right: 5px;
   top: 6px;
-  background-image: url("../../images/add-ico.png");
-  z-index: 20;
+  background-image: url("../../images/add-ico.svg");
+  z-index: 70;
 }
 
 .foodCard__btn-change {
   left: 5px;
   top: 6px;
   background-image: url("../../images/Complete.svg");
-  z-index: 20;
+  z-index: 70;
 }
 
 .foodCard__btn-hide {
@@ -156,15 +156,18 @@
   top: 65px;
   width: 25px;
   height: 25px;
-  background-image: url("../../images/hide-svgrepo-com 1.svg");
-  z-index: 20;
+  background-image: url("../../images/hide-svgrepo-com\ 1.svg");
+  z-index: 70;
 }
-
+.foodCard__btn-trash {
+  background-image: url("../../images/btn-trash.svg");
+  z-index: 70;
+}
 .foodCard__btn-add:hover,
 .foodCard__btn-change:hover,
 .foodCard__btn-hide:hover {
   opacity: 0.8;
-  z-index: 20;
+  z-index: 70;
 }
 
 /* Состояния */

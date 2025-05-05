@@ -56,85 +56,10 @@ const FoodCard = ({
   openPopupChangeInfo,
   itemHide,
 }) => {
-  const [Mon, setMon] = useState(false);
-  const [Tue, setTue] = useState(false);
-  const [Wed, setWed] = useState(false);
-  const [Thu, setThu] = useState(false);
-  const [Fri, setFri] = useState(false);
-  const [Sat, setSat] = useState(false);
-  const [Sun, setSun] = useState(false);
 
   const try123 = (index, category) => {
     openPopupConfirm(index, category);
   };
-
-  const date = new Date().toString().slice(0, 3);
-
-  const whatDate = () => {
-    if (hookahsBtnValue === true && date === "Mon") {
-      setMon(true);
-      setTue(false);
-      setWed(false);
-      setThu(false);
-      setFri(false);
-      setSat(false);
-      setSun(false);
-    } else if (hookahsBtnValue === true && date === "Tue") {
-      setMon(false);
-      setTue(true);
-      setWed(false);
-      setThu(false);
-      setFri(false);
-      setSat(false);
-      setSun(false);
-    } else if (hookahsBtnValue === true && date === "Wed") {
-      setMon(false);
-      setTue(false);
-      setWed(true);
-      setThu(false);
-      setFri(false);
-      setSat(false);
-      setSun(false);
-    } else if (hookahsBtnValue === true && date === "Thu") {
-      setMon(false);
-      setTue(false);
-      setWed(false);
-      setThu(true);
-      setFri(false);
-      setSat(false);
-      setSun(false);
-    } else if (hookahsBtnValue === true && date === "Fri") {
-      setMon(false);
-      setTue(false);
-      setWed(false);
-      setThu(false);
-      setFri(true);
-      setSat(false);
-      setSun(false);
-    } else if (hookahsBtnValue === true && date === "Sat") {
-      setMon(false);
-      setTue(false);
-      setWed(false);
-      setThu(false);
-      setFri(false);
-      setSat(true);
-      setSun(false);
-    } else if (hookahsBtnValue === true && date === "Sun") {
-      setMon(false);
-      setTue(false);
-      setWed(false);
-      setThu(false);
-      setFri(false);
-      setSat(false);
-      setSun(true);
-    } else {
-      return;
-    }
-  };
-  useEffect(() => {
-    whatDate();
-    setInterval(() => { }, 21600000);
-  }, []);
 
   let category;
   const whatIsCost = () => {
@@ -263,6 +188,7 @@ const FoodCard = ({
       } else {
         thisGram = gram;
       }
+      debugger
       addToCart(title, description, price, thisGram, img, foodCategory);
 
     } else if (userInfo.admin === true) {
@@ -306,15 +232,15 @@ const FoodCard = ({
   let hide
   let zeroHide
 
-  if (itemHide && userInfo.name === 'admin' || itemHide && userInfo.name === 'официант') {
+  if (itemHide && userInfo.admin === true || itemHide && userInfo.waiter === true) {
     hide = true
-  } else if (itemHide && userInfo.name !== 'admin' || itemHide && userInfo.name !== 'официант') {
+  } else if (itemHide && userInfo.admin !== true || itemHide && userInfo.waiter !== true) {
     zeroHide = true
   }
 
   return (
     <div
-      className={`foodCard ${hide ? 'foodCard_hide' : ''} ${zeroHide && userInfo.name !== 'администратор' || zeroHide && userInfo.name !== 'официант' ? 'foodCard_hide-zero' : ''}`}
+      className={`foodCard ${hide ? 'foodCard_hide' : ''} ${((zeroHide && userInfo.admin !== true) || (zeroHide && userInfo.waiter !== true)) ? 'foodCard_hide-zero' : ''}`}
     >
       <div className="foodCard__overlay" onClick={cart ? findIndex : onClickCard}></div>
       <img
@@ -343,13 +269,13 @@ const FoodCard = ({
           onClick={cart ? findIndex : onClickCard}
         ></button>
       )}
-      {userInfo.admin === true || userInfo.name === 'официант' && (
+      {(userInfo.admin === true || userInfo.waiter === true) && (
         <button
           className={`foodCard__btn-change`}
           onClick={openPopupChangeValue}
         ></button>
       )}
-      {userInfo.admin === true || userInfo.name === 'официант' && (
+      {(userInfo.admin === true || userInfo.waiter === true) && (
         <button
           className={`foodCard__btn-hide`}
           onClick={openPopupChangeHideValue}

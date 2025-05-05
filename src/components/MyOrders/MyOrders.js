@@ -4,6 +4,7 @@ import "./MyOrders.css";
 import MyOrder from "../MyOrder/MyOrder";
 
 const MyOrders = ({ orders, userInfo }) => {
+  
   const array = [];
 
   orders.forEach((item) => {
@@ -12,7 +13,7 @@ const MyOrders = ({ orders, userInfo }) => {
     }
   });
 
-  console.log(array);
+ 
   return (
     <section className="myOrders">
       <h1 className="myOrders__title">Мои заказы</h1>

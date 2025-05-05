@@ -83,7 +83,6 @@ const Main = ({
   openPopupChangeInfo
 }) => {
 
-  console.log('foodArrayInMain', foodMenu)
   return (
     <main className="main">
       <NavLinks

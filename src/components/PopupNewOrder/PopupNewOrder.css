@@ -1,50 +1,88 @@
+/* Анимация появления */
+@keyframes popupSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .PopupNewOrder {
   margin: 0;
   position: fixed;
   display: none;
   justify-content: center;
   align-items: center;
-  right: 15px;
+  right: 25px;
   bottom: 35vh;
-  border: 1px solid red;
   width: 500px;
   height: 250px;
-  background-color: #f1f1f1;
+
+  /* светлый неоновый фон с градиентом */
+  background: linear-gradient(135deg, #27d4ff, #e67afc, #ff00bf);
+  border-radius: 12px;
+
+  /* яркое свечение */
+  box-shadow:
+    0 0 20px #00b7ff,
+    0 0 40px #ff2a70,
+    inset 0 0 10px #ffffff0f;
+
+  z-index: 100;
 }
 
-.PopupNewOrder_open{
+.PopupNewOrder_open {
   display: flex;
+  animation: popupSlideIn 0.4s ease-out;
 }
-/* .PopupNewOrder__overlay{
-    margin: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #0000004f;
-} */
+
 .PopupNewOrder__container {
-  margin: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 20px;
 }
 
 .PopupNewOrder__title {
+  color: #ffffff;
+  font-family: Inter, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  text-shadow: 0 0 6px #00b7ff;
   margin: 0;
-  text-align: center;
-  align-items: center;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.PopupNewOrder__close-btn{
-    margin: 0;
-    height: 40px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #ff0808;
-    border: 1px solid #000;
-    outline: none;
+
+.PopupNewOrder__close-btn {
+  margin: 0;
+  position: absolute;
+  top: 10px;
+  right: 55px;
+  width: 36px;
+  height: 36px;
+  background-color: #ff2a70;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow:
+    0 0 8px #ff2a70,
+    0 0 12px #ff2a70;
+  transition: transform 0.2s ease;
+}
+
+.PopupNewOrder__close-btn:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 12px #ff2a70,
+    0 0 20px #ff2a70;
 }

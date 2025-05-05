@@ -9,8 +9,8 @@ const UsersList = ({ userList, changeLimit, userInfo }) => {
     const name = user.name?.toLowerCase().trim() || '';
     const userName = userInfo.name.toLowerCase();
     const isNeonTable = name.includes('neon');
-  
-    if (userName === 'admin') return true;
+
+    if (userName === 'admin' || 'администратор') return true;
     if (userName === 'neon') return isNeonTable;
     return !isNeonTable;
   });

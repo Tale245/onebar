@@ -13,7 +13,6 @@ const Orders = ({
   userInfo,
   downloadItem,
 }) => {
-  console.log(orders)
   const selectOrdersBtn = () => {
     setBtnOrders(true);
     setBtnHistoryOrders(false);

@@ -3,11 +3,6 @@ import React from "react";
 import "./MyOrder.css";
 
 const MyOrder = ({ itemFood, price, status, date }) => {
-  console.log(itemFood);
-  console.log(price);
-  console.log(status);
-
-
   return (
     <div className="myOrder">
       <div className="myOrder__container">
@@ -21,9 +16,8 @@ const MyOrder = ({ itemFood, price, status, date }) => {
         <div className="myOrder__text-container">
           <p className="myOrder__text">{price}р</p>
           <p
-            className={`myOrder__text  ${
-              status ? "myOrder__text_done" : "myOrder__text_not-done"
-            }`}
+            className={`myOrder__text  ${status ? "myOrder__text_done" : "myOrder__text_not-done"
+              }`}
           >
             {status ? "Готов" : "Готовится"}
           </p>

@@ -11,7 +11,6 @@ const Signin = ({signin}) => {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
-    console.log(data);
     signin(data.email, data.password, data.codeWord)
   };
   return (

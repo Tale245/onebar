@@ -1,61 +1,81 @@
 .popupConfirm {
-  margin: 0 auto;
-  border: 1px solid red;
-  position: absolute;
+  position: fixed;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+
   opacity: 0;
   visibility: hidden;
-  transition: visibility 0.5s ease, opacity 0.5s ease;
+  pointer-events: none;
+
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
 }
+
 .popupConfirm_active {
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
+
 .popupConfirm__overlay {
-  margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.459);
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 0;
 }
+
 .popupConfirm__container {
-  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  width: 450px;
+  height: 200px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow:
+    0 0 15px #00b7ff,
+    0 0 25px #ff2a70;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 450px;
-  height: 200px;
-  background-color: #fff;
-  z-index: 4;
+  justify-content: center;
+  color: #fff;
+  font-family: Inter, sans-serif;
+  padding: 20px;
 }
+
 .popupConfirm__confirm-title {
-  margin: 0 auto;
-  margin-top: 40px;
+  font-size: 22px;
   text-align: center;
+  margin: 0 0 10px;
+  text-shadow: 0 0 6px #00b7ff;
 }
+
 .popupConfirm__confirm-text {
-  margin: 0;
-  margin-top: 30px;
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+  color: #ccc;
 }
-.popupConfirm__btn-confirm {
-  margin: 0;
-  margin-top: 20px;
-  width: 140px;
-  height: 40px;
-  background: none;
-  border: 0.5px solid #000;
-}
+
 .popupConfirm__btn-container {
-  margin: 0 auto;
+  margin-top: 25px;
   display: flex;
   gap: 30px;
+}
+
+.popupConfirm__btn-confirm {
+  width: 140px;
+  height: 40px;
+  border: 1px solid #fff;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.popupConfirm__btn-confirm:hover {
+  opacity: 0.8;
 }

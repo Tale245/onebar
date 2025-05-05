@@ -30,39 +30,29 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWh
   }, [foods]); // Вызываем эффект при изменении
 
   // Первое значение это айди чека в "распечатать чек - второе айди пользователя, чтобы обновить ему лимит"
+  const orderIdMap = {
+    'Стол 1': ['68178006cf0d216bc5fdfc46', '68177fe4cf0d216bc5fdfb6e'],
+    'Стол 2': ['6568f19e9925afaa13ad69f3', '6568ef3a9925afaa13ad69a6'],
+    'Стол 3': ['6568f1a39925afaa13ad69f6', '6568ef469925afaa13ad69a8'],
+    'Стол 4': ['6568f1a69925afaa13ad69fc', '6568ef569925afaa13ad69aa'],
+    'Стол 5': ['6568f1a89925afaa13ad69ff', '6568ef6a9925afaa13ad69ac'],
+    'Стол 6': ['6568f1aa9925afaa13ad6a02', '6568ef789925afaa13ad69ae'],
+    'Стол 7': ['6568f1ac9925afaa13ad6a05', '6568ef879925afaa13ad69b0'],
+    'Стол 8': ['6568f1b29925afaa13ad6a0b', '6568ef959925afaa13ad69b2'],
+    'Стол 9': ['6568f1b49925afaa13ad6a0e', '6568efa49925afaa13ad69b4'],
+    'Стол 10': ['6568f1b69925afaa13ad6a11', '6568efd19925afaa13ad69b8'],
+    'Стол 11': ['6568f1b99925afaa13ad6a17', '6568efe29925afaa13ad69ba'],
+    'Официант': ['67e69a9235870b4f2fb85c84', '6568ef019925afaa13ad69a2'],
+    'Neon': ['681782cecf0d216bc5fe1aed', '681779bbe1f76c2af11cace9'],
+    'admin': ['6568f1a39925afaa13ad69f6', '6568ee919925afaa13ad699f'],
+  };
+
   const whatId = () => {
-    debugger
-    if (nameWhoOrder === 'Стол 1') {
-      clearReceipt('68178006cf0d216bc5fdfc46', '68177fe4cf0d216bc5fdfb6e')
-    } else if (nameWhoOrder === 'Стол 2') {
-      clearReceipt('6568f19e9925afaa13ad69f3', '6568ef3a9925afaa13ad69a6')
-    } else if (nameWhoOrder === 'Официант') {
-      clearReceipt('67e69a9235870b4f2fb85c84', '6568ef019925afaa13ad69a2')
-    } else if (nameWhoOrder === 'Neon') {
-      debugger
-      clearReceipt('681782cecf0d216bc5fe1aed', '681779bbe1f76c2af11cace9')
-    } else if (nameWhoOrder === 'admin') {
-      clearReceipt('6568f1a39925afaa13ad69f6', '6568ee919925afaa13ad699f')
-    } else if (nameWhoOrder === 'Стол 3') {
-      clearReceipt('6568f1a39925afaa13ad69f6', '6568ef469925afaa13ad69a8')
-    } else if (nameWhoOrder === 'Стол 4') {
-      clearReceipt('6568f1a69925afaa13ad69fc', '6568ef569925afaa13ad69aa')
-    } else if (nameWhoOrder === 'Стол 5') {
-      clearReceipt('6568f1a89925afaa13ad69ff', '6568ef6a9925afaa13ad69ac')
-    } else if (nameWhoOrder === 'Стол 6') {
-      clearReceipt('6568f1aa9925afaa13ad6a02', '6568ef789925afaa13ad69ae')
-    } else if (nameWhoOrder === 'Стол 7') {
-      clearReceipt('6568f1ac9925afaa13ad6a05', '6568ef879925afaa13ad69b0')
-    } else if (nameWhoOrder === 'Стол 8') {
-      clearReceipt('6568f1b29925afaa13ad6a0b', '6568ef959925afaa13ad69b2')
-    } else if (nameWhoOrder === 'Стол 9') {
-      clearReceipt('6568f1b49925afaa13ad6a0e', '6568efa49925afaa13ad69b4')
-    } else if (nameWhoOrder === 'Стол 10') {
-      clearReceipt('6568f1b69925afaa13ad6a11', '6568efd19925afaa13ad69b8')
-    } else if (nameWhoOrder === 'Стол 11') {
-      clearReceipt('6568f1b99925afaa13ad6a17', '6568efe29925afaa13ad69ba')
+    const ids = orderIdMap[nameWhoOrder];
+    if (ids) {
+      clearReceipt(ids[0], ids[1]);
     }
-  }
+  };
   const downloadItem = () => {
     let array = [];
     let itemCount = {};

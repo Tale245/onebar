@@ -16,11 +16,12 @@ const Basket = ({
   isUserCartEmpty,
   isUserCreateOrder,
 }) => {
+  debugger
   const createNewOrder = () => {
-    console.log(userInfo);
     if (userInfo.foods.length === 0) {
       console.log("вы не можете сделать пустой заказ!");
     } else {
+      debugger
       createOrder(userInfo.name, userInfo.foods, cost, false);
       changeLimit(userInfo.limit - cost, userInfo._id);
       clearCart();

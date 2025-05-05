@@ -11,20 +11,17 @@ const PopupConfirm = ({
   btnBar,
 }) => {
   const cardItem = () => {
-    console.log(deleteCard);
     if (btnBar === true) {
-      debugger
       deleteElementInBarMenu(deleteCard.thisCard, deleteCard.category);
     } else {
-      debugger
       deleteElementInMenu(deleteCard.thisCard, deleteCard.category);
     }
   };
   return (
+    <>
     <div
-      className={`popupConfirm ${
-        isPopupConfirmOpen === true && "popupConfirm_active"
-      }`}
+      className={`popupConfirm ${isPopupConfirmOpen === true && "popupConfirm_active"
+        }`}
     >
       <div className="popupConfirm__overlay" onClick={closePopups}></div>
       <div className="popupConfirm__container">
@@ -42,6 +39,7 @@ const PopupConfirm = ({
         </div>
       </div>
     </div>
+    </>
   );
 };
 
