@@ -148,6 +148,7 @@
 
 /* Анимация свечения при фокусе */
 .basket__select:hover {
+  cursor: pointer;
   animation: pulse-glow 1.2s ease-out infinite;
 }
 
