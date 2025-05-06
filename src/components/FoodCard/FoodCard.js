@@ -188,7 +188,6 @@ const FoodCard = ({
       } else {
         thisGram = gram;
       }
-      debugger
       addToCart(title, description, price, thisGram, img, foodCategory);
 
     } else if (userInfo.admin === true) {

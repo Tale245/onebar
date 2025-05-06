@@ -42,7 +42,7 @@ const Receipt = ({ name, foods, price, item, download, _id, clearReceipt, nameWh
     'Стол 9': ['6568f1b49925afaa13ad6a0e', '6568efa49925afaa13ad69b4'],
     'Стол 10': ['6568f1b69925afaa13ad6a11', '6568efd19925afaa13ad69b8'],
     'Стол 11': ['6568f1b99925afaa13ad6a17', '6568efe29925afaa13ad69ba'],
-    'Официант': ['67e69a9235870b4f2fb85c84', '6568ef019925afaa13ad69a2'],
+    'Официант': ['6819e9a6a22a69f5f5d48e83', '68179043cf0d216bc5fe5a68'],
     'Neon': ['681782cecf0d216bc5fe1aed', '681779bbe1f76c2af11cace9'],
     'admin': ['6568f1a39925afaa13ad69f6', '6568ee919925afaa13ad699f'],
   };

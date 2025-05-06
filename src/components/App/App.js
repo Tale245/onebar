@@ -174,7 +174,7 @@ function App() {
         const nameToTableId = {
           "Стол 1": "68178006cf0d216bc5fdfc46",
           "Стол 2": "6568f19e9925afaa13ad69f3",
-          "официант": "67e69a9235870b4f2fb85c84",
+          "официант": "6819e9a6a22a69f5f5d48e83",
           "Neon": "681782cecf0d216bc5fe1aed",
           "admin": "6568f0ce9925afaa13ad69c6",
           "Стол 3": "6568f1a39925afaa13ad69f6",
@@ -391,43 +391,40 @@ function App() {
 
     download(array, _id, dateNow, 'printer-waiter');
   };
-  const createOrder = async (nameWhoOrder, foods, price, doneStatus) => {
-    try {
-      await orderApi.createOrder(nameWhoOrder, foods, price, doneStatus);
-      const updatedOrders = await orderApi.getOrders();
-      setOrders(updatedOrders);
-
-      setIsUserCreateOrder(true);
-      setIsUserCartEmpty(false);
-
-      setTimeout(() => {
-        setIsUserCreateOrder(false);
-        setIsUserCartEmpty(true);
-      }, 5000);
-
-      // Добавляем все позиции в чек параллельно
-      await Promise.all(
-        foods.map((item) =>
-          receiptApi.addToReceipt(
-            item.name,
-            item.description,
-            item.price,
-            item.gram,
-            item.imageLink,
-            id
-          )
-        )
-      );
-
-      // Обновляем цену чека
-      await receiptApi.changePrice(price, id);
-
-      // Загружаем обновлённый чек
-      const updatedReceipt = await receiptApi.findMyReceipt(id);
-      setPriceReceipt(updatedReceipt);
-    } catch (e) {
-      console.log("Ошибка при создании заказа:", e);
-    }
+  const createOrder = (nameWhoOrder, foods, price, doneStatus) => {
+    orderApi
+      .createOrder(nameWhoOrder, foods, price, doneStatus)
+      .then(() => {
+        orderApi.getOrders().then((data) => {
+          setOrders(data);
+        }).catch((e) => console.log(e))
+        setIsUserCreateOrder(true);
+        setIsUserCartEmpty(false);
+        setTimeout(() => {
+          setIsUserCreateOrder(false);
+          setIsUserCartEmpty(true);
+        }, 5000);
+        receiptApi.findMyReceipt(id).then((data) => setPriceReceipt(data)).catch((e) => console.log(e))
+      })
+      .catch((e) => console.log(e));
+    foods.forEach((item) => {
+      receiptApi.addToReceipt(
+        item.name,
+        item.description,
+        item.price,
+        item.gram,
+        item.imageLink,
+        id
+      )
+        .then(() => {
+          receiptApi.changePrice(priceReceipt.price + price, id).then(() => {
+            receiptApi.findMyReceipt(id).then((data) => {
+              setPriceReceipt(data);
+              receiptApi.getReceipt();
+            }).catch((e) => console.log(e))
+          });
+        }).catch((e) => console.log(e))
+    });
   };
 
   const updateDoneStatus = (doneStatus, id) => {
@@ -579,6 +576,7 @@ function App() {
             element={
               <Basket
                 userInfo={userInfo}
+                userList={userList}
                 foodMenu={foodMenu}
                 deleteFromCart={deleteFromCart}
                 cost={cost}

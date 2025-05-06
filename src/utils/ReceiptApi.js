@@ -65,7 +65,6 @@ class Receipt {
   }
 
   addToReceipt(name, description, price, gram, imageLink, id) {
-    debugger;
     return fetch(`${this._baseUrl}/addPositionInReceipt/${id}`, {
       method: "POST",
       headers: {
