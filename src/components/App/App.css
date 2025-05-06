@@ -1,9 +1,12 @@
 .app {
   margin: 0 auto;
   max-width: 100%;
+  min-height: 100vh;
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: top center;
+  /* background-attachment: fixed; */
 }
 .app__neon{
   background-image: url(../../images/Neon.png);
