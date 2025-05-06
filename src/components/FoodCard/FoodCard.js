@@ -248,6 +248,8 @@ const FoodCard = ({
         alt={title}
 
       />
+
+      <div className="foodCard__description-container">
       <div className="foodCard__text-container">
         {" "}
         <h3 className="foodCard__title">{title}</h3>
@@ -255,7 +257,6 @@ const FoodCard = ({
           {`${price}р`}
         </h4>
       </div>
-      <div className="foodCard__description-container">
         <p className="foodCard__description">
           {btnBar ? "Страна:" : "Состав:"} {description}
         </p>

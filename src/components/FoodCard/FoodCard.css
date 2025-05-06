@@ -66,18 +66,12 @@
 }
 
 .foodCard__text-container {
-  margin: 0 auto;
-  height: 20px;
-  padding-bottom: 10px;
+  margin: 0;
+  margin-bottom: 10px;
   text-wrap: nowrap;
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.596);
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  bottom: 54px;
-  z-index: 16;
+  align-items: center;
 }
 
 .foodCard__description-container {
@@ -97,7 +91,6 @@
   margin: 0;
   margin-left: 8px;
   margin-right: 8px;
-  margin-bottom: 40px;
   max-width: 220px;
   color: #fff;
 
@@ -159,10 +152,12 @@
   background-image: url("../../images/hide-svgrepo-com\ 1.svg");
   z-index: 70;
 }
+
 .foodCard__btn-trash {
   background-image: url("../../images/btn-trash.svg");
   z-index: 70;
 }
+
 .foodCard__btn-add:hover,
 .foodCard__btn-change:hover,
 .foodCard__btn-hide:hover {
