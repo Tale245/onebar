@@ -3,7 +3,8 @@ import React from "react";
 import "./Header.css";
 
 // import logo from "../../images/neonLogo.png";
-import logo from "../../images/Frame 28.jpg";
+import logo from "../../images/elvisLogo.png";
+import neonLogo from "../../images/neonLogo.png";
 import { NavLink } from "react-router-dom";
 import basketLogo from "../../images/basketLogo.svg";
 import basketLogoBar from "../../images/basketLogo_bar.svg";
@@ -15,7 +16,7 @@ const Header = ({ userInfo, btnBar, cost }) => {
     <header className="header">
       <NavLink to="/main">
         {" "}
-        <img className="header__logo" src={logo} alt="логотип" />
+        <img className="header__logo" src={userInfo.name === "Neon" ? neonLogo : logo} alt="логотип" />
       </NavLink>
       <div className="header__container">
 

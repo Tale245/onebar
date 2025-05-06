@@ -567,7 +567,7 @@ function App() {
       .catch((e) => console.log("Ошибка при очистке чека:", e));
   };
   return (
-    <div className="app">
+    <div className={`app ${userInfo.name === "Neon" ? 'app__neon' : 'app__elvis'}`}>
       <Header userInfo={userInfo} btnBar={btnBar} cost={cost} />
       <div className="app__container">
         <Routes>

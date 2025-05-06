@@ -27,9 +27,6 @@ body {
   margin: 0 auto;
   width: 100%;
   background-color: black;
-  background-image: url('./images/Frame\ 35\ \(2\)\ 1\ 1.png');
-  background-size: cover;
-  background-repeat: no-repeat;
   /* font-family: 'DrukWideCyr-Bold', Arial, Helvetica, sans-serif; */
   font-family: "inter", Arial, Helvetica, sans-serif;
 }
