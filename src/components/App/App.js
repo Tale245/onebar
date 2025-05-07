@@ -150,6 +150,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      navigate("/main");
       setIsLoggedIn(true);
     } else {
       navigate("/signin");
@@ -525,6 +526,8 @@ function App() {
     auth
       .signin(email, password, codeWord)
       .then(() => {
+        navigate("/main");
+
         console.log("Успешная авторизация!");
         setIsLoggedIn(true);
 
