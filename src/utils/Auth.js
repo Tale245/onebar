@@ -10,13 +10,11 @@ class Auth {
 
       return res.json();
     } else {
-      debugger
       window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
   //   Авторизация
-
   signin(email, password, codeWord) {
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",

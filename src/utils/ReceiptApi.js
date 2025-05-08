@@ -10,14 +10,12 @@ class Receipt {
 
       return res.json();
     } else {
-
       window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
 
   // Получаем заказ
-
   getReceipt() {
     return fetch(`${this._baseUrl}/getReceipts`, {
       method: "GET",
@@ -26,7 +24,6 @@ class Receipt {
         "Accept": "application/json",
       },
     }).then((res) => {
-
       return this._checkResponse(res);
     });
   }
@@ -43,9 +40,7 @@ class Receipt {
   }
 
   // Создаем заказ
-
   createReceipt(nameWhoOrders, foods, price, doneStatus) {
-
     return fetch(`${this._baseUrl}/createReceipt`, {
       method: "POST",
       headers: {
@@ -59,7 +54,6 @@ class Receipt {
         doneStatus: doneStatus,
       }),
     }).then((res) => {
-
       return this._checkResponse(res);
     });
   }

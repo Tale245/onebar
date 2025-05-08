@@ -10,14 +10,12 @@ class Order {
 
       return res.json();
     } else {
-
       window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
 
   // Получаем заказ
-
   getOrders() {
     return fetch(`${this._baseUrl}/orders`, {
       method: "GET",
@@ -30,7 +28,6 @@ class Order {
   }
 
   // Создаем заказ
-
   createOrder(nameWhoOrders, foods, price, doneStatus) {
 
     return fetch(`${this._baseUrl}/createOrder`, {

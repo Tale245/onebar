@@ -11,14 +11,12 @@ class UserApi {
 
       return res.json();
     } else {
-
-      // window.location.reload();
+      window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
 
   // Получить информацию о всех пользователях
-
   getUsers() {
     return fetch(`${this._baseUrl}/users`, {
       method: "GET",
@@ -29,9 +27,7 @@ class UserApi {
       return this._checkResponse(res);
     });
   }
-
   // Получить информацию о текущем пользователе
-
   getMyInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
@@ -44,7 +40,6 @@ class UserApi {
   }
 
   addToCart(name, description, price, gram, imageLink, category) {
-
     return fetch(`${this._baseUrl}/user/cards`, {
       method: "POST",
       headers: {

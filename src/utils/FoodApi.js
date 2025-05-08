@@ -9,11 +9,11 @@ class Food {
     if (res.ok) {
       return res.json();
     } else {
+      window.location.reload();
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
   //   Получаем меню
-
   getFoods() {
     return fetch(`${this._baseUrl}/foodMenu`, {
       method: "GET",
