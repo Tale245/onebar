@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Basket.css";
 import FoodList from "../FoodList/FoodList";
@@ -18,7 +18,8 @@ const Basket = ({
   userList
 }) => {
 
-  const [selectedUserId, setSelectedUserId] = useState('681779bbe1f76c2af11cace9')
+  const [selectedUserId, setSelectedUserId] = useState('68177fe4cf0d216bc5fdfb6e')
+
 
   const handleTableChange = (e) => {
     setSelectedUserId(e.target.value)
@@ -27,32 +28,30 @@ const Basket = ({
   const filteredOrders = userList.filter((user) => {
     const name = user.name?.toLowerCase().trim() || '';
     const userName = userInfo.name.toLowerCase();
+    const isSystemUser = name.includes('стол 1')
+
     const isNeonTable = name.includes('neon');
 
+    if (isSystemUser) return true
     if (userName === 'admin' || userName === 'администратор') return true;
 
-    if (userName === 'neon') return isNeonTable;
+    if (userName === 'neon') return isNeonTable
 
     return !isNeonTable;
   });
-
   const selectedUser = filteredOrders.find(u => u._id === selectedUserId);
-
-
+  console.log(selectedUser)
   const createNewOrder = () => {
     if (userInfo.foods.length === 0) {
       console.log("вы не можете сделать пустой заказ!");
     } else {
-      if (userInfo.waiter === true && userInfo.name === 'Neon') {
+      if (userInfo.waiter === true) {
         if (selectedUser._id === userInfo._id) {
           changeLimit(selectedUser.limit - 0, selectedUser._id);
         } else {
           changeLimit(selectedUser.limit - cost, selectedUser._id);
         }
         createOrder(selectedUser.name, userInfo.foods, cost, false);
-      } else if (userInfo.waiter === true && userInfo.name !== 'Neon') {
-        changeLimit(userInfo.limit - 0, userInfo._id);
-        changeLimit(userInfo.limit - cost, userInfo._id);
       } else {
         createOrder(userInfo.name, userInfo.foods, cost, false);
         changeLimit(userInfo.limit - cost, userInfo._id);
@@ -83,10 +82,10 @@ const Basket = ({
           МЫ УЖЕ НАЧАЛИ ГОТОВИТЬ ВАШ ЗАКАЗ!
         </p>
       )}
-      {userInfo.name === "Neon" && <div className="basket__container basket__container-select">
+      {userInfo.waiter === true && <div className="basket__container basket__container-select">
         <p className="basket__text basket__text-select">Счет списания:</p>
         <select className="basket__select" value={selectedUserId} onChange={handleTableChange}>
-          {filteredOrders.map(user => (
+          {filteredOrders.sort((a, b) => (a._id === '68177fe4cf0d216bc5fdfb6e' ? -1 : b._id === '68177fe4cf0d216bc5fdfb6e' ? 1 : 0)).map(user => (
             <option className="basket__option" key={user._id} value={user._id}>{user.name} - {user.limit}р</option>
           )
           )}
@@ -98,14 +97,14 @@ const Basket = ({
           Назад
         </NavLink>
         <p className="basket__price">
-          {cost}р/<span className="basket__price-limit">{userInfo.name === "Neon" ? selectedUser.limit : userInfo.limit}р</span>
+          {cost}р/<span className="basket__price-limit">{userInfo.waiter === true ? selectedUser.limit : userInfo.limit}р</span>
         </p>
         <button
-          className={`basket__btn-order ${(userInfo.name === "Neon" ? (cost > selectedUser.limit || cost === 0) : (cost > userInfo.limit || cost === 0)) &&
+          className={`basket__btn-order ${(userInfo.waiter === true ? (cost > selectedUser.limit || cost === 0) : (cost > userInfo.limit || cost === 0)) &&
             "basket__btn-order_disabled"
             } ${btnBar === true && "basket__btn-order_barTheme"}`}
           onClick={createNewOrder}
-          disabled={userInfo.name === "Neon" ? (cost > selectedUser.limit || cost === 0) : (cost > userInfo.limit || cost === 0)}
+          disabled={userInfo.waiter === true ? (cost > selectedUser.limit || cost === 0) : (cost > userInfo.limit || cost === 0)}
         >
           Заказать
         </button>
