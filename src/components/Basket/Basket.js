@@ -40,7 +40,7 @@ const Basket = ({
     return !isNeonTable;
   });
   const selectedUser = filteredOrders.find(u => u._id === selectedUserId);
-  console.log(selectedUser)
+  
   const createNewOrder = () => {
     if (userInfo.foods.length === 0) {
       console.log("вы не можете сделать пустой заказ!");
