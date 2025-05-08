@@ -839,6 +839,8 @@ function App() {
           liqueursBtnValue={liqueursBtnValue}
           cocktailsBtnValue={cocktailsBtnValue}
           shotsBtnValue={shotsBtnValue}
+          userInfo={userInfo}
+
         />
       </div>
     </div>

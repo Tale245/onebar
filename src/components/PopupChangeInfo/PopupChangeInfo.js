@@ -43,6 +43,7 @@ const PopupChangeInfo = ({
   cocktailsBtnValue,
   shotsBtnValue,
   isHideChangeInfo,
+  userInfo
 }) => {
   const {
     watch,
@@ -165,12 +166,12 @@ const PopupChangeInfo = ({
                 <option className="popupChangeInfo__select-status" value="gram">
                   Вес
                 </option>
-                <option
+                {userInfo.waiter !== true && <option
                   className="popupChangeInfo__select-status"
                   value="linkImage"
                 >
                   Изображение
-                </option>
+                </option>}
               </select>
             )}
             {!isHideChangeInfo && <p className="popupChangeInfo__text">-</p>}
