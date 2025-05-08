@@ -3,7 +3,7 @@ import React from "react";
 import "./Receipts.css";
 import Receipt from "../Receipt/Receipt";
 
-const Receipts = ({ receipts, download, clearReceipt, setId, userInfo }) => {
+const Receipts = ({ receipts, download, clearReceipt, setId, userInfo, btnBar }) => {
 
   const filteredOrders = receipts.filter((order) => {
     const name = order.nameWhoOrders?.toLowerCase().trim() || '';
@@ -17,8 +17,8 @@ const Receipts = ({ receipts, download, clearReceipt, setId, userInfo }) => {
   });
 
   return (
-    <section className="receipts">
-      <h1 className="receipts__title">Распечатать чек</h1>
+    <section className={`receipts`}>
+      <h1 className={`receipts__title ${btnBar === true && 'receipts__title_bar-theme'}`}>Распечатать чек</h1>
       {receipts &&
         filteredOrders.map((item) => (
           <Receipt

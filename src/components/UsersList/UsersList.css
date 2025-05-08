@@ -6,6 +6,7 @@
   justify-content: center;
   position: relative;
 }
+
 .userList__title {
   margin: 0;
   text-align: center;
@@ -17,6 +18,12 @@
   font-weight: 700;
   line-height: normal;
 }
+
+.userList__title_btn-theme {
+  color: #00b7ff;
+  text-shadow: 0 0 4px #00b7ff;
+}
+
 .userList__container {
   margin: 0;
   display: flex;

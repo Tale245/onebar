@@ -3,7 +3,7 @@ import React from "react";
 import "./UsersList.css";
 import UserCard from "../UserCard/UserCard";
 
-const UsersList = ({ userList, changeLimit, userInfo }) => {
+const UsersList = ({ userList, changeLimit, userInfo, btnBar }) => {
 
   const filteredOrders = userList.filter((user) => {
     const name = user.name?.toLowerCase().trim() || '';
@@ -19,7 +19,7 @@ const UsersList = ({ userList, changeLimit, userInfo }) => {
 
   return (
     <section className="userList">
-      <h1 className="userList__title">Установить лимит</h1>
+      <h1 className={`userList__title ${btnBar === true && 'userList__title_btn-theme'}`}>Установить лимит</h1>
       <div className="userList__container">
         {filteredOrders.map((item) => (
           <UserCard
@@ -28,6 +28,7 @@ const UsersList = ({ userList, changeLimit, userInfo }) => {
             key={item._id}
             id={item._id}
             changeLimit={changeLimit}
+            btnBar={btnBar}
           />
         ))}
       </div>

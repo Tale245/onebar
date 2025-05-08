@@ -9,9 +9,6 @@ class Food {
     if (res.ok) {
       return res.json();
     } else {
-      debugger
-      // window.location.reload();
-      debugger
       return Promise.reject(`Ошибка ${res.status}`);
     }
   }
@@ -37,9 +34,9 @@ class Food {
       return this._checkResponse(res);
     });
   }
-  addNewElementInMenu(newItem, name, description, price, gram, linkImage) {
-    debugger
-    return fetch(`${this._baseUrl}/add${newItem}InMenu`, {
+  addNewElementInMenu(newItem, name, description, price, gram, linkImage, whatIsMenu) {
+    console.log(whatIsMenu)
+    return fetch(`${this._baseUrl}/addElementIn${whatIsMenu}MenuArray`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -51,16 +48,16 @@ class Food {
           description: description,
           price: price,
           gram: gram,
-          linkImage: linkImage
+          linkImage: linkImage,
+          itemName: newItem
         },
       }),
     }).then((res) => {
       return this._checkResponse(res);
     });
   }
-  deleteElementInMenu(index, deleteItem) {
-    debugger
-    return fetch(`${this._baseUrl}/delete${deleteItem}InMenu`, {
+  deleteElementInMenu(index, deleteItem, whatIsMenu) {
+    return fetch(`${this._baseUrl}/deleteElementIn${whatIsMenu}Menu`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -68,6 +65,7 @@ class Food {
       },
       body: JSON.stringify({
         index: index,
+        deleteItem: deleteItem
       }),
     }).then((res) => {
       return this._checkResponse(res);

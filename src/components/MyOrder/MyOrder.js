@@ -2,7 +2,7 @@ import React from "react";
 
 import "./MyOrder.css";
 
-const MyOrder = ({ itemFood, price, status, date }) => {
+const MyOrder = ({ itemFood, price, status, date, btnBar }) => {
   return (
     <div className="myOrder">
       <div className="myOrder__container">
@@ -11,7 +11,7 @@ const MyOrder = ({ itemFood, price, status, date }) => {
           <h5 className="myOrder__text myOrder__text_date">{date.slice(0, 10)} - {date.slice(11, 19)}</h5>
         </div>
         {itemFood.map((item) => (
-          <p className="myOrder__text-name">{item.name}</p>
+          <p className={`myOrder__text-name`}>{item.name}</p>
         ))}
         <div className="myOrder__text-container">
           <p className="myOrder__text">{price}р</p>

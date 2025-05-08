@@ -37,6 +37,11 @@
   text-shadow: 0 0 6px #ff2a70;
 }
 
+.userCard__user-name_bar-theme {
+  color: #00b7ff;
+  text-shadow: 0 0 6px #00b7ff;
+}
+
 .userCard__form {
   display: flex;
   flex-direction: column;

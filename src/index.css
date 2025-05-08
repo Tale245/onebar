@@ -30,3 +30,15 @@ body {
   /* font-family: 'DrukWideCyr-Bold', Arial, Helvetica, sans-serif; */
   font-family: "inter", Arial, Helvetica, sans-serif;
 }
+
+html,
+body {
+  height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}

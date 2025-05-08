@@ -4,10 +4,16 @@
   flex-direction: column;
   gap: 50px;
 }
+
 .receipts__title {
   margin: 0 auto;
   margin-top: 40px;
   color: #ff2a70;
   text-shadow: 0 0 4px #ff2a70;
   font-family: inter, Arial, Helvetica, sans-serif;
+}
+
+.receipts__title_bar-theme {
+  color: #00b7ff;
+  text-shadow: 0 0 4px #00b7ff;
 }

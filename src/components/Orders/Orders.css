@@ -4,9 +4,11 @@
   padding-bottom: 40px;
   position: relative;
 }
+
 .orders__container {
   margin: 0;
 }
+
 .orders__title {
   margin: 0;
   margin-top: 59px;
@@ -20,6 +22,12 @@
   font-weight: 400;
   line-height: normal;
 }
+
+.orders__title_bar-theme {
+  color: #00b7ff;
+  text-shadow: 0 0 4px #00b7ff;
+}
+
 .orders__btns {
   margin: 0;
   margin-top: 20px;
@@ -27,6 +35,7 @@
   justify-content: center;
   gap: 10px;
 }
+
 .orders__btn-food {
   margin: 0;
   min-width: 100px;
@@ -39,18 +48,22 @@
   border: 2px solid #ff2a70;
   transition: 0.3s ease;
 }
+
 .orders__btn-food:last-of-type {
   border-color: #00b7ff;
 }
+
 .orders__btn-food:hover {
   cursor: pointer;
 }
+
 .orders__btn-food_active {
   background: rgba(255, 42, 112, 0.2);
   box-shadow: 0 0 8px #ff2a70;
   color: #ffffff;
   text-shadow: 0 0 6px #ff2a70;
 }
+
 .orders__btn-food:last-of-type.orders__btn-food_active {
   background: rgba(0, 183, 255, 0.2);
   box-shadow: 0 0 8px #00b7ff;

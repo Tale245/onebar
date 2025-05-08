@@ -83,96 +83,96 @@ const FoodCard = ({
     if (btnBar === false) {
       if (pizzaBtnValue === true) {
         thisArray = foodArray[0].pizza;
-        category = "Pizza";
+        category = "pizza";
       } else if (soupsBtnValue === true) {
         thisArray = foodArray[0].soups;
-        category = "Soups";
+        category = "soups";
       } else if (iceCreamBtnValue === true) {
         thisArray = foodArray[0].iceCream;
-        category = "IceCream";
+        category = "iceCream";
       } else if (snacksBtnValue === true) {
         thisArray = foodArray[0].snacks;
-        category = "Snacks";
+        category = "snacks";
       } else if (coldSnacksBtnValue === true) {
         thisArray = foodArray[0].coldSnacks;
-        category = "ColdSnacks";
+        category = "coldSnacks";
       } else if (saladsBtnValue === true) {
         thisArray = foodArray[0].salads;
-        category = "Salads";
+        category = "salads";
       } else if (pastesBtnValue === true) {
         thisArray = foodArray[0].pastes;
-        category = "Pastes";
+        category = "pastes";
       } else if (beerSnacksBtnValue === true) {
         thisArray = foodArray[0].beerSnacks;
-        category = "BeerSnack";
+        category = "beerSnacks";
       } else if (hotDishesBtnValue === true) {
         thisArray = foodArray[0].hotDishes;
-        category = "HotDishes";
+        category = "hotDishes";
       }
     } else if (btnBar === true) {
       if (cigarettesBtnValue === true) {
         thisArray = foodMenuBar[0].cigarettes;
-        category = "Cigarettes";
+        category = "cigarettes";
       } else if (juiceBtnValue === true) {
         thisArray = foodMenuBar[0].juice;
-        category = "Juice";
+        category = "juice";
       } else if (hookahsBtnValue === true) {
         thisArray = foodMenuBar[0].hookahs;
-        category = "Hookahs";
+        category = "hookahs";
       } else if (coffeesBtnValue === true) {
         thisArray = foodMenuBar[0].coffee;
-        category = "Coffee";
+        category = "coffee";
       } else if (teaBtnValue === true) {
         thisArray = foodMenuBar[0].tea;
-        category = "Tea";
+        category = "tea";
       } else if (bottledBeerBtnValue === true) {
         thisArray = foodMenuBar[0].bottledBeer;
-        category = "BottledBeer";
+        category = "bottledBeer";
       } else if (wineBtnValue === true) {
         thisArray = foodMenuBar[0].wine;
-        category = "Wine";
+        category = "wine";
       } else if (champagneBtnValue === true) {
         thisArray = foodMenuBar[0].champagne;
-        category = "Champagne";
+        category = "champagne";
       } else if (vermouthBtnValue === true) {
         thisArray = foodMenuBar[0].vermouth;
-        category = "Vermouth";
+        category = "vermouth";
       } else if (aperativesBtnValue === true) {
         thisArray = foodMenuBar[0].aperatives;
-        category = "Aperatives";
+        category = "aperatives";
       } else if (rumBtnValue === true) {
         thisArray = foodMenuBar[0].rum;
-        category = "Rum";
+        category = "rum";
       } else if (cognacBtnValue === true) {
         thisArray = foodMenuBar[0].cognac;
-        category = "Cognac";
+        category = "cognac";
       } else if (brandyBtnValue === true) {
         thisArray = foodMenuBar[0].brandy;
-        category = "Brandy";
+        category = "brandy";
       } else if (whiskeyBtnValue === true) {
         thisArray = foodMenuBar[0].whiskey;
-        category = "Whiskey";
+        category = "whiskey";
       } else if (ginBtnValue === true) {
         thisArray = foodMenuBar[0].gin;
-        category = "Gin";
+        category = "gin";
       } else if (tequilaBtnValue === true) {
         thisArray = foodMenuBar[0].tequila;
-        category = "Tequila";
+        category = "tequila";
       } else if (tincturesBtnValue === true) {
         thisArray = foodMenuBar[0].tinctures;
-        category = "Tinctures";
+        category = "tinctures";
       } else if (vodkaBtnValue === true) {
         thisArray = foodMenuBar[0].vodka;
-        category = "Vodka";
+        category = "vodka";
       } else if (liqueursBtnValue === true) {
         thisArray = foodMenuBar[0].liqueurs;
-        category = "Liqueurs";
+        category = "liqueurs";
       } else if (cocktailsBtnValue === true) {
         thisArray = foodMenuBar[0].cocktails;
-        category = "Cocktails";
+        category = "cocktails";
       } else if (shotsBtnValue === true) {
         thisArray = foodMenuBar[0].shots;
-        category = "Shots";
+        category = "shots";
       }
     }
     thisArray.forEach((item) => {

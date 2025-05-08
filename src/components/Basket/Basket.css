@@ -17,6 +17,11 @@
   font-weight: 400;
 }
 
+.basket__title_barTheme {
+  color: #00b7ff;
+  text-shadow: 0 0 4px #00b7ff;
+}
+
 .basket__container {
   margin: 0;
   margin-top: 100px;
@@ -26,9 +31,11 @@
   align-items: center;
   gap: 204px;
 }
-.basket__container-select{
+
+.basket__container-select {
   gap: 20px;
 }
+
 .basket__price {
   color: #ffffff;
   font-family: Inter, sans-serif;
@@ -74,9 +81,9 @@
 }
 
 .basket__btn-order_barTheme {
-  color: #eaa51a;
-  border: 2px solid #eaa51a;
-  box-shadow: 0 0 8px #eaa51a, 0 0 16px #eaa51a;
+  color: #ffffff;
+  border: 2px solid #00b7ff;
+  box-shadow: 0 0 12px #ff2a70, 0 0 24px #00b7ff;
 }
 
 .basket__link-back {
@@ -116,7 +123,8 @@
   height: 50px;
   font-family: Inter;
   font-size: 15px;
-  background: #0a0a0a;;
+  background: #0a0a0a;
+  ;
   border: 1px solid #00b7ff;
   border-image: linear-gradient(to left, #ff2a70, #00b7ff) 1;
 

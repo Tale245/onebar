@@ -2,9 +2,10 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Basket from "../Basket/Basket";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, transform } from "framer-motion";
+import Basket from "../Basket/Basket";
 import userApi from "../../utils/UserApi";
 import food from "../../utils/FoodApi";
 import orderApi from "../../utils/OrderApi";
@@ -96,6 +97,15 @@ function App() {
 
   const downloadedOrders = useRef(new Set()); // Храним ID уже скачанных заказов
   const [prevOrdersState, setPrevOrdersState] = useState([]); // Храним предыдущее состояние заказов
+
+  const location = useLocation();
+
+  const fade = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.35, ease: 'easeInOut' }
+  };
 
   useEffect(() => {
     // Загружаем из localStorage уже скачанные заказы
@@ -454,8 +464,9 @@ function App() {
     gram,
     linkImage
   ) => {
+    let whatIsMenu = btnBar === true ? 'Bar' : 'Food'
     food
-      .addNewElementInMenu(newItem, name, description, price, gram, linkImage)
+      .addNewElementInMenu(newItem, name, description, price, gram, linkImage, whatIsMenu)
       .then(() => food.getFoods())
       .then((foods) => setFoodMenu(foods))
       .catch((e) => console.log("Ошибка при добавлении нового элемента:", e));
@@ -491,19 +502,21 @@ function App() {
     description,
     price,
     gram,
-    linkImage,
-    category
+    linkImage
   ) => {
+    let whatIsMenu = btnBar === true ? 'Bar' : 'Food'
     food
-      .addNewElementInMenu(newItem, name, description, price, gram, linkImage, category)
+      .addNewElementInMenu(newItem, name, description, price, gram, linkImage, whatIsMenu)
       .then(() => food.getFoodBar())
       .then((barMenu) => setFoodMenuBar(barMenu))
       .catch((e) => console.log("Ошибка при добавлении в барное меню:", e));
   };
 
   const deleteElementInMenu = (index, deleteItem) => {
+    let whatIsMenu = btnBar === true ? 'Bar' : 'Food'
+
     food
-      .deleteElementInMenu(index, deleteItem)
+      .deleteElementInMenu(index, deleteItem, whatIsMenu)
       .then(() => food.getFoods())
       .then((menu) => {
         setFoodMenu(menu);
@@ -513,8 +526,9 @@ function App() {
   };
 
   const deleteElementInBarMenu = (index, deleteItem) => {
+    let whatIsMenu = btnBar === true ? 'Bar' : 'Food'
     food
-      .deleteElementInMenu(index, deleteItem)
+      .deleteElementInMenu(index, deleteItem, whatIsMenu)
       .then(() => food.getFoodBar())
       .then((barMenu) => {
         setFoodMenuBar(barMenu);
@@ -573,130 +587,146 @@ function App() {
     <div className={`app ${userInfo.name === "Neon" ? 'app__neon' : 'app__elvis'}`}>
       <Header userInfo={userInfo} btnBar={btnBar} cost={cost} />
       <div className="app__container">
-        <Routes>
+        <Routes location={location} key={location.pathname}>
           <Route
             path="/basket"
             element={
-              <Basket
-                userInfo={userInfo}
-                userList={userList}
-                foodMenu={foodMenu}
-                deleteFromCart={deleteFromCart}
-                cost={cost}
-                setCost={setCost}
-                createOrder={createOrder}
-                clearCart={clearCart}
-                changeLimit={changeLimit}
-                btnBar={btnBar}
-                isUserCartEmpty={isUserCartEmpty}
-                isUserCreateOrder={isUserCreateOrder}
-                setIsUserCreateOrder={setIsUserCreateOrder}
-                setIsUserCartEmpty={setIsUserCartEmpty}
-                downloadItem={downloadItem}
-              />
+              <motion.div initial={fade.initial}
+                animate={fade.animate}
+                exit={fade.exit}
+                transition={fade.transition}
+              >
+                <Basket
+                  userInfo={userInfo}
+                  userList={userList}
+                  foodMenu={foodMenu}
+                  deleteFromCart={deleteFromCart}
+                  cost={cost}
+                  setCost={setCost}
+                  createOrder={createOrder}
+                  clearCart={clearCart}
+                  changeLimit={changeLimit}
+                  btnBar={btnBar}
+                  isUserCartEmpty={isUserCartEmpty}
+                  isUserCreateOrder={isUserCreateOrder}
+                  setIsUserCreateOrder={setIsUserCreateOrder}
+                  setIsUserCartEmpty={setIsUserCartEmpty}
+                  downloadItem={downloadItem}
+                /></motion.div>
             }
           />
           <Route
             path="/main"
             element={
-              <Main
-                openPopupConfirm={openPopupConfirm}
-                userInfo={userInfo}
-                foodMenu={foodMenu}
-                addToCart={addToCart}
-                cost={cost}
-                setCost={setCost}
-                pizzaBtnValue={pizzaBtnValue}
-                soupsBtnValue={soupsBtnValue}
-                snacksBtnValue={snacksBtnValue}
-                coldSnacksBtnValue={coldSnacksBtnValue}
-                iceCreamBtnValue={iceCreamBtnValue}
-                saladsBtnValue={saladsBtnValue}
-                pastesBtnValue={pastesBtnValue}
-                beerSnacksBtnValue={beerSnacksBtnValue}
-                hotDishesBtnValue={hotDishesBtnValue}
-                setPizzaBtnValue={setPizzaBtnValue}
-                setSoupsBtnValue={setSoupsBtnValue}
-                setSnacksBtnValue={setSnacksBtnValue}
-                setColdSnacksBtnValue={setColdSnacksBtnValue}
-                setIceCreamBtnValue={setIceCreamBtnValue}
-                setSaladsBtnValue={setSaladsBtnValue}
-                setPastesBtnValue={setPastesBtnValue}
-                setBeerSnacksBtnValue={setBeerSnacksBtnValue}
-                setHotDishesBtnValue={setHotDishesBtnValue}
-                cigarettesBtnValue={cigarettesBtnValue}
-                hookahsBtnValue={hookahsBtnValue}
-                juiceBtnValue={juiceBtnValue}
-                coffeesBtnValue={coffeesBtnValue}
-                teaBtnValue={teaBtnValue}
-                bottledBeerBtnValue={bottledBeerBtnValue}
-                wineBtnValue={wineBtnValue}
-                champagneBtnValue={champagneBtnValue}
-                vermouthBtnValue={vermouthBtnValue}
-                aperativesBtnValue={aperativesBtnValue}
-                rumBtnValue={rumBtnValue}
-                cognacBtnValue={cognacBtnValue}
-                brandyBtnValue={brandyBtnValue}
-                whiskeyBtnValue={whiskeyBtnValue}
-                ginBtnValue={ginBtnValue}
-                tequilaBtnValue={tequilaBtnValue}
-                tincturesBtnValue={tincturesBtnValue}
-                vodkaBtnValue={vodkaBtnValue}
-                liqueursBtnValue={liqueursBtnValue}
-                cocktailsBtnValue={cocktailsBtnValue}
-                shotsBtnValue={shotsBtnValue}
-                setCigarettesBtnValue={setCigarettesBtnValue}
-                setJuiceBtnValue={setJuiceBtnValue}
-                setHookahsBtnValue={setHookahsBtnValue}
-                setCoffeeBtnValue={setCoffeeBtnValue}
-                setTeaBtnValue={setTeaBtnValue}
-                setBottledBeerBtnValue={setBottledBeerBtnValue}
-                setWineBtnValue={setWineBtnValue}
-                setChampagneBtnValue={setChampagneBtnValue}
-                setVermouthBtnValue={setVermouthBtnValue}
-                setAperativesBtnValue={setAperativesBtnValue}
-                setRumBtnValue={setRumBtnValue}
-                setCognacBtnValue={setCognacBtnValue}
-                setBrandyBtnValue={setBrandyBtnValue}
-                setWhiskeyBtnValue={setWhiskeyBtnValue}
-                setGinBtnValue={setGinBtnValue}
-                setTequilaBtnValue={setTequilaBtnValue}
-                setTincturesBtnValue={setTincturesBtnValue}
-                setVodkaBtnValue={setVodkaBtnValue}
-                setLiqueursBtnValue={setLiqueursBtnValue}
-                setCocktailsBtnValue={setCocktailsBtnValue}
-                setShotsBtnValue={setShotsBtnValue}
-                deleteElementInMenu={deleteElementInMenu}
-                openPopupAddItem={openPopupAddItem}
-                isPopupAddItemOpen={isPopupAddItemOpen}
-                closePopups={closePopups}
-                addNewElementInMenu={addNewElementInMenu}
-                btnBar={btnBar}
-                setBtnBar={setBtnBar}
-                btnFood={btnFood}
-                setBtnFood={setBtnFood}
-                foodMenuBar={foodMenuBar}
-                deleteElementInBarMenu={deleteElementInBarMenu}
-                deleteFromCart={deleteFromCart}
-                openPopupChangeInfo={openPopupChangeInfo}
-              />
+              <motion.div initial={fade.initial}
+                animate={fade.animate}
+                exit={fade.exit}
+                transition={fade.transition}>
+                <Main
+                  openPopupConfirm={openPopupConfirm}
+                  userInfo={userInfo}
+                  foodMenu={foodMenu}
+                  addToCart={addToCart}
+                  cost={cost}
+                  setCost={setCost}
+                  pizzaBtnValue={pizzaBtnValue}
+                  soupsBtnValue={soupsBtnValue}
+                  snacksBtnValue={snacksBtnValue}
+                  coldSnacksBtnValue={coldSnacksBtnValue}
+                  iceCreamBtnValue={iceCreamBtnValue}
+                  saladsBtnValue={saladsBtnValue}
+                  pastesBtnValue={pastesBtnValue}
+                  beerSnacksBtnValue={beerSnacksBtnValue}
+                  hotDishesBtnValue={hotDishesBtnValue}
+                  setPizzaBtnValue={setPizzaBtnValue}
+                  setSoupsBtnValue={setSoupsBtnValue}
+                  setSnacksBtnValue={setSnacksBtnValue}
+                  setColdSnacksBtnValue={setColdSnacksBtnValue}
+                  setIceCreamBtnValue={setIceCreamBtnValue}
+                  setSaladsBtnValue={setSaladsBtnValue}
+                  setPastesBtnValue={setPastesBtnValue}
+                  setBeerSnacksBtnValue={setBeerSnacksBtnValue}
+                  setHotDishesBtnValue={setHotDishesBtnValue}
+                  cigarettesBtnValue={cigarettesBtnValue}
+                  hookahsBtnValue={hookahsBtnValue}
+                  juiceBtnValue={juiceBtnValue}
+                  coffeesBtnValue={coffeesBtnValue}
+                  teaBtnValue={teaBtnValue}
+                  bottledBeerBtnValue={bottledBeerBtnValue}
+                  wineBtnValue={wineBtnValue}
+                  champagneBtnValue={champagneBtnValue}
+                  vermouthBtnValue={vermouthBtnValue}
+                  aperativesBtnValue={aperativesBtnValue}
+                  rumBtnValue={rumBtnValue}
+                  cognacBtnValue={cognacBtnValue}
+                  brandyBtnValue={brandyBtnValue}
+                  whiskeyBtnValue={whiskeyBtnValue}
+                  ginBtnValue={ginBtnValue}
+                  tequilaBtnValue={tequilaBtnValue}
+                  tincturesBtnValue={tincturesBtnValue}
+                  vodkaBtnValue={vodkaBtnValue}
+                  liqueursBtnValue={liqueursBtnValue}
+                  cocktailsBtnValue={cocktailsBtnValue}
+                  shotsBtnValue={shotsBtnValue}
+                  setCigarettesBtnValue={setCigarettesBtnValue}
+                  setJuiceBtnValue={setJuiceBtnValue}
+                  setHookahsBtnValue={setHookahsBtnValue}
+                  setCoffeeBtnValue={setCoffeeBtnValue}
+                  setTeaBtnValue={setTeaBtnValue}
+                  setBottledBeerBtnValue={setBottledBeerBtnValue}
+                  setWineBtnValue={setWineBtnValue}
+                  setChampagneBtnValue={setChampagneBtnValue}
+                  setVermouthBtnValue={setVermouthBtnValue}
+                  setAperativesBtnValue={setAperativesBtnValue}
+                  setRumBtnValue={setRumBtnValue}
+                  setCognacBtnValue={setCognacBtnValue}
+                  setBrandyBtnValue={setBrandyBtnValue}
+                  setWhiskeyBtnValue={setWhiskeyBtnValue}
+                  setGinBtnValue={setGinBtnValue}
+                  setTequilaBtnValue={setTequilaBtnValue}
+                  setTincturesBtnValue={setTincturesBtnValue}
+                  setVodkaBtnValue={setVodkaBtnValue}
+                  setLiqueursBtnValue={setLiqueursBtnValue}
+                  setCocktailsBtnValue={setCocktailsBtnValue}
+                  setShotsBtnValue={setShotsBtnValue}
+                  deleteElementInMenu={deleteElementInMenu}
+                  openPopupAddItem={openPopupAddItem}
+                  isPopupAddItemOpen={isPopupAddItemOpen}
+                  closePopups={closePopups}
+                  addNewElementInMenu={addNewElementInMenu}
+                  btnBar={btnBar}
+                  setBtnBar={setBtnBar}
+                  btnFood={btnFood}
+                  setBtnFood={setBtnFood}
+                  foodMenuBar={foodMenuBar}
+                  deleteElementInBarMenu={deleteElementInBarMenu}
+                  deleteFromCart={deleteFromCart}
+                  openPopupChangeInfo={openPopupChangeInfo}
+                /></motion.div>
+
             }
           />
           {(userInfo.admin === true || userInfo.waiter === true) && (
             <Route
               path="/orders"
               element={
-                <Orders
-                  orders={orders}
-                  updateDoneStatus={updateDoneStatus}
-                  btnOrders={btnOrders}
-                  btnHistoryOrders={btnHistoryOrders}
-                  setBtnOrders={setBtnOrders}
-                  setBtnHistoryOrders={setBtnHistoryOrders}
-                  download={download}
-                  userInfo={userInfo}
-                  downloadItem={downloadItem}
-                />
+                <motion.div initial={fade.initial}
+                  animate={fade.animate}
+                  exit={fade.exit}
+                  transition={fade.transition}>
+                  <Orders
+                    orders={orders}
+                    updateDoneStatus={updateDoneStatus}
+                    btnOrders={btnOrders}
+                    btnHistoryOrders={btnHistoryOrders}
+                    setBtnOrders={setBtnOrders}
+                    setBtnHistoryOrders={setBtnHistoryOrders}
+                    download={download}
+                    userInfo={userInfo}
+                    downloadItem={downloadItem}
+                    btnBar={btnBar}
+                  /></motion.div>
+
               }
             />
           )}
@@ -707,27 +737,48 @@ function App() {
             <Route
               path="/userList"
               element={
-                <UsersList userList={userList} userInfo={userInfo} changeLimit={changeLimit} />
+                <motion.div initial={fade.initial}
+                  animate={fade.animate}
+                  exit={fade.exit}
+                  transition={fade.transition}>
+                  <UsersList userList={userList} userInfo={userInfo} changeLimit={changeLimit} btnBar={btnBar} />
+                </motion.div>
               }
             />
           )}
           <Route
             path="/myOrders"
-            element={<MyOrders orders={orders} userInfo={userInfo} />}
+            element={<motion.div initial={fade.initial}
+              animate={fade.animate}
+              exit={fade.exit}
+              transition={fade.transition}>
+              <MyOrders orders={orders} userInfo={userInfo} btnBar={btnBar} />
+            </motion.div>}
           />
           <Route
             path="/receipts"
             element={
-              <Receipts
-                receipts={receipts}
-                download={download}
-                clearReceipt={clearReceipt}
-                setId={setId}
-                userInfo={userInfo}
-              />
+              <motion.div initial={fade.initial}
+                animate={fade.animate}
+                exit={fade.exit}
+                transition={fade.transition}>
+                <Receipts
+                  receipts={receipts}
+                  download={download}
+                  clearReceipt={clearReceipt}
+                  setId={setId}
+                  userInfo={userInfo}
+                  btnBar={btnBar}
+                /> </motion.div>
             }
           />
-          <Route path="*" element={<PageNotFound />}></Route>
+          <Route path="*" element={<motion.div initial={fade.initial}
+            animate={fade.animate}
+            exit={fade.exit}
+            transition={fade.transition}>
+            <PageNotFound />
+          </motion.div>}>
+          </Route>
         </Routes>
         <PopupAddItem
           isPopupAddItemOpen={isPopupAddItemOpen}

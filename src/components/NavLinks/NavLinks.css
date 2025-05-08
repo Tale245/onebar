@@ -50,7 +50,7 @@
 
 /* Стили горизонтальной полосы прокрутки */
 .navLinks__container::-webkit-scrollbar {
-  height: 5px;
+  height: 10px;
   /* высота нижнего скроллбара */
 }
 

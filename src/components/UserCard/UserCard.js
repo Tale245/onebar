@@ -3,7 +3,7 @@ import React from "react";
 import "./UserCard.css";
 import { useForm } from "react-hook-form";
 
-const UserCard = ({ userName, userLimit, id, changeLimit }) => {
+const UserCard = ({ userName, userLimit, id, changeLimit, btnBar }) => {
   const {
     register,
     handleSubmit,
@@ -19,7 +19,7 @@ const UserCard = ({ userName, userLimit, id, changeLimit }) => {
     <>
       {userName !== 'admin' && <div className="userCard">
         <div className="userCard__container">
-          <p className="userCard__user-name">{userName}</p>
+          <p className={`userCard__user-name ${btnBar === true && 'userCard__user-name_bar-theme'}`}>{userName}</p>
           <form className="userCard__form" onSubmit={handleSubmit(onSubmit)}>
             <p className="userCard__limit">Установить лимит пользователя:</p>
             <input

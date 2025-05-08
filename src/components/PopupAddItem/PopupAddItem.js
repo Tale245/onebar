@@ -102,31 +102,31 @@ const PopupAddItem = ({
                 required: true,
               })}
             >
-              <option сlassName="popup__item" value="ColdSnacks">
+              <option сlassName="popup__item" value="coldSnacks">
                 Холодные закуски
               </option>
-              <option сlassName="popup__item" value="IceCream">
+              <option сlassName="popup__item" value="iceCream">
                 Мороженое
               </option>
-              <option className="popup__item" value="Soups">
+              <option className="popup__item" value="soups">
                 Супы
               </option>
-              <option className="popup__item" value="Pizza">
+              <option className="popup__item" value="pizza">
                 Пицца
               </option>
-              <option className="popup__item" value="Snacks">
+              <option className="popup__item" value="snacks">
                 Снэки
               </option>
-              <option className="popup__item" value="Salads">
+              <option className="popup__item" value="salads">
                 Салаты
               </option>
-              <option className="popup__item" value="Pastes">
+              <option className="popup__item" value="pastes">
                 Пасты
               </option>
-              <option className="popup__item" value="BeerSnack">
+              <option className="popup__item" value="beerSnacks">
                 Закуски к пиву
               </option>
-              <option className="popup__item" value="HotDishes">
+              <option className="popup__item" value="hotDishes">
                 Горячие блюда
               </option>
             </select>
@@ -140,123 +140,123 @@ const PopupAddItem = ({
               })}
               size={4}
             >
-              <option сlassName="popup__item " value="Cigarettes">
+              <option сlassName="popup__item " value="cigarettes">
                 Выберите категорию
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Cigarettes"
+                value="cigarettes"
               >
                 Сигареты
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Hookahs"
+                value="hookahs"
               >
                 Кальяны
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Juice"
+                value="juice"
               >
                 Сок
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Coffee"
+                value="coffee"
               >
                 Кофе
               </option>
-              <option className="popup__item popup__item_bar-theme" value="Tea">
+              <option className="popup__item popup__item_bar-theme" value="tea">
                 Чай
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="BottledBeer"
+                value="bottledBeer"
               >
                 Пиво Бутылочное
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Wine"
+                value="wine"
               >
                 Вино
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Champagne"
+                value="champagne"
               >
                 Шампанское и игристые вина
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Vermouth"
+                value="vermouth"
               >
                 Вермут
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Aperatives"
+                value="aperatives"
               >
                 Аперативы
               </option>
-              <option className="popup__item popup__item_bar-theme" value="Rum">
+              <option className="popup__item popup__item_bar-theme" value="rum">
                 Ром
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Cognac"
+                value="cognac"
               >
                 Коньяк
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Brandy"
+                value="brandy"
               >
                 Бренди
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Whiskey"
+                value="whiskey"
               >
                 Виски
               </option>
-              <option className="popup__item popup__item_bar-theme" value="Gin">
+              <option className="popup__item popup__item_bar-theme" value="gin">
                 Джин
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Tequila"
+                value="tequila"
               >
                 Текила
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Tinctures"
+                value="tinctures"
               >
                 Настойки
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Vodka"
+                value="vodka"
               >
                 Водка
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Liqueurs"
+                value="liqueurs"
               >
                 Ликеры
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Cocktails"
+                value="cocktails"
               >
                 Коктейли
               </option>
               <option
                 className="popup__item popup__item_bar-theme"
-                value="Shots"
+                value="shots"
               >
                 Шоты
               </option>

@@ -36,7 +36,7 @@ const Order = ({
       <div className="order__container">
         {btnOrders === false && (
           <div className="order__container-text">
-            <p className="order__author">{nameWhoOrders}</p>
+            <p className={`order__author`}>{nameWhoOrders}</p>
             <p
               className={`order__order-status ${
                 doneStatus === false && "order__order-status_not-ready"
@@ -46,7 +46,7 @@ const Order = ({
             </p>
           </div>
         )}
-        {btnOrders === true && <p className="order__author">{nameWhoOrders}</p>}
+        {btnOrders === true && <p className={`order__author`}>{nameWhoOrders}</p>}
         {foods.map((item) => (
           <p className="order__name">
             {item.name} - {item.price}руб

@@ -5,6 +5,7 @@ import Order from "../Order/Order";
 const Orders = ({
   orders,
   updateDoneStatus,
+  btnBar,
   btnOrders,
   btnHistoryOrders,
   setBtnOrders,
@@ -43,7 +44,7 @@ const Orders = ({
   return (
     <section className="orders">
       <div className="orders__container">
-        <h1 className="orders__title">Заказы</h1>
+        <h1 className={`orders__title ${btnBar === true && 'orders__title_bar-theme'}`}>Заказы</h1>
         <div className="orders__btns">
           <button
             className={`orders__btn-food ${btnOrders && "orders__btn-food_active"

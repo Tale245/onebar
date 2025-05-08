@@ -66,7 +66,7 @@ const Basket = ({
 
   return (
     <section className="basket">
-      <h1 className="basket__title">Корзина</h1>
+      <h1 className={`basket__title ${btnBar === true && 'basket__title_barTheme'}`}>Корзина</h1>
       <FoodList
         foodArray={userInfo.foods}
         userInfo={userInfo}
